@@ -93,6 +93,16 @@ h1,h2,h3{margin:0}
 /* ---- live workout companion ---- */
 .wk{position:fixed;inset:0;z-index:50;background:#1E1D26;overflow:hidden;animation:fade .25s;user-select:none;-webkit-user-select:none}
 .wk-scene{position:absolute;left:0;right:0;top:0;height:72%;overflow:hidden;transition:filter 1.2s}
+.wkv{position:absolute;inset:0;opacity:0;transition:opacity .6s,filter 1.2s;pointer-events:none}
+.wkv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;opacity:0;transition:opacity .7s ease}
+.wkv video.on{opacity:1}
+.wk-scene.has-video .wkv{opacity:1}
+.wk-scene.has-video .layer,.wk-scene.has-video .wk-cat,.wk-scene.has-video .stars,.wk-scene.has-video .sunmoon{visibility:hidden}
+.wk-scene.has-video:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(0,0,0,.18))}
+.wk-scene[data-sky=dawn] .wkv{filter:sepia(.18) saturate(1.05) brightness(1.02)}
+.wk-scene[data-sky=golden] .wkv{filter:sepia(.32) saturate(1.2) hue-rotate(-8deg)}
+.wk-scene[data-sky=night] .wkv{filter:brightness(.62) saturate(.75) hue-rotate(12deg)}
+.wk-scene[data-wx=cloud] .wkv,.wk-scene[data-wx=rain] .wkv{filter:brightness(.85) saturate(.6)}
 .wk-scene .sky{position:absolute;inset:0;transition:background 1.5s}
 .wk-scene[data-sky=dawn] .sky{background:linear-gradient(#B9D7F2,#FDD9B5)}
 .wk-scene[data-sky=day] .sky{background:linear-gradient(#8FCBF2,#DDF1FB)}
@@ -188,8 +198,15 @@ button.wchip{cursor:pointer}
 .banner{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:10px 12px 10px 14px;box-shadow:var(--raise);animation:pop .4s}
 .banner p{margin:0;font-size:13.5px;font-weight:700;flex:1}
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px 12px env(safe-area-inset-bottom);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid #ECE9F2}
-.tabbar .in{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));height:56px}
+.tabbar .in{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:56px}
 .tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:var(--ink2);font-size:11px;font-weight:700}
+.fr{align-items:center}.fr .rank{width:18px;font-weight:800;color:var(--ink2);text-align:center}
+.fr .art svg{width:40px;height:40px}.meRow{background:#F4F0FF;border-radius:16px;padding-left:6px;padding-right:6px}
+.chatb{background:#F4F1FA;border-radius:4px 16px 16px 16px;padding:7px 11px;font-size:13.5px;line-height:1.4}
+.cheer{border:0;background:#F6F3FB;border-radius:10px;width:30px;height:30px;font-size:15px;cursor:pointer}.cheer:active{transform:scale(.9)}
+.codebox{border:0;background:#EFEAFD;color:#3F3294;font:800 20px/1 inherit;letter-spacing:.18em;padding:10px 14px;border-radius:14px;cursor:pointer;font-family:inherit}
+.codebox .tiny{letter-spacing:0;font-weight:700;margin-left:4px}
+.inp{min-height:44px;border:1.5px solid #E3DEEE;border-radius:14px;padding:0 12px;font:600 15px inherit;font-family:inherit;background:#fff;color:inherit;width:100%}
 .tabbar a.on{color:var(--lavD);font-weight:800}
 .seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:#E9E6F1;border-radius:14px;padding:4px;height:44px}
 .seg button{border:none;border-radius:11px;background:transparent;font-size:14px;font-weight:700;color:var(--ink2);cursor:pointer}
@@ -310,7 +327,7 @@ const SHOP = [
 ];
 const SHOP_BY = Object.fromEntries(SHOP.map(i => [i.id, i]));
 const SHOP_CATS = [['all','ทั้งหมด'],['food','อาหาร'],['toy','ของเล่น'],['collar','ปลอกคอ'],['room','แต่งห้อง']];
-const TABS = ['cat','stats','shop','me'];
+const TABS = ['cat','stats','friends','shop','me'];
 const LS_KEY = 'meowmotion.v1';
 const TOY_CD = 2 * 3600e3;
 const DAY_TH = ['อา','จ','อ','พ','พฤ','ศ','ส'];
@@ -466,6 +483,7 @@ const TAB_ICON = {
   cat:(on)=>`<svg width="24" height="24" viewBox="0 0 24 24" fill="${on?'#E6E0FA':'none'}" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10V3.8l4.2 3.4h6.6l4.2-3.4V10c0 5.4-3.4 9.5-7.5 9.5S4.5 15.4 4.5 10z"/></svg>`,
   stats:(on)=>`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${on?2.2:1.8}" stroke-linecap="round" aria-hidden="true"><path d="M5 19v-7M12 19V5M19 19v-9"/></svg>`,
   shop:(on)=>`<svg width="24" height="24" viewBox="0 0 24 24" fill="${on?'#E6E0FA':'none'}" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 8.5h14l-1.2 11H6.2L5 8.5z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none"/></svg>`,
+  friends:(on)=>`<svg width="24" height="24" viewBox="0 0 24 24" fill="${on?'#E6E0FA':'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.3"/><circle cx="16.5" cy="9.5" r="2.6"/><path d="M3 19.5c1.1-3.4 3.4-5.2 6-5.2s4.9 1.8 6 5.2M15 14.6c2.6-.4 4.6 1.1 5.6 4.4" fill="none"/></svg>`,
   me:(on)=>`<svg width="24" height="24" viewBox="0 0 24 24" fill="${on?'#E6E0FA':'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.4-3.8 4.2-5.8 7.5-5.8s6.1 2 7.5 5.8" fill="none"/></svg>`
 };
 
@@ -616,8 +634,8 @@ const Pet = {
   }
 };
 // ---------- live (video) cat ----------
-const LIVE_CLIPS = {idle:'clips/idle.mp4', blink:'clips/blink.mp4', groom:'clips/groom.mp4', loaf:'clips/loaf.mp4'};
-const LIVE_POOL = {content:['idle','idle','blink','groom','loaf'], playful:['groom','idle','blink'], hungry:['idle','idle','blink'], waiting:['idle','loaf'], sulking:['loaf','idle'], sleeping:['loaf'], happy:['blink','idle'], eating:['blink'], cheering:['blink','idle']};
+const LIVE_CLIPS = {idle:'clips/idle.mp4', blink:'clips/blink.mp4', groom:'clips/groom.mp4', loaf:'clips/loaf.mp4', stretch:'clips/stretch.mp4', walk:'clips/walk.mp4', walk2:'clips/walk2.mp4'};
+const LIVE_POOL = {content:['idle','idle','blink','groom','loaf','stretch'], playful:['stretch','groom','idle','blink'], hungry:['idle','idle','blink'], waiting:['idle','loaf','stretch'], sulking:['loaf','idle'], sleeping:['loaf'], happy:['blink','idle'], eating:['blink'], cheering:['blink','idle']};
 const Live = {
   front:0, cur:null, fading:false, queued:null, failed:false, warned:false,
   on(){ return !this.failed && !!S && S.settings.live !== false && cat().breed === 'orange'; },
@@ -661,6 +679,160 @@ const Live = {
     };
     if (back.readyState >= 2) go(); else { back.addEventListener('loadeddata', go, {once:true}); setTimeout(() => { if (this.fading && back.readyState < 2){ this.fading = false; } }, 6000); }
   }
+};
+// ---------- bot friends (local league) ----------
+const BOTS = [
+  {id:'ton',  name:'โค้ชต้น', cat:'บิ๊กบอส', breed:'mainecoon', mult:1.30, hour:6,    rest:.10,
+    tease:['ตื่นตีห้ามาวิ่งแล้ว ตามทันไหม 💪','วันนี้ผมออกไปแล้ว 2 รอบนะ','ความสม่ำเสมอชนะทุกอย่าง'], chase:['ฝีมือดีขึ้นเยอะเลยนะ!','โอ้ แซงผมได้ไง เดี๋ยวพรุ่งนี้เอาคืน'], cheer:['เยี่ยม! ร่างกายขอบคุณคุณนะ','วันนี้ทำได้ดีมาก พักให้พอด้วย']},
+  {id:'mint', name:'มิ้นท์', cat:'ถั่วแระ', breed:'siamese', mult:1.12, hour:18.5, rest:.15,
+    tease:['ขอที่ 1 สัปดาห์นี้นะ 😼','เลิกงานปุ๊บ เดินเร็วปั๊บ','แซงแล้วจ้า ไม่ต้องเสียใจ'], chase:['ไม่ยอมนะ! เย็นนี้เจอกัน','ใกล้แล้ว อีกนิดเดียวฉันก็แซง'], cheer:['ถั่วแระฝากบอกว่าแมวเธอน่ารัก','สู้ ๆ คู่แข่งที่ดีที่สุดของฉัน']},
+  {id:'daeng',name:'ป้าแดง', cat:'ขนมชั้น', breed:'korat', mult:1.00, hour:5.5, rest:.12,
+    tease:['ป้าเดินรอบสวนลุมทุกเช้าเลยลูก','ช้า ๆ ได้พร้าเล่มงามนะ'], chase:['หลานเก่งจัง ป้าตามไม่ทันแล้ว','ดีใจด้วยลูก ทำต่อไปนะ'], cheer:['กินน้ำเยอะ ๆ ด้วยนะลูก','ป้าภูมิใจในตัวหนูนะ']},
+  {id:'boss', name:'บอส', cat:'ปลาทู', breed:'fold', mult:0.88, hour:12.5, rest:.22,
+    tease:['เดินไปกินข้าวเที่ยงก็นับนะ 555','ประชุมยาว แต่ยังเดินทัน'], chase:['ช่วยด้วย ตกอันดับแล้ว 😅','เดี๋ยวลงบันไดแทนลิฟต์ก็ได้'], cheer:['คุณคือแรงบันดาลใจของออฟฟิศเลย','ปลาทูส่งปลามาให้ 🐟']},
+  {id:'fah',  name:'น้องฟ้า', cat:'ข้าวปั้น', breed:'khaomanee', mult:0.72, hour:20, rest:.28,
+    tease:['หนูเพิ่งเริ่ม แต่จะพยายามนะ!','ฟ้าแซงได้ด้วย ดีใจจัง'], chase:['พี่เก่งจัง สอนหน่อย','ฟ้าจะเดินเพิ่มอีก 10 นาที!'], cheer:['ข้าวปั้นกระพริบตาให้แมวพี่ 💛','เป็นกำลังใจให้นะคะ']}
+];
+const TIERS = ['บรอนซ์','ซิลเวอร์','โกลด์','แพลทินัม','ไดมอนด์'];
+const TIER_ICON = ['🥉','🥈','🥇','💠','💎'];
+const PRIZE = [150, 100, 70, 40, 25, 15];
+function seeded(str){ let h = 1779033703 ^ str.length; for (let i = 0; i < str.length; i++){ h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+  return () => { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; }; }
+const League = {
+  st(){ if (!S.bots) S.bots = {tier:0, week:'', base:0, hist:[], sent:{}, cheerDay:'', ahead:null, pending:null}; return S.bots; },
+  weekKey(k){ k = k || today(); const d = keyToDate(k), wd = (d.getDay() + 6) % 7; return addDays(k, -wd); },
+  userWeek(wk){ let m = 0; for (let i = 0; i < 7; i++){ const k = addDays(wk, i); if (k > today()) break; m += effEx(peek(k)); } return Math.round(m); },
+  baseline(){
+    const wk = this.weekKey(), ws = [1, 2, 3, 4].map(i => this.userWeek(addDays(wk, -7 * i))).filter(m => m > 0);
+    const avg = ws.length ? ws.reduce((a, b) => a + b, 0) / ws.length : 120;
+    return Math.round(clamp(avg * 1.05, 90, 600));
+  },
+  botWeek(b, wk, upto){
+    const st = this.st(), r = seeded(b.id + wk), T = st.base * b.mult * (1 + .07 * st.tier) * (0.88 + r() * .24);
+    const w = Array.from({length:7}, () => r() < b.rest ? 0 : 0.7 + r() * .6), sw = w.reduce((a, x) => a + x, 0) || 1;
+    const now = new Date(), tk = today(); let m = 0, todayMin = 0;
+    for (let i = 0; i < 7; i++){
+      const k = addDays(wk, i), dm = T * w[i] / sw;
+      if (upto && k < upto || !upto && k < tk){ m += dm; continue; }
+      if (k === tk && !upto){ const hr = now.getHours() + now.getMinutes() / 60, f = clamp((hr - b.hour) / 1.3, 0, 1); todayMin = dm * (f * f * (3 - 2 * f)); m += todayMin; }
+    }
+    return {min:Math.round(m), today:Math.round(todayMin), target:Math.round(T)};
+  },
+  rows(wk, final){
+    wk = wk || this.weekKey();
+    const upto = final ? addDays(wk, 7) : null;
+    const rows = BOTS.map(b => { const x = this.botWeek(b, wk, upto); return {id:b.id, bot:b, name:b.name, cat:b.cat, breed:b.breed, min:x.min, today:x.today}; });
+    rows.push({id:'me', me:true, name:'คุณ', cat:cat().name, breed:cat().breed, min:this.userWeek(wk), today:Math.round(effEx(peek(today())))});
+    rows.sort((a, b) => b.min - a.min || (a.me ? -1 : 1));
+    return rows;
+  },
+  ensure(){
+    const st = this.st(), wk = this.weekKey();
+    if (st.week === wk) return null;
+    let res = null;
+    if (st.week){
+      const rows = this.rows(st.week, true), rank = rows.findIndex(r => r.me) + 1, total = rows.reduce((a, r) => a + r.min, 0), team = total >= 900;
+      const coins = PRIZE[rank - 1] + (team ? 60 : 0), salmon = (rank === 1 ? 1 : 0) + (team ? 1 : 0), old = st.tier;
+      if (rank <= 2) st.tier = Math.min(4, st.tier + 1); else if (rank >= 5) st.tier = Math.max(0, st.tier - 1);
+      S.coins += coins; S.salmon += salmon; addLog(`ลีก${TIERS[old]} ได้อันดับ ${rank}${team ? ' + ภารกิจทีมสำเร็จ' : ''}`, coins);
+      res = {rank, coins, salmon, team, old, tier:st.tier, total};
+      st.hist.unshift({week:st.week, rank, tier:old, min:rows.find(r => r.me).min}); st.hist = st.hist.slice(0, 12);
+    }
+    st.week = wk; st.base = this.baseline(); st.ahead = null; st.sent = {}; if (res) st.pending = res;
+    save(); return res;
+  },
+  check(){
+    if (!S) return; this.ensure(); const st = this.st(), res = st.pending; st.pending = null;
+    if (res) setTimeout(() => openSheet(`<div class="col g10" style="align-items:center;text-align:center"><div style="font-size:54px">${TIER_ICON[res.tier]}</div>
+      <h2>จบลีกสัปดาห์ที่แล้ว · อันดับ ${res.rank}</h2>
+      <p class="muted" style="margin:0">${res.tier > res.old ? 'เลื่อนชั้นขึ้นลีก' + TIERS[res.tier] + '! คู่แข่งจะเก่งขึ้นนะ' : res.tier < res.old ? 'ตกลงไปลีก' + TIERS[res.tier] + ' สัปดาห์นี้เอาคืนได้' : 'อยู่ลีก' + TIERS[res.tier] + 'ต่อ'}${res.team ? '<br>ภารกิจทีมรวม 900 นาทีสำเร็จ!' : ''}</p>
+      <div class="row g8"><span class="pill coin">${coinSVG(16)} +${res.coins}</span>${res.salmon ? `<span class="pill salmon">🐟 +${res.salmon}</span>` : ''}</div>
+      <button class="btn primary" style="width:100%" data-act="close">เยี่ยม!</button></div>`, 'ผลลีก'), 600);
+    const rows = this.rows(), me = rows.findIndex(r => r.me), above = rows.slice(0, me).map(r => r.id);
+    const passed = Array.isArray(st.ahead) ? above.filter(id => !st.ahead.includes(id)) : [];
+    if (Array.isArray(st.ahead)){ if (passed.length && !res){ const r = rows.find(x => x.id === passed[0]), gap = r.min - rows[me].min + 1;
+      toast(`${esc(r.name)} แซงคุณแล้ว! อีก ${gap} นาทีแซงกลับ`, 3000); } }
+    st.ahead = above;
+    const d = peek(today()), ex = effEx(d);
+    if (ex >= 20 && st.cheerDay !== today()){ const r = seeded(today() + 'c'), b = BOTS[Math.floor(r() * BOTS.length)], c = cat();
+      st.cheerDay = today(); c.happiness = clamp(c.happiness + 3, 0, 100); save();
+      setTimeout(() => toast(`🐾 ${esc(b.name)}: ${esc(b.cheer[Math.floor(r() * b.cheer.length)])} (+3 ความสุข)`, 3200), res ? 2500 : 900); }
+  },
+  chat(rows){
+    const me = rows.findIndex(r => r.me), r = seeded(today() + new Date().getHours()), out = [];
+    const up = rows[me - 1], down = rows[me + 1];
+    if (up && up.bot) out.push({b:up.bot, t:up.bot.tease[Math.floor(r() * up.bot.tease.length)]});
+    if (down && down.bot) out.push({b:down.bot, t:down.bot.chase[Math.floor(r() * down.bot.chase.length)]});
+    const ex = effEx(peek(today())), others = rows.filter((x, i) => x.bot && i !== me - 1 && i !== me + 1);
+    if (others.length){ const o = others[Math.floor(r() * others.length)].bot; out.push({b:o, t:ex >= 20 ? o.cheer[Math.floor(r() * o.cheer.length)] : 'วันนี้ยังไม่ได้ขยับเลยนะ ออกไปเดินด้วยกันไหม?'}); }
+    return out;
+  }
+};
+function renderFriendsTab(){
+  League.ensure();
+  const st = League.st(), rows = League.rows(), meI = rows.findIndex(r => r.me), me = rows[meI];
+  const total = rows.reduce((a, r) => a + r.min, 0), pct = Math.min(100, Math.round(total / 900 * 100));
+  const daysLeft = 7 - ((keyToDate(today()).getDay() + 6) % 7) - 1;
+  const gapUp = meI > 0 ? rows[meI - 1].min - me.min + 1 : 0;
+  const board = rows.map((r, i) => `<div class="lrow fr${r.me ? ' meRow' : ''}">
+      <span class="rank">${i < 2 ? '⬆' : i >= 4 ? '⬇' : ''}${i + 1}</span>
+      <div class="art" style="background:#F6F1FF;width:46px;height:46px">${catSVG({breed:BREEDS[r.breed] ? r.breed : 'orange', mood:r.today > 0 ? 'happy' : 'content', label:r.cat})}</div>
+      <div class="col grow" style="min-width:0"><b style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.name)}</b>
+        <span class="tiny muted">แมว${esc(r.cat)} · วันนี้ ${fmt(r.today)} นาที</span>
+        <div class="track" style="margin-top:4px"><div class="fill" style="width:${Math.min(100, r.min / 150 * 100)}%;background:${r.min >= 150 ? '#46B98A' : '#9C8CF0'}"></div></div></div>
+      <div class="col" style="align-items:flex-end;gap:4px"><b style="font-size:16px">${fmt(r.min)}<span class="tiny muted"> นาที</span></b>
+        ${r.me ? '' : `<button class="cheer" data-act="botCheer" data-id="${r.id}" ${st.sent[r.id] === today() ? 'disabled style="opacity:.4"' : ''} aria-label="ส่งปลาให้ ${esc(r.name)}">🐟</button>`}</div></div>`).join('');
+  const chat = League.chat(rows).map(m => `<div class="row g8" style="align-items:flex-start"><div style="width:34px;height:34px;flex:none">${catSVG({breed:m.b.breed, mood:'content', label:m.b.cat})}</div>
+      <div class="chatb"><b class="tiny">${esc(m.b.name)}</b><br>${esc(m.t)}</div></div>`).join('');
+  return `<header class="top"><div class="col g4"><h1 class="title">ลีก${TIERS[st.tier]} ${TIER_ICON[st.tier]}</h1><span class="sub">${daysLeft ? 'จบลีกในอีก ' + daysLeft + ' วัน' : 'วันสุดท้ายของลีก!'} · ⬆ เลื่อน ⬇ ตกชั้น</span></div>${walletPills()}</header>
+  <section class="card col g8" style="background:linear-gradient(135deg,#F4F0FF,#EAF8F1)">
+    <div class="row between"><b style="font-size:15px">คุณอยู่อันดับ ${meI + 1} จาก 6</b><span class="chip ${meI < 2 ? 'mint' : meI >= 4 ? 'peach' : 'lav'}">${meI < 2 ? 'โซนเลื่อนชั้น' : meI >= 4 ? 'โซนตกชั้น' : 'โซนปลอดภัย'}</span></div>
+    <span class="small muted">${meI === 0 ? 'นำอยู่! รักษาไว้จนจบสัปดาห์ รับ ' + PRIZE[0] + ' Coins + ปลาแซลมอน' : `อีก <b style="color:var(--ink)">${gapUp} นาที</b> แซง${esc(rows[meI - 1].name)} · รางวัลอันดับตอนนี้ ${PRIZE[meI]} Coins`}</span>
+    <button class="btn primary" data-act="walk">${ICON.walk('#fff')}ไปเก็บนาทีเพิ่ม</button>
+  </section>
+  <section class="card col g8"><b style="font-size:15px">ตารางลีกสัปดาห์นี้</b><div class="list">${board}</div>
+    <span class="tiny muted">คู่แข่งปรับความเก่งตามค่าเฉลี่ย 4 สัปดาห์ของคุณ (${st.base} นาที/สัปดาห์) และเก่งขึ้นเมื่อเลื่อนลีก</span></section>
+  <section class="card col g10">
+    <div class="row between"><b style="font-size:15px">ภารกิจทีม · รวมกัน 900 นาที</b><span class="chip mint">${pct}%</span></div>
+    <div class="track" style="height:12px"><div class="fill" style="width:${pct}%;background:linear-gradient(90deg,#5CC99B,#46B98A)"></div></div>
+    <span class="small muted">เท่ากับคนละ 150 นาทีตามเกณฑ์ WHO · ทีมได้ ${fmt(total)} นาที · สำเร็จรับเพิ่ม 60 Coins + 🐟 ทุกคน · ${rows.filter(r => r.min >= 150).length}/6 คนครบ 150 แล้ว</span>
+  </section>
+  <section class="card col g10"><b style="font-size:15px">แชทในลีก</b>${chat}</section>
+  ${st.hist.length ? `<section class="card col g6"><b style="font-size:15px">ประวัติลีก</b>${st.hist.slice(0, 5).map(h => `<div class="row between small"><span>${TIER_ICON[h.tier]} ${TIERS[h.tier]} · สัปดาห์ ${esc(h.week.slice(5))}</span><b>อันดับ ${h.rank} · ${fmt(h.min)} นาที</b></div>`).join('')}</section>` : ''}`;
+}
+
+// ---------- workout video (real cat walking with you) ----------
+const WkVid = {
+  front:0, fading:false, list:[], idx:0, paused:false, rate:1, failed:false,
+  vids(){ return [document.getElementById('wvA'), document.getElementById('wvB')]; },
+  html(){ return Live.on() ? `<div class="wkv" id="wkV"><video id="wvA" class="on" muted playsinline preload="auto" aria-hidden="true"></video><video id="wvB" muted playsinline preload="auto" aria-hidden="true"></video></div>` : ''; },
+  start(w){
+    const v = this.vids(), sc = document.getElementById('wkScene'); if (!v[0]) return;
+    this.list = (w.act === 'yoga' || w.act === 'strength') ? ['stretch'] : ['walk', 'walk2'];
+    this.idx = 0; this.front = 0; this.fading = false; this.paused = false; this.rate = 1; this.failed = false;
+    v.forEach(x => { x.addEventListener('error', () => this.fail()); x.addEventListener('timeupdate', () => this.near(x)); });
+    v[0].addEventListener('loadeddata', () => { if (sc && !this.failed) sc.classList.add('has-video'); }, {once:true});
+    v[0].poster = LIVE_CLIPS[this.list[0]].replace('.mp4', '.jpg'); v[0].src = LIVE_CLIPS[this.list[0]];
+    if (!RMOTION) v[0].play().catch(() => {});
+  },
+  fail(){ if (this.failed) return; this.failed = true; const sc = document.getElementById('wkScene'); if (sc) sc.classList.remove('has-video'); const b = document.getElementById('wkV'); if (b) b.remove(); },
+  near(x){ const v = this.vids(); if (x !== v[this.front] || this.fading || !x.duration || this.paused) return;
+    if (x.currentTime > x.duration - 0.9 / Math.max(this.rate, .5)){ this.idx = (this.idx + 1) % this.list.length; this.swap(this.list[this.idx]); } },
+  swap(k){
+    const v = this.vids(); if (!v[0]) return; const fr = v[this.front], back = v[1 - this.front];
+    this.fading = true; back.src = LIVE_CLIPS[k];
+    const go = () => { back.playbackRate = this.rate; if (!RMOTION && !this.paused) back.play().catch(() => {});
+      back.classList.add('on'); fr.classList.remove('on');
+      setTimeout(() => { fr.pause(); this.front = 1 - this.front; this.fading = false; }, 720); };
+    if (back.readyState >= 2) go(); else { back.addEventListener('loadeddata', go, {once:true}); setTimeout(() => { if (this.fading && back.readyState < 2) this.fading = false; }, 6000); }
+  },
+  update(w, g, rate){
+    const v = this.vids()[this.front]; if (!v || this.failed) return;
+    const paused = !!w.pausedAt || g === 'idle', r = g === 'gallop' ? 1.5 : g === 'trot' ? 1.25 : (g === 'walk' ? clamp(rate, .75, 1.2) : 1);
+    if (Math.abs(r - this.rate) > .04){ this.rate = r; try { v.playbackRate = r; } catch (e) {} }
+    if (paused !== this.paused){ this.paused = paused; if (paused) v.pause(); else if (!RMOTION) v.play().catch(() => {}); }
+  },
+  stop(){ this.vids().forEach(x => { if (x){ try { x.pause(); x.removeAttribute('src'); x.load(); } catch (e) {} } }); }
 };
 function attachLook(){
   const room = document.getElementById('room'); if (!room) return;
@@ -1058,10 +1230,11 @@ function render(){
     return;
   }
   nav.hidden = false;
-  nav.innerHTML = `<div class="in">${[['cat','แมว'],['stats','สถิติ'],['shop','ร้านค้า'],['me','ฉัน']].map(([k, t]) => `<a href="#${k}" class="${UI.tab === k ? 'on' : ''}" ${UI.tab === k ? 'aria-current="page"' : ''}>${TAB_ICON[k](UI.tab === k)}${t}</a>`).join('')}</div>`;
+  nav.innerHTML = `<div class="in">${[['cat','แมว'],['stats','สถิติ'],['friends','ลีก'],['shop','ร้านค้า'],['me','ฉัน']].map(([k, t]) => `<a href="#${k}" class="${UI.tab === k ? 'on' : ''}" ${UI.tab === k ? 'aria-current="page"' : ''}>${TAB_ICON[k](UI.tab === k)}${t}</a>`).join('')}</div>`;
   Live.stop();
-  app.innerHTML = UI.tab === 'stats' ? renderStatsTab() : UI.tab === 'shop' ? renderShopTab() : UI.tab === 'me' ? renderMeTab() : renderCatTab();
+  app.innerHTML = UI.tab === 'stats' ? renderStatsTab() : UI.tab === 'friends' ? renderFriendsTab() : UI.tab === 'shop' ? renderShopTab() : UI.tab === 'me' ? renderMeTab() : renderCatTab();
   if (UI.tab === 'cat'){ attachPet(); attachLook(); Pet.start(); Live.start(); } else Pet.stop();
+  if (UI.tab === 'friends') setTimeout(() => League.check(), 0);
 }
 function refreshCat(){
   const wrap = document.getElementById('catwrap'); if (!wrap) return;
@@ -1325,6 +1498,7 @@ function wkBuild(w){
         <div class="ifloor"></div>
         ${w.act === 'yoga' ? '<div class="mat"></div>' : w.act === 'strength' ? `<svg class="post" viewBox="0 0 60 90" aria-hidden="true"><rect x="6" y="80" width="48" height="8" rx="3" fill="#C9A27E"/><rect x="22" y="14" width="16" height="68" fill="#E8D3BC"/><path d="M22 24h16M22 34h16M22 44h16M22 54h16M22 64h16M22 74h16" stroke="#D3B596" stroke-width="2"/><rect x="10" y="6" width="40" height="10" rx="4" fill="#9C8CF0"/></svg><div class="mat" style="width:min(60%,280px)"></div>` : '<div class="belt" id="wkBelt"></div>'}
       </div>
+      ${WkVid.html()}
       <div class="wk-cat" id="wkCat">${catSVG({breed:c.breed, mood:'cheering', collar:c.collar, label:c.name + ' ออกกำลังกายด้วยกัน'})}</div>
       <div class="wk-top" id="wkTop"></div>
       <div class="wk-pop" id="wkPop" role="status" aria-live="polite"></div>
@@ -1347,7 +1521,7 @@ function wkBuild(w){
       an.currentTime = i * 525; w.scene.push(an); });
     const belt = el.querySelector('#wkBelt'); if (belt) w.scene.push(belt.animate([{backgroundPosition:'0 0'},{backgroundPosition:'-44px 0'}], {duration:500, iterations:Infinity}));
   }
-  wkScene(w); wkChips(w);
+  wkScene(w); wkChips(w); WkVid.start(w);
 }
 function wkScene(w){
   const sc = document.getElementById('wkScene'), root = document.getElementById('wk'); if (!sc) return;
@@ -1398,7 +1572,7 @@ function wkRate(w, cad){
     else if (cad < 160){ g = 'trot'; rate = clamp(cad / 145, .8, 1.3); scene = clamp(cad / 110, .9, 1.7); }
     else { g = 'gallop'; rate = clamp(cad / 170, .85, 1.3); scene = 2; }
   } else { g = w.act === 'run' ? 'trot' : 'walk'; scene = w.act === 'run' ? 1.4 : w.act === 'cycle' ? 1.7 : 1; }
-  wkGait(w, g); w.anims.forEach(x => { try { x.playbackRate = rate; } catch (e) {} }); w.scene.forEach(x => { try { x.playbackRate = Math.max(scene, 0.0001); if (scene === 0) x.pause(); else if (x.playState === 'paused') x.play(); } catch (e) {} });
+  wkGait(w, g); WkVid.update(w, g, rate); w.anims.forEach(x => { try { x.playbackRate = rate; } catch (e) {} }); w.scene.forEach(x => { try { x.playbackRate = Math.max(scene, 0.0001); if (scene === 0) x.pause(); else if (x.playState === 'paused') x.play(); } catch (e) {} });
 }
 function wkFx(w, kind){
   const sc = document.getElementById('wkScene'), c = document.getElementById('wkCat'); if (!sc || !c || RMOTION) return;
@@ -1473,7 +1647,7 @@ function endWorkout(keep){
   const w = UI.walking; if (!w) return;
   clearInterval(w.timer); try { window.removeEventListener('devicemotion', w.handler); } catch (e) {}
   try { if (w.geo != null) navigator.geolocation.clearWatch(w.geo); } catch (e) {} try { if (w.wake) w.wake.release(); } catch (e) {}
-  const n = wkNumbers(w); UI.walking = null; const el = document.getElementById('wk'); if (el) el.remove();
+  const n = wkNumbers(w); UI.walking = null; WkVid.stop(); const el = document.getElementById('wk'); if (el) el.remove();
   if (ACTS[w.act].out && w.auto && w.fix) wPrefs().lastPlace[w.act] = w.place;
   if (!keep){ toast('ยกเลิกแล้ว'); save(); goTab('cat'); Pet.start(); return; }
   if (n.min < 1){ toast('ยังไม่ถึง 1 นาที เลยยังไม่บันทึกนะ'); goTab('cat'); Pet.start(); return; }
@@ -1492,6 +1666,10 @@ function endWorkout(keep){
 
 // ---------- actions ----------
 const ACT = {
+  botCheer(el){ const st = League.st(), b = BOTS.find(x => x.id === el.dataset.id); if (!b || st.sent[b.id] === today()) return;
+    st.sent[b.id] = today(); save(); haptic();
+    const r = seeded(b.id + today()), msg = b.cheer[Math.floor(r() * b.cheer.length)];
+    toast(`🐟 → ${esc(b.cat)} · ${esc(b.name)}: "${esc(msg)}"`, 2800); render(); },
   close(){ closeSheet(); },
   start(){ const name = ($('#onbName') && $('#onbName').value.trim()) || 'Mochi'; S = newState(name.slice(0, 20)); Store.save(); goTab('cat'); haptic(); toast(`${esc(name)} มาอยู่บ้านแล้ว! ${coinSVG(16)} +50`); },
   feed(){ feedSheet(); }, play(){ playSheet(); },
@@ -1597,6 +1775,7 @@ async function boot(){
   if (!UI.booted){ UI.booted = true; if (!S) render(); }
   if (UI.tab === 'me' && S) render();
   setInterval(tick, 30000);
+  if (S) setTimeout(() => League.check(), 1500);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible'){ tick(); Live.resume(); } else { Live.pause(); if (S){ Store.saveLocal(); Store.flush(); } } });
 }
 boot();
