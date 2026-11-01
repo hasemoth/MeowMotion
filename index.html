@@ -634,6 +634,14 @@ const Pet = {
   }
 };
 // ---------- live (video) cat ----------
+const CLIP = {base:(() => { try { return localStorage.getItem('mm_clipbase') === 'root' ? '' : 'clips/'; } catch (e) { return 'clips/'; } })()};
+const clipSrc = (k, ext) => CLIP.base + k + (ext || '.mp4');
+function clipMiss(x){ // try clips/ first, then repo root; returns true if handled
+  const src = x.getAttribute('src') || ''; if (!src) return true;
+  if (src.startsWith('clips/')){ if (CLIP.base === 'clips/'){ CLIP.base = ''; try { localStorage.setItem('mm_clipbase', 'root'); } catch (e) {} return 'switch'; } return true; }
+  if (CLIP.base === 'clips/') return true;
+  try { localStorage.removeItem('mm_clipbase'); } catch (e) {} return false;
+}
 const LIVE_CLIPS = {idle:'clips/idle.mp4', blink:'clips/blink.mp4', groom:'clips/groom.mp4', loaf:'clips/loaf.mp4', stretch:'clips/stretch.mp4', walk:'clips/walk.mp4', walk2:'clips/walk2.mp4'};
 const LIVE_POOL = {content:['idle','idle','blink','groom','loaf','stretch'], playful:['stretch','groom','idle','blink'], hungry:['idle','idle','blink'], waiting:['idle','loaf','stretch'], sulking:['loaf','idle'], sleeping:['loaf'], happy:['blink','idle'], eating:['blink'], cheering:['blink','idle']};
 const Live = {
@@ -641,21 +649,21 @@ const Live = {
   on(){ return !this.failed && !!S && S.settings.live !== false && cat().breed === 'orange'; },
   ready(){ return !!document.getElementById('lvA'); },
   vids(){ return [document.getElementById('lvA'), document.getElementById('lvB')]; },
-  html(){ return `<video class="lv on" id="lvA" muted playsinline preload="auto" poster="clips/idle.jpg" aria-hidden="true"></video><video class="lv" id="lvB" muted playsinline preload="auto" aria-hidden="true"></video><div class="lv-shade"></div>`; },
+  html(){ return `<video class="lv on" id="lvA" muted playsinline preload="auto" poster="${clipSrc('idle', '.jpg')}" aria-hidden="true"></video><video class="lv" id="lvB" muted playsinline preload="auto" aria-hidden="true"></video><div class="lv-shade"></div>`; },
   pool(){ return LIVE_POOL[UI.petting ? 'happy' : getMood()] || LIVE_POOL.content; },
   pick(){ const p = this.pool(); return p[Math.floor(Math.random() * p.length)]; },
   start(){
     const v = this.vids(); if (!v[0]) return;
     this.front = 0; this.fading = false; this.queued = null;
     v.forEach(x => { x.addEventListener('error', () => this.fail(x)); x.addEventListener('timeupdate', () => this.near(x)); });
-    const k = this.pick(); this.cur = k; v[0].poster = LIVE_CLIPS[k].replace('.mp4', '.jpg'); v[0].src = LIVE_CLIPS[k];
+    const k = this.pick(); this.cur = k; v[0].poster = clipSrc(k, '.jpg'); v[0].src = clipSrc(k);
     if (!RMOTION && !UI.walking) v[0].play().catch(() => {});
   },
   stop(){ this.vids().forEach(x => { if (x){ try { x.pause(); x.removeAttribute('src'); x.load(); } catch (e) {} } }); this.fading = false; this.queued = null; },
   pause(){ this.vids().forEach(x => { if (x) x.pause(); }); },
   resume(){ const v = this.vids()[this.front]; if (v && v.paused && !RMOTION && !UI.walking && UI.tab === 'cat') v.play().catch(() => {}); },
   fail(x){
-    if (!x.getAttribute('src') || this.failed) return; this.failed = true;
+    if (this.failed) return; const m = clipMiss(x); if (m === 'switch'){ if (UI.tab === 'cat') render(); return; } if (m) return; this.failed = true;
     if (!this.warned){ this.warned = true; toast('ยังไม่พบไฟล์คลิปแมว (โฟลเดอร์ clips) ใช้แมวการ์ตูนไปก่อนนะ', 3200); }
     if (UI.tab === 'cat') render();
   },
@@ -670,7 +678,7 @@ const Live = {
     if (this.fading){ this.queued = k; return; }
     const fr = v[this.front], back = v[1 - this.front];
     this.fading = true; this.cur = k;
-    back.poster = LIVE_CLIPS[k].replace('.mp4', '.jpg'); back.src = LIVE_CLIPS[k];
+    back.poster = clipSrc(k, '.jpg'); back.src = clipSrc(k);
     const go = () => {
       if (!RMOTION) back.play().catch(() => {});
       back.classList.add('on'); fr.classList.remove('on');
@@ -810,17 +818,17 @@ const WkVid = {
     const v = this.vids(), sc = document.getElementById('wkScene'); if (!v[0]) return;
     this.list = (w.act === 'yoga' || w.act === 'strength') ? ['stretch'] : ['walk', 'walk2'];
     this.idx = 0; this.front = 0; this.fading = false; this.paused = false; this.rate = 1; this.failed = false;
-    v.forEach(x => { x.addEventListener('error', () => this.fail()); x.addEventListener('timeupdate', () => this.near(x)); });
+    v.forEach(x => { x.addEventListener('error', () => this.fail(x)); x.addEventListener('timeupdate', () => this.near(x)); });
     v[0].addEventListener('loadeddata', () => { if (sc && !this.failed) sc.classList.add('has-video'); }, {once:true});
-    v[0].poster = LIVE_CLIPS[this.list[0]].replace('.mp4', '.jpg'); v[0].src = LIVE_CLIPS[this.list[0]];
+    v[0].poster = clipSrc(this.list[0], '.jpg'); v[0].src = clipSrc(this.list[0]);
     if (!RMOTION) v[0].play().catch(() => {});
   },
-  fail(){ if (this.failed) return; this.failed = true; const sc = document.getElementById('wkScene'); if (sc) sc.classList.remove('has-video'); const b = document.getElementById('wkV'); if (b) b.remove(); },
+  fail(x){ if (this.failed) return; const m = clipMiss(x); if (m === 'switch'){ const v = this.vids()[this.front]; if (v){ v.src = clipSrc(this.list[this.idx]); if (!RMOTION) v.play().catch(() => {}); } return; } if (m) return; this.failed = true; const sc = document.getElementById('wkScene'); if (sc) sc.classList.remove('has-video'); const b = document.getElementById('wkV'); if (b) b.remove(); },
   near(x){ const v = this.vids(); if (x !== v[this.front] || this.fading || !x.duration || this.paused) return;
     if (x.currentTime > x.duration - 0.9 / Math.max(this.rate, .5)){ this.idx = (this.idx + 1) % this.list.length; this.swap(this.list[this.idx]); } },
   swap(k){
     const v = this.vids(); if (!v[0]) return; const fr = v[this.front], back = v[1 - this.front];
-    this.fading = true; back.src = LIVE_CLIPS[k];
+    this.fading = true; back.src = clipSrc(k);
     const go = () => { back.playbackRate = this.rate; if (!RMOTION && !this.paused) back.play().catch(() => {});
       back.classList.add('on'); fr.classList.remove('on');
       setTimeout(() => { fr.pause(); this.front = 1 - this.front; this.fading = false; }, 720); };
