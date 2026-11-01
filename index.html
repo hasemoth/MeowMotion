@@ -7,71 +7,86 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="MeowMotion">
-<meta name="theme-color" content="#F4F3F8">
+<meta name="theme-color" content="#F4F2F8">
 <title>MeowMotion</title>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=2">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mali:wght@500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --bg:#F4F3F8;--surface:#FFFFFF;--ink:#26242E;--ink2:#625F70;
-  --mint:#CDEFE0;--mintD:#1B6E4E;--mintM:#5CC99B;
-  --peach:#FFE0CC;--peachD:#A44A24;--peachM:#F4A27C;
-  --lav:#E6E0FA;--lavD:#5B4BB8;--lavM:#9C8CF0;
+  --paper:#F4F2F8;--surface:#FFFFFF;--ink:#23202B;--ink2:#66617A;--ink3:#9893AA;--line:#E8E4F0;
+  --lav:#ECE8FB;--lavD:#5A49C2;--lavM:#9C8CF0;
+  --mint:#DDF3EA;--mintD:#1B6E4E;--leaf:#17865E;--leafM:#4CC48F;
+  --peach:#FFE3D6;--peachD:#A3401F;--peachM:#F4845F;
   --honey:#FFF0C7;--honeyD:#8A5A00;
   --move:#EE5D5D;--ex:#23A272;--stand:#2F94D0;
-  --raise:6px 6px 16px rgba(120,110,150,.14),-6px -6px 14px #FFFFFF;
-  --raise-btn:5px 5px 12px rgba(120,110,150,.22),-5px -5px 12px #FFFFFF;
+  --bg:var(--paper);
+  --raise:0 1px 2px rgba(35,32,43,.04),0 12px 28px -18px rgba(35,32,43,.22);
+  --raise-btn:0 1px 2px rgba(35,32,43,.05);
+  --display:'Mali','IBM Plex Sans Thai Looped',system-ui,sans-serif;
+  --body:'IBM Plex Sans Thai Looped',system-ui,-apple-system,sans-serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito','IBM Plex Sans Thai Looped',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
 body{min-height:100vh;overscroll-behavior-y:none}
 button,input,select,textarea{font:inherit;color:inherit}
-h1,h2,h3{margin:0}
-.app{max-width:480px;margin:0 auto;padding:max(20px,env(safe-area-inset-top)) 20px calc(96px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px}
+h1,h2,h3{margin:0;font-weight:700}
+:focus-visible{outline:2.5px solid var(--lavD);outline-offset:2px;border-radius:12px}
+.app{max-width:480px;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 18px calc(96px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px}
-.title{font-size:26px;line-height:32px;font-weight:800;letter-spacing:-.3px}
+.title{font-family:var(--display);font-size:28px;line-height:34px;font-weight:700;letter-spacing:-.2px}
+.catname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sub{font-size:13px;color:var(--ink2)}
 .row{display:flex;align-items:center}.col{display:flex;flex-direction:column}
 .g4{gap:4px}.g6{gap:6px}.g8{gap:8px}.g10{gap:10px}.g12{gap:12px}
 .between{justify-content:space-between}.grow{flex:1;min-width:0}
-.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
 .chip.lav{color:var(--lavD);background:var(--lav)}.chip.mint{color:var(--mintD);background:var(--mint)}.chip.peach{color:var(--peachD);background:var(--peach)}.chip.honey{color:var(--honeyD);background:var(--honey)}
-.pills{display:flex;gap:8px;flex-shrink:0}
-.pill{display:flex;align-items:center;gap:6px;font-weight:800;font-size:15px;padding:7px 12px 7px 8px;border-radius:999px;white-space:nowrap;transition:transform .3s}
+.pills{display:flex;gap:6px;flex-shrink:0}
+.pill{display:flex;align-items:center;gap:5px;font-weight:700;font-size:14.5px;padding:6px 11px 6px 7px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .pill.coin{background:var(--honey);color:var(--honeyD)}.pill.salmon{background:var(--peach);color:var(--peachD)}
 .pill.bump{animation:bump .5s}
-.card{background:var(--surface);border-radius:22px;padding:14px 16px;box-shadow:var(--raise)}
-.muted{color:var(--ink2)}.small{font-size:12px}.tiny{font-size:11.5px}
+.card{background:var(--surface);border-radius:22px;padding:14px 16px;border:1px solid var(--line);box-shadow:var(--raise)}
+.muted{color:var(--ink2)}.small{font-size:12.5px}.tiny{font-size:11.5px}
 .bars{display:flex;flex-direction:column;gap:8px}
-.barrow{display:grid;grid-template-columns:22px 62px minmax(0,1fr) 42px;align-items:center;gap:8px;height:20px}
-.barrow .lbl{font-size:13px;font-weight:600}.barrow .val{font-size:13px;font-weight:800;text-align:right}
-.track{height:8px;border-radius:999px;background:#F1EEF6;overflow:hidden}
+.track{height:7px;border-radius:999px;background:#F0EDF5;overflow:hidden}
 .fill{height:100%;border-radius:999px;transition:width .7s cubic-bezier(.34,1.56,.64,1)}
-.room{position:relative;height:252px;flex-shrink:0;border-radius:28px;overflow:hidden;background:#EDE8FB;touch-action:none;user-select:none;-webkit-user-select:none}
-.floor{position:absolute;left:0;right:0;bottom:0;height:80px;background:#F9E3D3;border-top:3px solid #F3D2BC}
-.window{position:absolute;left:18px;top:18px;width:84px;height:76px;border-radius:16px;background:#D6EEF8;border:5px solid #fff;overflow:hidden}
-.window.night{background:#4A4470}
-.window:before,.window:after{content:"";position:absolute;background:#fff}
-.window:before{left:50%;top:0;bottom:0;width:4px;margin-left:-2px}.window:after{top:50%;left:0;right:0;height:4px;margin-top:-2px}
-.sun{position:absolute;left:8px;top:8px;width:16px;height:16px;border-radius:50%;background:#FFE7A3}
-.window.night .sun{background:#F3EFD8;box-shadow:inset -4px -2px 0 #4A4470}
-.cushion{position:absolute;left:50%;bottom:36px;width:184px;height:42px;margin-left:-92px;border-radius:50%;background:#C9BCF5}
-.catwrap{position:absolute;left:50%;bottom:46px;width:156px;height:156px;margin-left:-78px;cursor:grab;touch-action:none}
+
+/* ---------- the room (hero) ---------- */
+.room{position:relative;height:min(430px,54vh);min-height:330px;flex-shrink:0;border-radius:30px;overflow:hidden;isolation:isolate;touch-action:none;user-select:none;-webkit-user-select:none;
+  --wall:#EEE9FB;--wall2:#E2DAF6;--floor:#E9C9A6;--floor2:#D9B28B;--plank:rgba(120,72,38,.12);--light:rgba(255,246,214,.85);--sky:linear-gradient(#9DD3F5,#E2F3FC);--frame:#FFFFFF;background:var(--wall)}
+.room[data-tod=dawn]{--wall:#F5E8EE;--wall2:#EBD8E4;--floor:#EBC7A8;--floor2:#DBAE8E;--light:rgba(255,214,190,.8);--sky:linear-gradient(#B9D7F2,#FDD9B5)}
+.room[data-tod=golden]{--wall:#F6E3D3;--wall2:#EDCDB7;--floor:#E6BC92;--floor2:#D29F74;--light:rgba(255,190,110,.75);--sky:linear-gradient(#F4B37A,#F9DDB0)}
+.room[data-tod=night]{--wall:#3B3560;--wall2:#2F2A52;--floor:#5A4A63;--floor2:#463A52;--plank:rgba(0,0,0,.16);--light:transparent;--sky:linear-gradient(#1C2141,#3B3F6B);--frame:#D9D2F2}
+.wall{position:absolute;inset:0 0 43% 0;background:linear-gradient(var(--wall),var(--wall2))}
+.wall:after{content:"";position:absolute;left:0;right:0;bottom:0;height:7px;background:rgba(60,40,70,.07)}
+.floor{position:absolute;left:0;right:0;bottom:0;height:43%;background:linear-gradient(var(--floor2),var(--floor) 45%);overflow:hidden}
+.floor:before{content:"";position:absolute;left:-60%;right:-60%;top:0;bottom:-30%;background:repeating-linear-gradient(90deg,transparent 0 50px,var(--plank) 50px 52px);transform:perspective(160px) rotateX(52deg);transform-origin:50% 0}
+.window{position:absolute;left:7%;top:7%;width:26%;max-width:118px;aspect-ratio:.86;border-radius:14px;background:var(--sky);border:6px solid var(--frame);overflow:hidden;box-shadow:0 6px 16px -10px rgba(40,30,60,.35)}
+.window:before,.window:after{content:"";position:absolute;background:var(--frame)}
+.window:before{left:50%;top:0;bottom:0;width:5px;margin-left:-2.5px}.window:after{top:52%;left:0;right:0;height:5px}
+.sun{position:absolute;left:14%;top:12%;width:22%;aspect-ratio:1;border-radius:50%;background:#FFE7A3;box-shadow:0 0 18px 4px rgba(255,231,163,.6)}
+.room[data-tod=night] .sun{background:#F3EFD8;box-shadow:inset -6px -3px 0 #3B3F6B,0 0 14px rgba(243,239,216,.35)}
+.sunpatch{position:absolute;left:2%;bottom:13%;width:58%;height:30%;background:linear-gradient(105deg,var(--light),transparent 78%);clip-path:polygon(10% 0,44% 0,100% 100%,0 100%);opacity:.75;pointer-events:none}
+.lampglow{position:absolute;right:-12%;top:-8%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,206,140,.42),transparent);display:none;pointer-events:none}
+.room[data-tod=night] .lampglow{display:block}
+.room .stage{position:absolute;inset:0;z-index:2}
+.room .c3d{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cushion{position:absolute;left:50%;bottom:10%;width:184px;height:42px;margin-left:-92px;border-radius:50%;background:#C9BCF5}
+.catwrap{position:absolute;left:50%;bottom:calc(10% + 10px);width:156px;height:156px;margin-left:-78px;cursor:grab;touch-action:none;z-index:2}
 .catwrap svg{width:100%;height:100%;overflow:visible}
-.room.live{height:min(420px,56vh);min-height:330px;background:#E9DCCB}
-.room.live .lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:0;transition:opacity .7s ease;pointer-events:none}
-.room.live .lv.on{opacity:1}
-.room.live .lv-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,0) 26%,rgba(0,0,0,0) 70%,rgba(0,0,0,.22))}
-.room.live .catwrap{left:14%;right:14%;top:16%;bottom:12%;width:auto;height:auto;margin:0;border-radius:40%}
-.room.live .bubble{top:auto;bottom:44px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.8)}
-.room.live .hint{background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-.lvtag{position:absolute;left:12px;top:12px;font-size:11px;font-weight:800;letter-spacing:.04em;color:#26242E;background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);padding:4px 9px;border-radius:999px;pointer-events:none}
-.bubble{position:absolute;right:14px;top:14px;max-width:62%;background:#fff;border-radius:16px;padding:7px 12px;font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(120,110,150,.16);animation:pop .35s cubic-bezier(.34,1.56,.64,1)}
-.hint{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:600;color:var(--ink2);background:rgba(255,255,255,.78);padding:3px 10px;border-radius:999px}
-.decor{position:absolute;pointer-events:none}
-.heart{position:absolute;width:18px;height:18px;pointer-events:none;animation:float 1.1s ease-out forwards}
+.decor{position:absolute;pointer-events:none;z-index:1}
+.decor.front{z-index:3}
+.moodtag{position:absolute;left:12px;top:12px;z-index:4;font-size:12px;font-weight:700;color:var(--ink);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);padding:4px 10px;border-radius:999px;pointer-events:none}
+.bubble{position:absolute;right:12px;top:12px;z-index:4;max-width:58%;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:16px 16px 4px 16px;padding:7px 12px;font-size:13.5px;font-weight:600;box-shadow:0 6px 16px -8px rgba(60,40,90,.3);animation:pop .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.hint{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:4;white-space:nowrap;font-size:12px;font-weight:600;color:var(--ink2);background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:4px 11px;border-radius:999px;pointer-events:none;max-width:92%;overflow:hidden;text-overflow:ellipsis}
+.room[data-tod=night] .moodtag,.room[data-tod=night] .hint{background:rgba(30,26,52,.6);color:#F1EEFA}
+.heart{position:absolute;width:20px;height:20px;pointer-events:none;z-index:5;animation:float 1.1s ease-out forwards}
+.zzz{position:absolute;z-index:5;font-family:var(--display);font-weight:700;color:#B8ACF4;pointer-events:none;animation:zzf 2.4s ease-out forwards}
+@keyframes zzf{0%{opacity:0;transform:translate(0,0)}30%{opacity:1}100%{opacity:0;transform:translate(16px,-44px)}}
+.cat3d-img{display:block;width:100%;height:100%;object-fit:contain}
+/* 2D cat parts (fallback) */
 .cat .c-body{transform-box:view-box;transform-origin:100px 192px;animation:breathe 3.4s ease-in-out infinite}
 .cat.slow .c-body{animation-duration:5.6s}
 .cat .c-head{transform-box:view-box;transform-origin:100px 118px}
@@ -87,22 +102,100 @@ h1,h2,h3{margin:0}
 .cat[data-mouth=w] .m-w,.cat[data-mouth=open] .m-open,.cat[data-mouth=o] .m-o,.cat[data-mouth=down] .m-down,.cat[data-mouth=yawn] .m-yawn{display:inline}
 .cat.hop{animation:hop .5s cubic-bezier(.34,1.56,.64,1)}
 .cat.wiggle{animation:wiggle .5s ease-in-out 2}
-.catwrap{will-change:transform}
-.zzz{position:absolute;font-weight:800;color:#5B4BB8;pointer-events:none;animation:zzf 2.4s ease-out forwards}
-@keyframes zzf{0%{opacity:0;transform:translate(0,0)}30%{opacity:1}100%{opacity:0;transform:translate(14px,-40px)}}
-/* ---- live workout companion ---- */
+
+/* ---------- status + actions ---------- */
+.meters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px 14px}
+.meter{display:flex;flex-direction:column;gap:6px;min-width:0}
+.meter .mh{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+.meter .mh b{margin-left:auto;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+.quick{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:10px}
+.quick .btn{height:56px;border-radius:18px;font-size:14.5px;gap:7px;padding:0 10px}
+.ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.banner{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:10px 12px 10px 14px;box-shadow:var(--raise);animation:pop .4s}
+.banner p{margin:0;font-size:13.5px;font-weight:600;flex:1}
+.ringsrow{display:flex;align-items:center;gap:16px}
+.metric{display:flex;align-items:baseline;justify-content:space-between}
+.metric b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}.metric span.u{font-size:12.5px;font-weight:500;color:var(--ink2)}
+.divider{height:1px;background:var(--line)}
+.btn{min-height:44px;border:none;border-radius:16px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 16px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:transform .12s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn.primary{background:var(--leaf);color:#fff;box-shadow:0 8px 18px -10px rgba(23,134,94,.7)}
+.btn.lavb{background:var(--lavD);color:#fff}
+.btn.soft{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--raise-btn)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.honeyb{background:var(--honey);color:var(--honeyD)}
+.btn.outline{background:#fff;color:var(--honeyD);border:1.5px solid #F2D27A}
+.btn.danger{background:#B3261E;color:#fff}
+.btn.full{width:100%}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:6px 12px env(safe-area-inset-bottom);background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-top:1px solid var(--line)}
+.tabbar .in{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:56px}
+.tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:var(--ink3);font-size:11px;font-weight:600;border-radius:14px}
+.tabbar a.on{color:var(--lavD);font-weight:700}
+.fr{align-items:center}.fr .rank{width:20px;font-weight:700;color:var(--ink2);text-align:center;font-size:13px}
+.fr .art img,.fr .art svg{width:42px;height:42px}.meRow{background:#F4F0FF;border-color:#DCD3FB!important}
+.chatb{background:#F4F1FA;border-radius:4px 16px 16px 16px;padding:7px 11px;font-size:13.5px;line-height:1.45}
+.cheer{border:0;background:#F6F3FB;border-radius:10px;width:32px;height:32px;font-size:15px;cursor:pointer}.cheer:active{transform:scale(.9)}
+.inp{min-height:44px;border:1.5px solid #E3DEEE;border-radius:14px;padding:0 12px;font-weight:600;font-size:15px;background:#fff;color:inherit;width:100%}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:#ECE9F3;border-radius:14px;padding:4px;height:44px}
+.seg button{border:none;border-radius:11px;background:transparent;font-size:14px;font-weight:600;color:var(--ink2);cursor:pointer}
+.seg button.on{background:#fff;color:var(--ink);font-weight:700;box-shadow:0 1px 4px rgba(60,50,90,.14)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.big{font-size:20px;line-height:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.mini-track{height:6px;border-radius:999px;background:#EFEBFB;overflow:hidden}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px}
+.chips::-webkit-scrollbar{display:none}
+.chips button{height:38px;padding:0 15px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:14px;font-weight:600;flex-shrink:0;cursor:pointer}
+.chips button.on{background:var(--ink);color:#fff;border-color:transparent;font-weight:700}
+.item{background:#fff;border:1px solid var(--line);border-radius:22px;padding:10px;display:flex;flex-direction:column;gap:6px;box-shadow:var(--raise)}
+.item .art{position:relative;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center}
+.item h3{font-size:15px;font-weight:700}
+.lock{position:absolute;top:7px;right:7px;width:26px;height:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+.note{font-size:11.5px;font-weight:600;color:var(--peachD);text-align:center}
+.sheet-back{position:fixed;inset:0;z-index:40;background:rgba(35,32,43,.38);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
+.sheet{width:100%;max-width:480px;max-height:90vh;overflow:auto;background:var(--paper);border-radius:28px 28px 0 0;padding:10px 20px calc(24px + env(safe-area-inset-bottom));animation:up .34s cubic-bezier(.34,1.25,.64,1)}
+.grab{width:40px;height:5px;border-radius:3px;background:#D9D5E3;margin:0 auto 14px}
+.sheet h2{font-family:var(--display);font-size:21px;font-weight:700;margin-bottom:4px}
+.list{display:flex;flex-direction:column;gap:10px}
+.lrow{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px 12px}
+.lrow .art{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:12.5px;font-weight:600;color:var(--ink2)}
+.input{height:46px;border-radius:14px;border:1.5px solid #E2DEEC;background:#fff;padding:0 14px;font-size:16px;font-weight:600;width:100%}
+.input:focus{outline:none;border-color:var(--lavM)}
+textarea.input{height:96px;padding:12px 14px;font-size:14px;font-weight:500;resize:vertical}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.steps code{background:#EFEBFB;color:var(--lavD);padding:1px 6px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;word-break:break-all}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));z-index:60;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:var(--ink);color:#fff;font-weight:600;font-size:14px;padding:10px 16px;border-radius:999px;box-shadow:0 10px 24px rgba(35,32,43,.25);animation:drop .35s cubic-bezier(.34,1.4,.64,1);max-width:92vw}
+.toast.out{animation:lift .3s forwards}
+.switch{position:relative;width:51px;height:31px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0;position:absolute}
+.switch span{position:absolute;inset:0;border-radius:999px;background:#D9D5E3;transition:.2s;cursor:pointer}
+.switch span:before{content:"";position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:.2s}
+.switch input:checked+span{background:var(--ex)}
+.switch input:checked+span:before{transform:translateX(20px)}
+.switch input:focus-visible+span{outline:2px solid var(--lavD);outline-offset:2px}
+.breeds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.breed{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:8px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font:inherit;color:inherit}
+.breed.on{border-color:var(--lavD);background:#F7F4FF}
+.breed[disabled]{cursor:default;background:#FAF9FC}
+.breed .art{width:76px;height:76px;display:block}
+.breed .art svg{width:76px;height:70px}
+.splash{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
+.onb{display:flex;flex-direction:column;gap:16px;padding-top:6px}
+.onb .room{height:min(360px,46vh);min-height:280px}
+.onb ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+.loglist{display:flex;flex-direction:column}
+.logrow{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #F0EDF6;font-size:13.5px}
+.logrow:last-child{border-bottom:none}
+.empty{font-size:13px;color:var(--ink2);text-align:center;padding:8px 0}
+a.link{color:var(--lavD);font-weight:700;text-decoration:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- live workout companion ---------- */
 .wk{position:fixed;inset:0;z-index:50;background:#1E1D26;overflow:hidden;animation:fade .25s;user-select:none;-webkit-user-select:none}
 .wk-scene{position:absolute;left:0;right:0;top:0;height:72%;overflow:hidden;transition:filter 1.2s}
-.wkv{position:absolute;inset:0;opacity:0;transition:opacity .6s,filter 1.2s;pointer-events:none}
-.wkv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;opacity:0;transition:opacity .7s ease}
-.wkv video.on{opacity:1}
-.wk-scene.has-video .wkv{opacity:1}
-.wk-scene.has-video .layer,.wk-scene.has-video .wk-cat,.wk-scene.has-video .stars,.wk-scene.has-video .sunmoon{visibility:hidden}
-.wk-scene.has-video:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(0,0,0,.18))}
-.wk-scene[data-sky=dawn] .wkv{filter:sepia(.18) saturate(1.05) brightness(1.02)}
-.wk-scene[data-sky=golden] .wkv{filter:sepia(.32) saturate(1.2) hue-rotate(-8deg)}
-.wk-scene[data-sky=night] .wkv{filter:brightness(.62) saturate(.75) hue-rotate(12deg)}
-.wk-scene[data-wx=cloud] .wkv,.wk-scene[data-wx=rain] .wkv{filter:brightness(.85) saturate(.6)}
 .wk-scene .sky{position:absolute;inset:0;transition:background 1.5s}
 .wk-scene[data-sky=dawn] .sky{background:linear-gradient(#B9D7F2,#FDD9B5)}
 .wk-scene[data-sky=day] .sky{background:linear-gradient(#8FCBF2,#DDF1FB)}
@@ -123,9 +216,9 @@ h1,h2,h3{margin:0}
 .path{position:absolute;left:50%;bottom:-2%;width:150%;height:56%;margin-left:-75%;transform:perspective(260px) rotateX(58deg);transform-origin:50% 100%;background-color:#E9D9BE;background-image:linear-gradient(90deg,transparent 48.6%,rgba(255,255,255,.95) 48.6%,rgba(255,255,255,.95) 51.4%,transparent 51.4%);background-size:100% 90px}
 .wk-scene[data-sky=night] .path{filter:brightness(.6)}
 .tree{position:absolute;left:50%;top:44%;width:90px;height:110px;margin-left:-45px;transform-origin:50% 100%;opacity:0}
-.wall{position:absolute;inset:0;background:#EDE8FB}
-.wk-scene[data-sky=night] .wall{background:#D9D1F2}
-.ifloor{position:absolute;left:0;right:0;bottom:0;height:34%;background:#F9E3D3;border-top:4px solid #F3D2BC}
+.wall2{position:absolute;inset:0;background:#EDE8FB}
+.wk-scene[data-sky=night] .wall2{background:#D9D1F2}
+.ifloor{position:absolute;left:0;right:0;bottom:0;height:34%;background:#F2DCC8;border-top:4px solid #EACDB4}
 .iwin{position:absolute;left:8%;top:9%;width:34%;max-width:170px;aspect-ratio:1.1;border-radius:18px;border:7px solid #fff;overflow:hidden}
 .iwin .isky{position:absolute;inset:0}
 .wk-scene[data-sky=dawn] .isky{background:linear-gradient(#B9D7F2,#FDD9B5)}.wk-scene[data-sky=day] .isky{background:linear-gradient(#8FCBF2,#DDF1FB)}
@@ -142,136 +235,44 @@ h1,h2,h3{margin:0}
 .wk-cat{position:absolute;left:50%;bottom:8%;width:min(46vw,220px);aspect-ratio:1;margin-left:calc(min(46vw,220px) / -2);transform-origin:50% 100%;z-index:3}
 .wk-scene[data-place=indoor][data-act=yoga] .wk-cat,.wk-scene[data-place=indoor][data-act=strength] .wk-cat{bottom:11%}
 .wk-cat svg{width:100%;height:100%;overflow:visible}
+.wk-stage{position:absolute;inset:0;z-index:3}
+.wk-stage .c3d{position:absolute;inset:0;width:100%;height:100%;display:block}
 .wk-top{position:absolute;left:0;right:0;top:0;padding:max(14px,env(safe-area-inset-top)) 14px 0;display:flex;gap:6px;flex-wrap:wrap;z-index:5}
-.wchip{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 11px;border-radius:999px;border:none;font:inherit;font-size:12.5px;font-weight:800;color:#26242E;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);white-space:nowrap}
+.wchip{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 11px;border-radius:999px;border:none;font:inherit;font-size:12.5px;font-weight:700;color:var(--ink);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);white-space:nowrap}
 button.wchip{cursor:pointer}
-.wk-pop{position:absolute;left:50%;top:calc(max(14px,env(safe-area-inset-top)) + 52px);transform:translate(-50%,-20px);opacity:0;z-index:6;background:#fff;color:#26242E;border-radius:20px;padding:12px 16px;font-weight:800;font-size:16px;box-shadow:0 12px 30px rgba(38,36,46,.25);text-align:center;transition:all .45s cubic-bezier(.34,1.4,.64,1);width:max-content;min-width:250px;max-width:86vw}
+.wk-pop{position:absolute;left:50%;top:calc(max(14px,env(safe-area-inset-top)) + 52px);transform:translate(-50%,-20px);opacity:0;z-index:6;background:#fff;color:var(--ink);border-radius:20px;padding:12px 16px;font-family:var(--display);font-weight:700;font-size:17px;box-shadow:0 12px 30px rgba(38,36,46,.25);text-align:center;transition:all .45s cubic-bezier(.34,1.4,.64,1);width:max-content;min-width:250px;max-width:86vw}
 .wk-pop.show{opacity:1;transform:translate(-50%,0)}
-.wk-pop small{display:block;font-size:12.5px;font-weight:700;color:#625F70;margin-top:2px}
+.wk-pop small{display:block;font-family:var(--body);font-size:12.5px;font-weight:600;color:var(--ink2);margin-top:2px}
 .fx{position:absolute;width:24px;height:24px;pointer-events:none;z-index:4;animation:fxup 2.2s ease-out forwards}
 @keyframes fxup{0%{opacity:0;transform:translate(0,0) scale(.6)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx,10px),-120px) scale(1.2)}}
-.wk-dash{position:absolute;left:0;right:0;bottom:0;height:calc(28% + 28px);min-height:262px;margin-top:-28px;border-radius:28px 28px 0 0;background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(26px) saturate(1.4);backdrop-filter:blur(26px) saturate(1.4);padding:14px 18px calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px;color:#26242E;z-index:7;box-shadow:0 -10px 30px rgba(30,28,40,.12)}
+.wk-dash{position:absolute;left:0;right:0;bottom:0;height:calc(28% + 28px);min-height:262px;margin-top:-28px;border-radius:28px 28px 0 0;background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(26px) saturate(1.4);backdrop-filter:blur(26px) saturate(1.4);padding:14px 18px calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px;color:var(--ink);z-index:7;box-shadow:0 -10px 30px rgba(30,28,40,.12)}
 .wk.night .wk-dash{background:rgba(30,28,44,.66);color:#fff}
 .wk.night .wk-dash .muted2{color:rgba(255,255,255,.78)}
-.muted2{color:#625F70}
-.wk-dash .big{font-size:46px;line-height:48px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.muted2{color:var(--ink2)}
+.wk-dash .big{font-size:46px;line-height:48px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums}
 .wk-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .wk-metrics div{display:flex;flex-direction:column}
-.wk-metrics b{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
-.wk-metrics span{font-size:11.5px;font-weight:700}
+.wk-metrics b{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+.wk-metrics span{font-size:11.5px;font-weight:600}
 .zbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
-.zbar div{height:26px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;background:rgba(120,110,150,.16);color:inherit;opacity:.6;transition:all .4s}
+.zbar div{height:26px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;background:rgba(120,110,150,.16);color:inherit;opacity:.6;transition:all .4s}
 .zbar div.on{opacity:1;color:#fff}
 .zbar div.on.z1{background:#2F94D0}.zbar div.on.z2{background:#23A272}.zbar div.on.z3{background:#E8845A}
 .wk-ctrl{display:flex;gap:10px;margin-top:auto}
 .wk-ctrl .btn{flex:1;min-height:50px;font-size:15.5px}
 .wk.night .btn.ghost{background:rgba(255,255,255,.14);color:#fff;border-color:transparent}
 .talkchip[hidden]{display:none}
-.talkchip{display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;cursor:pointer}
+.talkchip{display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;cursor:pointer}
 .talkchip input{width:22px;height:22px;accent-color:#23A272;flex-shrink:0}
 .pickgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.pickgrid button,.pickrow button{border:1.5px solid #E2DEEC;background:#fff;border-radius:16px;font:inherit;font-weight:800;font-size:14px;color:#26242E;cursor:pointer}
+.pickgrid button,.pickrow button{border:1.5px solid #E2DEEC;background:#fff;border-radius:16px;font:inherit;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer}
 .pickgrid button{min-height:58px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:6px 12px;text-align:left}
-.pickgrid button small{font-size:11.5px;font-weight:600;color:#625F70}
+.pickgrid button small{font-size:11.5px;font-weight:500;color:var(--ink2)}
 .pickrow{display:flex;gap:6px;flex-wrap:wrap}
 .pickrow button{min-height:40px;padding:0 13px}
-.pickgrid button.on,.pickrow button.on{border-color:#5B4BB8;background:#E6E0FA;color:#5B4BB8}
-.lbl2{font-size:13px;font-weight:800;color:#625F70;margin:14px 0 6px}
-
-.ringsrow{display:flex;align-items:center;gap:16px}
-.metric{display:flex;align-items:baseline;justify-content:space-between}
-.metric b{font-size:17px;font-weight:800}.metric span.u{font-size:13px;font-weight:600;color:var(--ink2)}
-.divider{height:1px;background:#EEEAF4}
-.btn{min-height:44px;border:none;border-radius:16px;font-weight:800;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 16px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:transform .12s}
-.btn:active{transform:scale(.97)}
-.btn[disabled]{opacity:.45;cursor:default}
-.btn.primary{background:var(--peachD);color:#fff;box-shadow:0 6px 14px rgba(164,74,36,.28)}
-.btn.lavb{background:var(--lavD);color:#fff}
-.btn.soft{background:var(--bg);color:var(--ink);border:1px solid rgba(38,36,46,.06);box-shadow:var(--raise-btn)}
-.btn.ghost{background:#fff;color:var(--ink);border:1px solid rgba(38,36,46,.08)}
-.btn.honeyb{background:var(--honey);color:var(--honeyD)}
-.btn.outline{background:#fff;color:var(--honeyD);border:1.5px solid #F2D27A}
-.btn.full{width:100%}
-.quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.quick .btn{height:60px;border-radius:18px;font-size:14px;gap:6px;padding:0 8px}
-.ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.banner{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:10px 12px 10px 14px;box-shadow:var(--raise);animation:pop .4s}
-.banner p{margin:0;font-size:13.5px;font-weight:700;flex:1}
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px 12px env(safe-area-inset-bottom);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid #ECE9F2}
-.tabbar .in{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:56px}
-.tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:var(--ink2);font-size:11px;font-weight:700}
-.fr{align-items:center}.fr .rank{width:18px;font-weight:800;color:var(--ink2);text-align:center}
-.fr .art svg{width:40px;height:40px}.meRow{background:#F4F0FF;border-radius:16px;padding-left:6px;padding-right:6px}
-.chatb{background:#F4F1FA;border-radius:4px 16px 16px 16px;padding:7px 11px;font-size:13.5px;line-height:1.4}
-.cheer{border:0;background:#F6F3FB;border-radius:10px;width:30px;height:30px;font-size:15px;cursor:pointer}.cheer:active{transform:scale(.9)}
-.codebox{border:0;background:#EFEAFD;color:#3F3294;font:800 20px/1 inherit;letter-spacing:.18em;padding:10px 14px;border-radius:14px;cursor:pointer;font-family:inherit}
-.codebox .tiny{letter-spacing:0;font-weight:700;margin-left:4px}
-.inp{min-height:44px;border:1.5px solid #E3DEEE;border-radius:14px;padding:0 12px;font:600 15px inherit;font-family:inherit;background:#fff;color:inherit;width:100%}
-.tabbar a.on{color:var(--lavD);font-weight:800}
-.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:#E9E6F1;border-radius:14px;padding:4px;height:44px}
-.seg button{border:none;border-radius:11px;background:transparent;font-size:14px;font-weight:700;color:var(--ink2);cursor:pointer}
-.seg button.on{background:#fff;color:var(--ink);font-weight:800;box-shadow:0 2px 6px rgba(120,110,150,.18)}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.big{font-size:20px;line-height:24px;font-weight:800}
-.mini-track{height:6px;border-radius:999px;background:#EFEBFB;overflow:hidden}
-.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:2px 20px}
-.chips::-webkit-scrollbar{display:none}
-.chips button{height:40px;padding:0 16px;border:1px solid rgba(38,36,46,.06);border-radius:999px;background:#fff;font-size:14px;font-weight:700;flex-shrink:0;cursor:pointer}
-.chips button.on{background:var(--lavD);color:#fff;border-color:transparent;font-weight:800}
-.item{background:#fff;border-radius:22px;padding:10px;display:flex;flex-direction:column;gap:6px;box-shadow:var(--raise)}
-.item .art{position:relative;height:70px;border-radius:16px;display:flex;align-items:center;justify-content:center}
-.item h3{font-size:15px;font-weight:800}
-.lock{position:absolute;top:7px;right:7px;width:26px;height:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
-.note{font-size:11.5px;font-weight:700;color:var(--peachD);text-align:center}
-.sheet-back{position:fixed;inset:0;z-index:40;background:rgba(38,36,46,.38);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
-.sheet{width:100%;max-width:480px;max-height:90vh;overflow:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:10px 20px calc(24px + env(safe-area-inset-bottom));animation:up .34s cubic-bezier(.34,1.25,.64,1)}
-.grab{width:40px;height:5px;border-radius:3px;background:#D9D5E3;margin:0 auto 14px}
-.sheet h2{font-size:20px;font-weight:800;margin-bottom:4px}
-.list{display:flex;flex-direction:column;gap:10px}
-.lrow{display:flex;align-items:center;gap:12px;background:#fff;border-radius:18px;padding:10px 12px}
-.lrow .art{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.field{display:flex;flex-direction:column;gap:4px}
-.field label{font-size:12.5px;font-weight:700;color:var(--ink2)}
-.input{height:46px;border-radius:14px;border:1.5px solid #E2DEEC;background:#fff;padding:0 14px;font-size:16px;font-weight:700;width:100%}
-.input:focus{outline:none;border-color:var(--lavM)}
-textarea.input{height:96px;padding:12px 14px;font-size:14px;font-weight:600;resize:vertical}
-.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:14px}
-.steps code{background:#EFEBFB;color:var(--lavD);padding:1px 6px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;word-break:break-all}
-.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));z-index:60;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:#26242E;color:#fff;font-weight:800;font-size:14px;padding:10px 16px;border-radius:999px;box-shadow:0 10px 24px rgba(38,36,46,.25);animation:drop .35s cubic-bezier(.34,1.4,.64,1);max-width:92vw}
-.toast.out{animation:lift .3s forwards}
-.walk{position:fixed;inset:0;z-index:50;background:#2C2840;color:#fff;display:flex;flex-direction:column;align-items:center;padding:max(24px,env(safe-area-inset-top)) 22px calc(24px + env(safe-area-inset-bottom));gap:14px;overflow:auto;animation:fade .25s}
-.walk .clock{font-size:64px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-1px;line-height:1}
-.wstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:420px}
-.wstat{background:rgba(255,255,255,.1);border-radius:18px;padding:12px 8px;text-align:center}
-.wstat b{display:block;font-size:22px;font-weight:800}.wstat span{font-size:12px;color:rgba(255,255,255,.8)}
-.talk{display:flex;align-items:center;gap:12px;width:100%;max-width:420px;background:rgba(255,255,255,.1);border-radius:18px;padding:12px 14px;cursor:pointer}
-.talk input{width:24px;height:24px;accent-color:#5CC99B;flex-shrink:0}
-.switch{position:relative;width:51px;height:31px;flex-shrink:0}
-.switch input{opacity:0;width:0;height:0;position:absolute}
-.switch span{position:absolute;inset:0;border-radius:999px;background:#D9D5E3;transition:.2s;cursor:pointer}
-.switch span:before{content:"";position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:.2s}
-.switch input:checked+span{background:var(--ex)}
-.switch input:checked+span:before{transform:translateX(20px)}
-.switch input:focus-visible+span{outline:2px solid var(--lavD);outline-offset:2px}
-.breeds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.breed{background:#fff;border-radius:18px;padding:8px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid transparent;cursor:pointer;font:inherit}
-.breed.on{border-color:var(--lavD)}
-.breed[disabled]{cursor:default}
-.breed svg{width:64px;height:58px}
-.splash{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
-.onb{display:flex;flex-direction:column;gap:16px;padding-top:12px}
-.onb ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
-.loglist{display:flex;flex-direction:column}
-.logrow{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #F0EDF6;font-size:13.5px}
-.logrow:last-child{border-bottom:none}
-.empty{font-size:13px;color:var(--ink2);text-align:center;padding:8px 0}
-a.link{color:var(--lavD);font-weight:800;text-decoration:none}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(7deg)}}
+.pickgrid button.on,.pickrow button.on{border-color:var(--lavD);background:var(--lav);color:var(--lavD)}
+.lbl2{font-size:13px;font-weight:700;color:var(--ink2);margin:14px 0 6px}
 @keyframes breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.015,1.025)}}
-@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
-@keyframes zz{0%{opacity:0;transform:translate(0,4px)}40%{opacity:1}100%{opacity:0;transform:translate(8px,-12px)}}
 @keyframes hop{0%{transform:translateY(0)}40%{transform:translateY(-18px)}100%{transform:translateY(0)}}
 @keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
 @keyframes float{0%{opacity:0;transform:translate(-50%,0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-70px) scale(1.15)}}
@@ -290,6 +291,896 @@ a.link{color:var(--lavD);font-weight:800;text-decoration:none}
 <div id="layer"></div>
 <script>
 'use strict';
+/* ===== MeowMotion 3D cat: dependency-free WebGL engine ===== */
+const C3 = (() => {
+'use strict';
+const PI = Math.PI, TAU = PI * 2;
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const lerp = (a, b, t) => a + (b - a) * t;
+const sstep = t => (t = clamp(t, 0, 1), t * t * (3 - 2 * t));
+const hex = h => { const n = parseInt(h.slice(1), 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; };
+
+// ---------- matrices (column-major, pooled per frame) ----------
+const pool = []; let pi = 0;
+function M(){ const m = pool[pi] || (pool[pi] = new Float32Array(16)); pi++; return m; }
+function resetPool(){ pi = 0; }
+function mul(a, b){ const o = M();
+  for (let i = 0; i < 4; i++){ const b0 = b[i*4], b1 = b[i*4+1], b2 = b[i*4+2], b3 = b[i*4+3];
+    o[i*4] = a[0]*b0 + a[4]*b1 + a[8]*b2 + a[12]*b3; o[i*4+1] = a[1]*b0 + a[5]*b1 + a[9]*b2 + a[13]*b3;
+    o[i*4+2] = a[2]*b0 + a[6]*b1 + a[10]*b2 + a[14]*b3; o[i*4+3] = a[3]*b0 + a[7]*b1 + a[11]*b2 + a[15]*b3; }
+  return o; }
+function trs(tx, ty, tz, rx, ry, rz, sx, sy, sz){
+  const o = M(), cx = Math.cos(rx), nx = Math.sin(rx), cy = Math.cos(ry), ny = Math.sin(ry), cz = Math.cos(rz), nz = Math.sin(rz);
+  sx = sx == null ? 1 : sx; sy = sy == null ? sx : sy; sz = sz == null ? sx : sz;
+  o[0] = (cy*cz + ny*nx*nz) * sx; o[1] = cx*nz * sx; o[2] = (-ny*cz + cy*nx*nz) * sx; o[3] = 0;
+  o[4] = (-cy*nz + ny*nx*cz) * sy; o[5] = cx*cz * sy; o[6] = (ny*nz + cy*nx*cz) * sy; o[7] = 0;
+  o[8] = ny*cx * sz; o[9] = -nx * sz; o[10] = cy*cx * sz; o[11] = 0;
+  o[12] = tx; o[13] = ty; o[14] = tz; o[15] = 1; return o; }
+const T = (x, y, z) => trs(x, y, z, 0, 0, 0);
+function tp(m, x, y, z){ return [m[0]*x + m[4]*y + m[8]*z + m[12], m[1]*x + m[5]*y + m[9]*z + m[13], m[2]*x + m[6]*y + m[10]*z + m[14]]; }
+function tv(m, x, y, z){ return [m[0]*x + m[4]*y + m[8]*z, m[1]*x + m[5]*y + m[9]*z, m[2]*x + m[6]*y + m[10]*z]; }
+function invRigid(m){ const o = M();
+  o[0] = m[0]; o[1] = m[4]; o[2] = m[8]; o[3] = 0; o[4] = m[1]; o[5] = m[5]; o[6] = m[9]; o[7] = 0; o[8] = m[2]; o[9] = m[6]; o[10] = m[10]; o[11] = 0;
+  o[12] = -(o[0]*m[12] + o[4]*m[13] + o[8]*m[14]); o[13] = -(o[1]*m[12] + o[5]*m[13] + o[9]*m[14]); o[14] = -(o[2]*m[12] + o[6]*m[13] + o[10]*m[14]); o[15] = 1; return o; }
+function inv4(a){ const o = new Float32Array(16);
+  const a00=a[0],a01=a[1],a02=a[2],a03=a[3],a10=a[4],a11=a[5],a12=a[6],a13=a[7],a20=a[8],a21=a[9],a22=a[10],a23=a[11],a30=a[12],a31=a[13],a32=a[14],a33=a[15];
+  const b00=a00*a11-a01*a10,b01=a00*a12-a02*a10,b02=a00*a13-a03*a10,b03=a01*a12-a02*a11,b04=a01*a13-a03*a11,b05=a02*a13-a03*a12,b06=a20*a31-a21*a30,b07=a20*a32-a22*a30,b08=a20*a33-a23*a30,b09=a21*a32-a22*a31,b10=a21*a33-a23*a31,b11=a22*a33-a23*a32;
+  let d = b00*b11-b01*b10+b02*b09+b03*b08-b04*b07+b05*b06; if (!d) return o; d = 1 / d;
+  o[0]=(a11*b11-a12*b10+a13*b09)*d; o[1]=(a02*b10-a01*b11-a03*b09)*d; o[2]=(a31*b05-a32*b04+a33*b03)*d; o[3]=(a22*b04-a21*b05-a23*b03)*d;
+  o[4]=(a12*b08-a10*b11-a13*b07)*d; o[5]=(a00*b11-a02*b08+a03*b07)*d; o[6]=(a32*b02-a30*b05-a33*b01)*d; o[7]=(a20*b05-a22*b02+a23*b01)*d;
+  o[8]=(a10*b10-a11*b08+a13*b06)*d; o[9]=(a01*b08-a00*b10-a03*b06)*d; o[10]=(a30*b04-a31*b02+a33*b00)*d; o[11]=(a21*b02-a20*b04-a23*b00)*d;
+  o[12]=(a11*b07-a10*b09-a12*b06)*d; o[13]=(a00*b09-a01*b07+a02*b06)*d; o[14]=(a31*b01-a30*b03-a32*b00)*d; o[15]=(a20*b03-a21*b01+a22*b00)*d; return o; }
+function persp(fovy, aspect, n, f){ const o = new Float32Array(16), q = 1 / Math.tan(fovy / 2);
+  o[0] = q / aspect; o[5] = q; o[10] = (f + n) / (n - f); o[11] = -1; o[14] = 2 * f * n / (n - f); return o; }
+function lookAt(e, c, up){ const o = new Float32Array(16);
+  let zx = e[0]-c[0], zy = e[1]-c[1], zz = e[2]-c[2], l = Math.hypot(zx, zy, zz); zx /= l; zy /= l; zz /= l;
+  let xx = up[1]*zz - up[2]*zy, xy = up[2]*zx - up[0]*zz, xz = up[0]*zy - up[1]*zx; l = Math.hypot(xx, xy, xz); xx /= l; xy /= l; xz /= l;
+  const yx = zy*xz - zz*xy, yy = zz*xx - zx*xz, yz = zx*xy - zy*xx;
+  o[0]=xx; o[1]=yx; o[2]=zx; o[4]=xy; o[5]=yy; o[6]=zy; o[8]=xz; o[9]=yz; o[10]=zz;
+  o[12]=-(xx*e[0]+xy*e[1]+xz*e[2]); o[13]=-(yx*e[0]+yy*e[1]+yz*e[2]); o[14]=-(zx*e[0]+zy*e[1]+zz*e[2]); o[15]=1; return o; }
+function mulN(a, b){ const o = new Float32Array(16); // non-pooled
+  for (let i = 0; i < 4; i++) for (let r = 0; r < 4; r++) o[i*4+r] = a[r]*b[i*4] + a[4+r]*b[i*4+1] + a[8+r]*b[i*4+2] + a[12+r]*b[i*4+3]; return o; }
+
+// ---------- geometry ----------
+function geoSphere(lat, lon, y0){ const P = [], I = [], tm = Math.acos(y0 == null ? -1 : y0);
+  for (let i = 0; i <= lat; i++){ const th = i / lat * tm, y = Math.cos(th), r = Math.sin(th);
+    for (let j = 0; j <= lon; j++){ const u = j / lon * TAU, x = r * Math.sin(u), z = r * Math.cos(u); P.push(x, y, z, x, y, z, x, y, z); } }
+  for (let i = 0; i < lat; i++) for (let j = 0; j < lon; j++){ const a = i * (lon + 1) + j, b = a + lon + 1; I.push(a, b, a + 1, a + 1, b, b + 1); }
+  return {P, I}; }
+function geoCap(lat, lon, A){ const P = [], I = [];
+  for (let i = 0; i <= lat; i++) for (let j = 0; j <= lon; j++){ const u = j / lon * TAU, cu = Math.cos(u), tm = Math.acos(-0.04) + A * Math.pow(Math.max(0, cu), 1.6);
+    const th = i / lat * tm, y = Math.cos(th), r = Math.sin(th), x = r * Math.sin(u), z = r * cu; P.push(x, y, z, x, y, z, i / lat, 0, 0); }
+  for (let i = 0; i < lat; i++) for (let j = 0; j < lon; j++){ const a = i * (lon + 1) + j, b = a + lon + 1; I.push(a, b, a + 1, a + 1, b, b + 1); }
+  return {P, I}; }
+function geoRevolve(prof, seg){ const P = [], I = [], n = prof.length;
+  for (let i = 0; i < n; i++){ const a = prof[Math.max(0, i - 1)], b = prof[Math.min(n - 1, i + 1)];
+    let nr = b[1] - a[1], ny = -(b[0] - a[0]); const l = Math.hypot(nr, ny) || 1; nr /= l; ny /= l;
+    const r = prof[i][0], y = prof[i][1];
+    for (let j = 0; j <= seg; j++){ const u = j / seg * TAU, s = Math.sin(u), c = Math.cos(u); P.push(r*s, y, r*c, nr*s, ny, nr*c, r*s, y, r*c); } }
+  for (let i = 0; i < n - 1; i++) for (let j = 0; j < seg; j++){ const a = i * (seg + 1) + j, b = a + seg + 1; I.push(a, b, a + 1, a + 1, b, b + 1); }
+  return {P, I}; }
+function geoTorus(R, r, su, sv, k){ const P = [], I = [];
+  for (let i = 0; i <= su; i++){ const u = i / su * TAU, cu = Math.cos(u), snu = Math.sin(u);
+    for (let j = 0; j <= sv; j++){ const v = j / sv * TAU, cv = Math.cos(v), sv2 = Math.sin(v);
+      const nx = cv * cu, ny = sv2, nz = cv * snu; P.push(R*cu + r*nx, r*ny, R*snu + r*nz, nx, ny, nz, u * k, v * 0.3, 0); } }
+  for (let i = 0; i < su; i++) for (let j = 0; j < sv; j++){ const a = i * (sv + 1) + j, b = a + sv + 1; I.push(a, b, a + 1, a + 1, b, b + 1); }
+  return {P, I}; }
+const TUBE_N = 12, TUBE_S = 12;
+function geoTube(){ const P = new Array(TUBE_N * (TUBE_S + 1) * 9).fill(0), I = [];
+  for (let i = 0; i < TUBE_N - 1; i++) for (let j = 0; j < TUBE_S; j++){ const a = i * (TUBE_S + 1) + j, b = a + TUBE_S + 1; I.push(a, b, a + 1, a + 1, b, b + 1); }
+  return {P, I, dyn:true}; }
+
+// ---------- shaders ----------
+const VS = `attribute vec3 aPos;attribute vec3 aNor;attribute vec3 aPat;
+uniform mat4 uVP;uniform mat4 uM;uniform mat3 uN;
+varying vec3 vN;varying vec3 vW;varying vec3 vP;varying vec3 vL;
+void main(){vec4 w=uM*vec4(aPos,1.0);vW=w.xyz;vN=uN*aNor;vP=aPat;vL=aNor;gl_Position=uVP*w;}`;
+const HP = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+`;
+const LIGHT = `uniform vec3 uCam;uniform vec3 uKey;uniform vec3 uKeyC;uniform vec3 uSky;uniform vec3 uGnd;uniform vec3 uRimC;uniform float uFloor;
+float h3(vec3 p){p=fract(p*0.3183099+0.1);p*=17.0;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
+float n3(vec3 x){vec3 i=floor(x);vec3 f=fract(x);f=f*f*(3.0-2.0*f);
+return mix(mix(mix(h3(i),h3(i+vec3(1,0,0)),f.x),mix(h3(i+vec3(0,1,0)),h3(i+vec3(1,1,0)),f.x),f.y),mix(mix(h3(i+vec3(0,0,1)),h3(i+vec3(1,0,1)),f.x),mix(h3(i+vec3(0,1,1)),h3(i+vec3(1,1,1)),f.x),f.y),f.z);}
+`;
+const FUR = HP + `varying vec3 vN;varying vec3 vW;varying vec3 vP;varying vec3 vL;` + LIGHT + `
+uniform vec3 uPS;uniform vec3 cBase;uniform vec3 cStr;uniform vec3 cBel;uniform vec3 cPt;uniform vec3 cPa;uniform vec3 cPb;uniform vec3 cPad;
+uniform vec4 uSt;uniform vec4 uSt2;uniform vec3 uStM;uniform vec4 uBel;uniform float uBelA;uniform vec4 uPt;uniform float uPt0;uniform vec4 uPa;
+uniform float uWhite;uniform float uPads;uniform float uLid;uniform float uSpec;uniform float uFuzz;uniform float uGrain;
+void main(){
+ vec3 p=vP*uPS; vec3 pn=normalize(vL); vec3 col=cBase;
+ if(uPa.w>0.0){float a=n3(p*7.0+uPa.xyz)*0.7+n3(p*17.0+uPa.zxy)*0.3;float b=n3(p*6.0+uPa.yzx+7.3)*0.7+n3(p*15.0+uPa.xyz+3.1)*0.3;
+  float ma=smoothstep(0.54,0.58,a)*uPa.w;float mb=smoothstep(0.55,0.59,b)*uPa.w*(1.0-ma);col=mix(col,cPa,ma);col=mix(col,cPb,mb);}
+ if(uSt2.x>0.0){float t=dot(p,uSt.xyz)*uSt.w+(n3(p*9.0)-0.5)*uSt2.z;float d=abs(fract(t)-0.5)*2.0;
+  float band=1.0-smoothstep(uSt2.y,uSt2.y+0.25,d);band*=smoothstep(0.22,0.5,n3(p*13.0+1.7))*0.55+0.45;
+  float m=smoothstep(uSt2.w-0.2,uSt2.w+0.2,dot(pn,uStM));col=mix(col,cStr,band*m*uSt2.x);}
+ float bel=0.0;if(uBelA>0.0){bel=smoothstep(uBel.w-0.14,uBel.w+0.14,dot(pn,uBel.xyz)+(n3(p*14.0)-0.5)*0.2)*uBelA;}
+ bel=max(bel,uWhite);col=mix(col,cBel,bel);
+ float pt=clamp(uPt0+dot(p,uPt.xyz)*uPt.w,0.0,1.0);col=mix(col,cPt,pt);
+ if(uPads>0.0){float bean=smoothstep(0.92,0.95,dot(pn,normalize(vec3(0.0,-1.0,-0.15))));
+  bean=max(bean,smoothstep(0.972,0.985,dot(pn,normalize(vec3(0.42,-0.8,0.42)))));bean=max(bean,smoothstep(0.972,0.985,dot(pn,normalize(vec3(-0.42,-0.8,0.42)))));
+  bean=max(bean,smoothstep(0.972,0.985,dot(pn,normalize(vec3(0.15,-0.72,0.68)))));bean=max(bean,smoothstep(0.972,0.985,dot(pn,normalize(vec3(-0.15,-0.72,0.68)))));
+  col=mix(col,cPad,bean*uPads);}
+ if(uLid>0.0){col=mix(vec3(0.16,0.11,0.11),col,smoothstep(0.985,0.84,vP.x));}
+ vec3 N=normalize(vN);vec3 V=normalize(uCam-vW);
+ float ndl=dot(N,uKey);float dif=clamp((ndl+0.55)/1.55,0.0,1.0);dif*=dif;
+ vec3 hemi=mix(uGnd,uSky,N.y*0.5+0.5);
+ float ao=mix(0.6,1.0,smoothstep(uFloor,uFloor+0.32,vW.y));
+ float fv=1.0-max(dot(N,V),0.0);float rim=fv*fv*fv;
+ float fz=1.0-uGrain+uGrain*2.0*n3(p*60.0);
+ vec3 c=col*fz*(hemi*ao+uKeyC*dif);
+ c+=uRimC*rim*(0.3+0.7*dif)*uFuzz*(0.6+0.4*(col.r+col.g+col.b)/1.5);
+ vec3 H=normalize(uKey+V);c+=uKeyC*pow(max(dot(N,H),0.0),36.0)*uSpec;
+ gl_FragColor=vec4(c,1.0);}`;
+const EYE = HP + `varying vec3 vN;varying vec3 vW;varying vec3 vP;varying vec3 vL;` + LIGHT + `
+uniform vec3 cIris;uniform float uPupil;uniform float uGlow;uniform mat3 uViewR;
+void main(){
+ vec3 n=normalize(vL);float zf=step(0.0,n.z);float rr=mix(1.6,length(n.xy),zf);float ir=0.86;
+ float ang=atan(n.y,n.x);
+ vec3 iris=mix(cIris*1.45,cIris*0.82,smoothstep(0.12,ir,rr));
+ iris*=0.9+0.14*sin(ang*27.0+rr*11.0)*smoothstep(0.1,0.3,rr);
+ iris=mix(iris,cIris*0.32,smoothstep(ir-0.12,ir,rr));
+ float pw=mix(0.08,0.46,uPupil);float ph=mix(0.7,0.52,uPupil);
+ float pe=(n.x*n.x)/(pw*pw)+(n.y*n.y)/(ph*ph);
+ vec3 c=mix(iris,vec3(0.03,0.025,0.04),smoothstep(1.18,0.86,pe)*zf);
+ c=mix(c,vec3(0.1,0.07,0.07),smoothstep(ir-0.01,ir+0.03,rr));
+ c*=1.0-0.5*smoothstep(0.05,0.85,n.y);
+ vec3 N=normalize(vN);
+ c*=mix(uSky*1.2,vec3(1.0),0.6);
+ c+=cIris*uGlow*(1.0-smoothstep(0.6,1.0,pe))*zf;
+ vec3 Nv=normalize(uViewR*N);
+ float s1=smoothstep(0.958,0.97,dot(Nv,normalize(vec3(-0.38,0.52,0.77))));
+ float s2=smoothstep(0.989,0.994,dot(Nv,normalize(vec3(0.3,-0.3,0.9))));
+ float gl=smoothstep(0.55,0.95,dot(Nv,normalize(vec3(-0.3,0.4,0.86))))*0.12;
+ c=mix(c,vec3(1.0),max(max(s1,s2*0.8),gl));
+ gl_FragColor=vec4(c,1.0);}`;
+const FLAT_VS = `attribute vec3 aPos;uniform mat4 uVP;uniform mat4 uM;varying vec2 vUV;void main(){vUV=aPos.xz;gl_Position=uVP*uM*vec4(aPos,1.0);}`;
+const FLAT_FS = `precision mediump float;varying vec2 vUV;uniform vec4 uCol;uniform float uMode;
+void main(){float a=uCol.a;if(uMode>0.5){float d=length(vUV);a*=pow(clamp(1.0-d,0.0,1.0),1.6);}gl_FragColor=vec4(uCol.rgb*a,a);}`;
+
+// ---------- renderer ----------
+function Renderer(canvas){
+  const opts = {antialias:true, alpha:true, premultipliedAlpha:true, depth:true, stencil:false, powerPreference:'low-power'};
+  const gl = canvas.getContext('webgl', opts) || canvas.getContext('experimental-webgl', opts);
+  if (!gl) throw new Error('no webgl');
+  function sh(type, src){ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+  function prog(vs, fs){ const p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+    gl.bindAttribLocation(p, 0, 'aPos'); gl.bindAttribLocation(p, 1, 'aNor'); gl.bindAttribLocation(p, 2, 'aPat'); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    const U = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+    for (let i = 0; i < n; i++){ const inf = gl.getActiveUniform(p, i); U[inf.name.replace(/\[0\]$/, '')] = gl.getUniformLocation(p, inf.name); }
+    return {p, U}; }
+  const P = {fur:prog(VS, FUR), eye:prog(VS, EYE), flat:prog(FLAT_VS, FLAT_FS)};
+  function up(g){ const vb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vb); const data = new Float32Array(g.P);
+    gl.bufferData(gl.ARRAY_BUFFER, data, g.dyn ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW);
+    const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(g.I), gl.STATIC_DRAW);
+    return {vb, ib, n:g.I.length, data}; }
+  const ear = [[0.86,-0.1],[1,0],[0.95,0.12],[0.8,0.3],[0.6,0.5],[0.4,0.7],[0.22,0.86],[0.09,0.96],[0.02,1],[0,1.005]];
+  const G = {
+    sphere:up(geoSphere(20, 28)), cap:up(geoCap(12, 28, -.38)), capL:up(geoCap(12, 28, .34)), cone:up(geoRevolve(ear, 18)),
+    rim:up(geoTorus(0.47, 0.125, 48, 16, 4.6)), base:up(geoSphere(10, 36)), collar:up(geoTorus(1, 0.16, 32, 8, 6))
+  };
+  const qb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, qb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,0,-1, 1,0,-1, -1,0,1, 1,0,1]), gl.STATIC_DRAW);
+  const lb = gl.createBuffer(); let lbLen = 0;
+  gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
+  const nm = new Float32Array(9);
+  function bindMesh(m){ gl.bindBuffer(gl.ARRAY_BUFFER, m.vb); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, m.ib);
+    gl.enableVertexAttribArray(0); gl.enableVertexAttribArray(1); gl.enableVertexAttribArray(2);
+    gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 36, 0); gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 36, 12); gl.vertexAttribPointer(2, 3, gl.FLOAT, false, 36, 24); }
+  function setGlobals(pr, cam, env){ const U = pr.U; gl.useProgram(pr.p);
+    gl.uniformMatrix4fv(U.uVP, false, cam.VP);
+    if (U.uCam) gl.uniform3fv(U.uCam, cam.eye);
+    if (U.uKey){ gl.uniform3fv(U.uKey, env.key); gl.uniform3fv(U.uKeyC, env.keyC); gl.uniform3fv(U.uSky, env.sky); gl.uniform3fv(U.uGnd, env.gnd); gl.uniform3fv(U.uRimC, env.rim); gl.uniform1f(U.uFloor, env.floor || 0); }
+    if (U.uViewR) gl.uniformMatrix3fv(U.uViewR, false, cam.VR); }
+  function normalMat(m, s){ const a = 1 / (s[0]*s[0]), b = 1 / (s[1]*s[1]), c = 1 / (s[2]*s[2]);
+    nm[0] = m[0]*a; nm[1] = m[1]*a; nm[2] = m[2]*a; nm[3] = m[4]*b; nm[4] = m[5]*b; nm[5] = m[6]*b; nm[6] = m[8]*c; nm[7] = m[9]*c; nm[8] = m[10]*c; return nm; }
+  function setLook(U, L){
+    gl.uniform3fv(U.cBase, L.base); gl.uniform3fv(U.cStr, L.str); gl.uniform3fv(U.cBel, L.bel); gl.uniform3fv(U.cPt, L.pt); gl.uniform3fv(U.cPa, L.pa); gl.uniform3fv(U.cPb, L.pb); gl.uniform3fv(U.cPad, L.pad);
+    gl.uniform4fv(U.uSt, L.st); gl.uniform4fv(U.uSt2, L.st2); gl.uniform3fv(U.uStM, L.stm); gl.uniform4fv(U.uBel, L.bd); gl.uniform1f(U.uBelA, L.ba);
+    gl.uniform4fv(U.uPt, L.pd); gl.uniform1f(U.uPt0, L.p0); gl.uniform4fv(U.uPa, L.pat);
+    gl.uniform1f(U.uWhite, L.wh); gl.uniform1f(U.uPads, L.pads); gl.uniform1f(U.uLid, L.lid); gl.uniform1f(U.uSpec, L.spec); gl.uniform1f(U.uFuzz, L.fuzz); gl.uniform1f(U.uGrain, L.grain); }
+  function draw(list, lines, flats, cam, env, w, h){
+    gl.viewport(0, 0, w, h); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.disable(gl.BLEND); gl.depthMask(true);
+    // fur
+    let pr = P.fur; setGlobals(pr, cam, env); let lastMesh = null, lastLook = null;
+    for (const it of list){ if (it.eye) continue;
+      if (it.mesh !== lastMesh){ bindMesh(it.mesh); lastMesh = it.mesh; }
+      if (it.look !== lastLook){ setLook(pr.U, it.look); lastLook = it.look; }
+      gl.uniformMatrix4fv(pr.U.uM, false, it.m); gl.uniformMatrix3fv(pr.U.uN, false, normalMat(it.m, it.s)); gl.uniform3fv(pr.U.uPS, it.s);
+      gl.drawElements(gl.TRIANGLES, it.mesh.n, gl.UNSIGNED_SHORT, 0); }
+    pr = P.eye; setGlobals(pr, cam, env); lastMesh = null;
+    for (const it of list){ if (!it.eye) continue;
+      if (it.mesh !== lastMesh){ bindMesh(it.mesh); lastMesh = it.mesh; }
+      gl.uniformMatrix4fv(pr.U.uM, false, it.m); gl.uniformMatrix3fv(pr.U.uN, false, normalMat(it.m, it.s));
+      gl.uniform3fv(pr.U.cIris, it.eye.iris); gl.uniform1f(pr.U.uPupil, it.eye.pupil); gl.uniform1f(pr.U.uGlow, it.eye.glow);
+      gl.drawElements(gl.TRIANGLES, it.mesh.n, gl.UNSIGNED_SHORT, 0); }
+    // lines + shadows (blended)
+    pr = P.flat; gl.useProgram(pr.p); gl.uniformMatrix4fv(pr.U.uVP, false, cam.VP);
+    gl.disableVertexAttribArray(1); gl.disableVertexAttribArray(2);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    if (lines.length){
+      let total = 0; for (const L of lines) total += L.pts.length;
+      const arr = new Float32Array(total); let o = 0; for (const L of lines){ arr.set(L.pts, o); L.off = o / 3; o += L.pts.length; }
+      gl.bindBuffer(gl.ARRAY_BUFFER, lb); if (total > lbLen){ gl.bufferData(gl.ARRAY_BUFFER, arr, gl.DYNAMIC_DRAW); lbLen = total; } else gl.bufferSubData(gl.ARRAY_BUFFER, 0, arr);
+      gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 12, 0); gl.uniform1f(pr.U.uMode, 0);
+      for (const L of lines){ gl.uniformMatrix4fv(pr.U.uM, false, L.m); gl.uniform4fv(pr.U.uCol, L.col); gl.drawArrays(gl.LINES, L.off, L.pts.length / 3); } }
+    gl.depthMask(false); gl.bindBuffer(gl.ARRAY_BUFFER, qb); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 12, 0); gl.uniform1f(pr.U.uMode, 1);
+    for (const f of flats){ gl.uniformMatrix4fv(pr.U.uM, false, f.m); gl.uniform4fv(pr.U.uCol, f.col); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); }
+    gl.depthMask(true); gl.disable(gl.BLEND);
+  }
+  function newTube(){ return up(geoTube()); }
+  function updateTube(mesh, data){ gl.bindBuffer(gl.ARRAY_BUFFER, mesh.vb); gl.bufferSubData(gl.ARRAY_BUFFER, 0, data); }
+  // offscreen snapshot
+  function snapshot(fn, w, h){
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    const rb = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, rb); gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, w, h);
+    const fb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0); gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, rb);
+    fn(w, h);
+    const px = new Uint8Array(w * h * 4); gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.deleteFramebuffer(fb); gl.deleteRenderbuffer(rb); gl.deleteTexture(tex);
+    return px; }
+  return {gl, G, draw, newTube, updateTube, snapshot, lose(){ try { const e = gl.getExtension('WEBGL_lose_context'); if (e) e.loseContext(); } catch (er) {} }};
+}
+
+return {PI, TAU, clamp, lerp, sstep, hex, M, resetPool, mul, trs, T, tp, tv, invRigid, inv4, persp, lookAt, mulN, Renderer, TUBE_N, TUBE_S};
+})();
+
+/* ===== MeowMotion 3D cat: breeds, rig, poses ===== */
+const C3R = (() => {
+'use strict';
+const {PI, TAU, clamp, lerp, hex, mul, trs, T, tp, invRigid, TUBE_N, TUBE_S} = C3;
+
+// ---------- breeds: change the coat, not the cat ----------
+const SPEC = {
+  orange:    {fur:'#EC9A50', str:'#BC5F26', bel:'#F8DDBE', muz:'#FFF4E8', nose:'#E2877A', earIn:'#F2AFA0', iris:['#C9B43A'], tabby:1, chest:.55, belly:.85, muzzle:.95, rim:'#FFD8A6'},
+  siamese:   {fur:'#EFE3CF', bel:'#F8F2E6', pt:'#4B362B', nose:'#4B362B', earIn:'#6A4C3E', iris:['#4F8FE6'], point:1, chest:.3, belly:.5, muzzle:0, pad:'#5A4038', rim:'#FFF2DC'},
+  fold:      {fur:'#B9B3BF', str:'#7C7583', bel:'#E2DDE6', muz:'#F4F1F6', nose:'#C98F95', earIn:'#E8C3C6', iris:['#D9901E'], tabby:.85, fold:1, headW:1.07, chest:.45, belly:.8, muzzle:.7, rim:'#F3EEFF'},
+  korat:     {fur:'#8C99AE', bel:'#A4AEC0', nose:'#6E7486', earIn:'#C9A9B2', iris:['#79B54B'], chest:.2, belly:.4, muzzle:0, rim:'#E8F1FF', fuzz:1.5, pad:'#6E6070'},
+  tuxedo:    {fur:'#2E2B32', bel:'#F7F5F1', nose:'#E89A9C', earIn:'#7A5A62', iris:['#B9C43A'], chest:1, belly:1, muzzle:1, paws:1, socks:1, rim:'#B9B0E6', fuzz:1.4},
+  mainecoon: {fur:'#9F7049', str:'#4C3121', bel:'#E9D3B4', muz:'#F7EBDA', nose:'#B66D5E', earIn:'#E9B7A6', iris:['#A9B23A'], tabby:1, size:1.12, tufts:1, ruff:1, tailR:1.45, chest:.75, belly:.8, muzzle:.8, rim:'#FFDDB8', fuzz:1.4},
+  khaomanee: {fur:'#F8F6F2', bel:'#FFFFFF', nose:'#F1A2A6', earIn:'#F6B6BB', iris:['#4F8FE6','#E3B02A'], chest:0, belly:0, muzzle:0, rim:'#FFFFFF', fuzz:.7},
+  calico:    {fur:'#FAF6F0', pa:'#E48536', pb:'#2F2A2E', nose:'#EB9C9C', earIn:'#F2B4B6', iris:['#D99E2C'], patch:1, chest:1, belly:1, muzzle:1, paws:1, rim:'#FFE8CC'},
+  black:     {fur:'#27242B', bel:'#27242B', nose:'#3A3238', earIn:'#4E3E46', iris:['#EAB92A'], chest:0, belly:0, muzzle:0, rim:'#A99CF2', fuzz:1.7, pad:'#3E3036'}
+};
+function looks(sp){
+  const base = hex(sp.fur), str = hex(sp.str || sp.fur), bel = hex(sp.bel || sp.fur), pt = hex(sp.pt || sp.str || sp.fur);
+  const pa = hex(sp.pa || sp.fur), pb = hex(sp.pb || sp.fur), pad = hex(sp.pad || '#E7909A');
+  const tab = sp.tabby || 0, P = sp.point ? 1 : 0, pat = sp.patch || 0;
+  const L = o => Object.assign({base, str, bel, pt, pa, pb, pad, st:[0,0,1,13], st2:[0,.3,1.3,-2], stm:[0,1,0], bd:[0,-1,0,.4], ba:0, pd:[0,-1,0,0], p0:0,
+    pat:[0,0,0,0], wh:0, pads:0, lid:0, spec:.08, fuzz:sp.fuzz || 1, grain:.07}, o);
+  const solid = c => L({base:hex(c), fuzz:0, grain:0, spec:.25});
+  return {
+    hips:  L({st:[0,0,1,13], st2:[tab,.3,1.5,-.3], bd:[0,-1,.15,.38], ba:sp.belly || 0, p0:P*.04, pat:[1.3,2.1,.4,pat]}),
+    chest: L({st:[0,0,1,13], st2:[tab,.3,1.5,-.25], bd:[0,-.62,.78,.62 - .4 * (sp.chest || 0)], ba:Math.min(1, (sp.chest || 0) * 1.4), p0:P*.04, pat:[4.1,.6,2.2,pat]}),
+    neck:  L({st:[0,1,0,15], st2:[tab*.8,.28,1.2,-.1], stm:[0,.2,-1], bd:[0,-.35,.94,.62 - .4 * (sp.chest || 0)], ba:Math.min(1, (sp.chest || 0) * 1.4), pat:[2.4,3.3,.9,pat*.7]}),
+    head:  L({st:[1,0,0,24], st2:[tab,.36,.7,.66], stm:[0,.62,.78], pd:[0,-.38,.92,6.5], p0:-.62*P, pat:[3.3,.2,5.1,pat], bd:[0,-1,.4,.6], ba:(sp.muzzle || 0)*.4}),
+    lid:   L({st:[1,0,0,26], st2:[0,.34,.6,.55], lid:1, p0:P*.25, pd:[0,0,1,2]}),
+    cheek: L({bd:[0,-.75,.66,.2], ba:(sp.muzzle || 0)*.75, pd:[0,0,1,5], p0:-.15*P, pat:[3.3,.2,5.1,pat], st:[0,1,0,24], st2:[tab*.6,.3,.5,.3], stm:[0,0,1]}),
+    muzzle:L({base:sp.muz ? hex(sp.muz) : base, wh:sp.muz ? 0 : (sp.muzzle || 0), p0:P*.92, pat:[3.3,.2,5.1,sp.muz ? 0 : pat*.5]}),
+    chin:  L({base:sp.muz ? hex(sp.muz) : base, wh:sp.muz ? 0 : Math.min(1, (sp.muzzle || 0) * 1.1), p0:P*.85}),
+    nose:  solid(sp.nose),
+    mouth: solid('#6E2E36'), tongue: solid('#EE8C98'),
+    earOut:L({p0:P, st2:[0,.3,1,-2], pat:[.3,1.9,2.6,pat]}),
+    earIn: L({base:hex(sp.earIn), grain:.04, fuzz:.4, p0:0, bd:[0,-1,0,.35], ba:0}),
+    tuft:  L({base:hex(sp.str || sp.fur)}),
+    legF1: L({st:[0,1,0,15], st2:[tab,.28,1,-2], p0:P*.2, pd:[0,-1,0,2.5], bd:[0,0,1,.55], ba:(sp.chest || 0)*.5, pat:[6.1,.4,1.7,pat]}),
+    legF2: L({st:[0,1,0,15], st2:[tab,.28,1,-2], p0:P*.55, pd:[0,-1,0,3], bd:[0,-1,0,sp.socks ? -.2 : .9], ba:sp.socks ? 1 : 0}),
+    paw:   L({wh:sp.paws || 0, p0:P*.95, pads:1, st2:[tab*.5,.3,1,-2], st:[0,0,1,16]}),
+    thigh: L({st:[0,1,.3,14], st2:[tab,.3,1.5,-2], stm:[1,0,0], bd:[0,0,1,.55], ba:sp.paws ? .9 : 0, p0:P*.1, pat:[7.2,1.1,.2,pat]}),
+    legH2: L({st:[0,1,0,15], st2:[tab,.28,1,-2], p0:P*.6, bd:[0,-1,0,sp.socks ? -.3 : .9], ba:sp.socks ? 1 : 0}),
+    foot:  L({wh:sp.paws || 0, p0:P*.95, st:[0,0,1,15], st2:[tab*.6,.3,1,-2], pads:.0}),
+    tail:  L({st:[0,0,1,12], st2:[tab,.4,.8,-2], pd:[0,0,1, P ? 1.6 : (tab ? 4 : 0)], p0:P ? .3 : (tab ? -2.4 : 0), pt:P ? pt : str, pat:[.5,4.4,2.7,pat]}),
+    bed:   L({base:hex('#BBAEF2'), str:hex('#A394E8'), st:[1,0,0,1.6], st2:[1,.45,0,-2], fuzz:.5, grain:.12, spec:.02}),
+    bedIn: L({base:hex('#E4DCFB'), fuzz:.3, grain:.16, spec:0}),
+    collar:solid('#9C8CF0'), bell:L({base:hex('#F6C453'), spec:1.4, fuzz:0, grain:0})
+  };
+}
+const IRIS = {};
+function irisOf(sp){ return sp.iris.map(hex); }
+
+// ---------- pose channels ----------
+const POSE = {};
+POSE.sit = {ly:0, ox:0, oz:0, hy:.2, hz:-.05, hp:-.86, hyaw:0, hr:0, sp:-.12, syaw:0, sr:0, hdy:0, hdp:.04, hdr:0,
+  fLx:.085, fLy:.045, fLz:.205, fRx:-.085, fRy:.045, fRz:.205, fpL:0, fpR:0,
+  hLx:.155, hLy:.045, hLz:-.02, hRx:-.155, hRy:.045, hRz:-.02, hfp:0,
+  tb:-1.9, ty:0, tc:.02, tw:0, ts:.06, tf:.5, tq:.15, twr:1, tws:1, twz:0, twR:1, eU:.12, eL:0, pu:.35, mo:0, tg:0, eaL:0, eaR:0, eaF:0, br:1};
+POSE.stand = Object.assign({}, POSE.sit, {hy:.355, hz:-.13, hp:.03, sp:-.02, hdp:.02,
+  fLx:.09, fLy:.045, fLz:.19, fRx:-.09, fRy:.045, fRz:.19, hLx:.115, hLy:.11, hLz:-.24, hRx:-.115, hRy:.11, hRz:-.24, hfp:.85,
+  tb:.6, ty:0, tc:.08, tw:0, tq:.25, ts:.1, twr:0});
+POSE.loaf = Object.assign({}, POSE.sit, {hy:.165, hz:-.1, hp:-.02, sp:-.02, hdp:.08,
+  fLx:.07, fLy:.035, fLz:.25, fRx:-.07, fRy:.035, fRz:.25, hLx:.135, hLy:.04, hLz:-.08, hRx:-.135, hRy:.04, hRz:-.08, hfp:0,
+  tb:-.4, ty:0, tc:0, tw:0, ts:.04, eU:.3, twr:1, tws:1, twz:.06, twR:1.05});
+POSE.sleep = Object.assign({}, POSE.loaf, {hy:.15, hp:.02, hyaw:-.3, syaw:.55, sr:-.05, hdp:.62, hdy:.95, hdr:-.25,
+  fLx:.12, fLz:.27, fRx:-.02, fRz:.27, tb:-.25, ts:.015, tq:0, eU:1, eL:.2, eaL:.25, eaR:.25, br:1.4, twr:1, tws:-1, twz:.1, twR:1.12});
+POSE.crouch = Object.assign({}, POSE.stand, {hy:.21, hz:-.1, hp:.12, sp:.05, hdp:-.06,
+  fLx:.1, fLz:.3, fRx:-.1, fRz:.3, fLy:.04, fRy:.04, hLx:.13, hLy:.06, hLz:-.2, hRx:-.13, hRy:.06, hRz:-.2, hfp:.5, tb:0, tc:0, tq:0, ts:.03, pu:.95, eU:0, eaF:1, twr:0});
+POSE.bow = Object.assign({}, POSE.stand, {hy:.37, hp:.5, sp:.14, hdp:-.32, fLx:.09, fLz:.44, fRx:-.09, fRz:.44, fpL:-.1, fpR:-.1, tb:1.4, tq:.2});
+POSE.reach = Object.assign({}, POSE.stand, {hy:.27, hz:-.08, hp:-.18, sp:-.1, hdp:-.12, hLz:-.4, hRz:-.4, hLy:.06, hRy:.06, hfp:1.2, tb:.1, ts:.02});
+
+// ---------- rig constants ----------
+const G = {chest:[0,.03,.25], neck:[0,.13,.12], head:[0,.15,.04], sh:[.1,-.075,.06], f1:.155, f2:.155,
+  hip:[.115,-.03,-.07], h1:.17, h2:.165, foot:.12, tail:[0,.05,-.2], tseg:.07};
+
+function ik(S, tg, L1, L2, dir){
+  const dx = tg[0] - S[0], dy = tg[1] - S[1], dz = tg[2] - S[2];
+  const D = Math.hypot(dx, dy, dz) || 1e-4, Dc = clamp(D, Math.abs(L1 - L2) + .01, (L1 + L2) * .999);
+  const roll = Math.asin(clamp(dx / D, -.7, .7)), p0 = Math.atan2(-dz, -dy);
+  const A = Math.acos(clamp((L1*L1 + Dc*Dc - L2*L2) / (2*L1*Dc), -1, 1));
+  const K = Math.acos(clamp((L1*L1 + L2*L2 - Dc*Dc) / (2*L1*L2), -1, 1));
+  return [p0 + dir * A, -dir * (PI - K), roll];
+}
+// whiskers + mouth line (head space)
+const WHISK = [], MOUTH = [];
+[1, -1].forEach(s => [-1, 0, 1].forEach(i => {
+  const a = [s*.075, -.092 + i*.011, .214], b = [s*.2, -.09 + i*.022, .2], c = [s*.335, -.078 + i*.042, .15];
+  WHISK.push(...a, ...b, ...b, ...c); }));
+MOUTH.push(0,-.047,.236, 0,-.088,.244,  0,-.088,.244, .028,-.104,.238,  .028,-.104,.238, .055,-.097,.224,  0,-.088,.244, -.028,-.104,.238,  -.028,-.104,.238, -.055,-.097,.224);
+const WHISK_F = new Float32Array(WHISK), MOUTH_F = new Float32Array(MOUTH);
+
+// ---------- build one frame ----------
+const tubeData = new Float32Array(TUBE_N * (TUBE_S + 1) * 9);
+function build(K, R, out){
+  const c = K.r, A = K.look, S = K.spec, k = (S.size || 1) * (K.scale || 1), G2 = R.G;
+  const W = mul(trs(K.root.x, K.root.y, K.root.z, 0, K.root.yaw, 0, k, k, k), T(c.ox, c.ly, c.oz));
+  const L = out.list;
+  const put = (mesh, cm, sx, sy, sz, look) => { L.push({mesh, m:mul(W, mul(cm, trs(0,0,0, 0,0,0, sx, sy, sz))), s:[sx, sy, sz], look}); };
+  const br = 1 + Math.sin(K.breath) * .02 * c.br;
+  const purr = K.purr ? (Math.sin(K.t * 160) * .0016 * K.purr) : 0;
+  // body
+  const Hp = trs(0, c.hy, c.hz, c.hp, c.hyaw, c.hr);
+  put(G2.sphere, Hp, .2, .19 * br, .235, A.hips);
+  const Ch = mul(Hp, trs(G.chest[0], G.chest[1], G.chest[2], c.sp, c.syaw, c.sr));
+  put(G2.sphere, Ch, .19, .205 * br + purr, .21 * br, A.chest);
+  const Nk = mul(Ch, T(G.neck[0], G.neck[1], G.neck[2]));
+  if (S.ruff) put(G2.sphere, mul(Nk, T(0, -.01, .02)), .2, .19, .19, A.neck); else put(G2.sphere, Nk, .145, .15, .14, A.neck);
+  const nk = tp(Nk, 0, 0, 0);
+  // head
+  const Hd = mul(trs(nk[0], nk[1] + purr, nk[2], c.hdp, c.hdy, c.hdr), T(0, .15, .04));
+  if (!K.HW) K.HW = new Float32Array(16); K.HW.set(mul(W, Hd));
+  const hw = S.headW || 1;
+  put(G2.sphere, Hd, .265 * hw, .225, .225, A.head);
+  [1, -1].forEach(s => put(G2.sphere, mul(Hd, T(s * .12 * hw, -.07, .08)), .15 * hw, .12, .14, A.cheek));
+  const mo = c.mo;
+  [1, -1].forEach(s => put(G2.sphere, mul(Hd, trs(s * .047, -.085, .2, 0, 0, -s * .15)), .06, .048, .05, A.muzzle));
+  put(G2.sphere, mul(Hd, T(0, -.128 - mo * .065, .165 - mo * .02)), .052, .042, .05, A.chin);
+  if (mo > .02){ put(G2.sphere, mul(Hd, T(0, -.13 - mo * .028, .19)), .046, .03 * mo + .004, .036, A.mouth);
+    put(G2.sphere, mul(Hd, trs(0, -.138 - mo * .045 + c.tg * .02, .19 + c.tg * .045, -.25, 0, 0)), .03, .011, .035 + c.tg * .02, A.tongue); }
+  else if (c.tg > .02) put(G2.sphere, mul(Hd, trs(0, -.115, .205 + c.tg * .04, .3, 0, 0)), .026, .01, .025 + c.tg * .02, A.tongue);
+  put(G2.sphere, mul(Hd, trs(0, -.036, .228, -.25, 0, 0)), .032, .021, .02, A.nose);
+  // eyes + lids
+  const iris = K.iris, aU = lerp(-1.2, .98, c.eU), aL = lerp(1.2, .12, c.eL), ER = .077;
+  [1, -1].forEach((s, i) => {
+    const sock = mul(Hd, trs(s * .104, .02, .152, 0, s * .17, 0));
+    const g = K.gaze[i];
+    L.push({mesh:G2.sphere, m:mul(W, mul(sock, trs(0,0,0, g[0], g[1], 0, ER, ER, ER))), s:[ER,ER,ER], eye:{iris:iris[i] || iris[0], pupil:c.pu, glow:K.glow || 0}});
+    put(G2.cap, mul(sock, trs(0,0,0, aU, 0, s * .13)), ER * 1.08, ER * 1.08, ER * 1.08, A.lid);
+    put(G2.capL, mul(sock, trs(0,0,0, aL, 0, PI + s * .13)), ER * 1.06, ER * 1.06, ER * 1.06, A.lid);
+  });
+  // ears
+  [1, -1].forEach(s => {
+    const b = s > 0 ? c.eaL : c.eaR;
+    let E;
+    if (S.fold) E = mul(Hd, trs(s * .125, .165, .01, 1.15 + b * .2, s * (.25 + b * .3), -s * (.5 + b * .5)));
+    else E = mul(Hd, trs(s * .132, .152, -.012, -.12 - b * .3 + c.eaF * .18, s * (.28 + b * .85), -s * (.36 + b * .72)));
+    const sz = S.fold ? .72 : 1;
+    put(G2.cone, E, .088 * sz, .158 * sz, .036 * sz, A.earOut);
+    put(G2.cone, mul(E, T(0, .012 * sz, .022 * sz)), .06 * sz, .118 * sz, .02 * sz, A.earIn);
+    if (S.tufts) put(G2.cone, mul(E, T(0, .145, -.004)), .016, .075, .014, A.tuft);
+  });
+  // front legs
+  const paws = [];
+  [1, -1].forEach(s => {
+    const Lf = s > 0, Sp = tp(Ch, s * G.sh[0], G.sh[1], G.sh[2]);
+    const tg = Lf ? [c.fLx, c.fLy, c.fLz] : [c.fRx, c.fRy, c.fRz];
+    const q = ik(Sp, tg, G.f1, G.f2, 1);
+    const U = trs(Sp[0], Sp[1], Sp[2], q[0], 0, q[2]);
+    put(G2.sphere, mul(U, T(0, -G.f1 * .45, 0)), .06, G.f1 * .5 + .04, .064, A.legF1);
+    const Lo = mul(U, trs(0, -G.f1, 0, q[1], 0, 0));
+    put(G2.sphere, mul(Lo, T(0, -G.f2 * .5, 0)), .047, G.f2 * .5 + .03, .05, A.legF2);
+    const pp = tp(Lo, 0, -G.f2, 0);
+    put(G2.sphere, trs(pp[0], pp[1], pp[2] + .012, Lf ? c.fpL : c.fpR, 0, 0), .058, .042, .072, A.paw);
+    paws.push(pp);
+  });
+  // hind legs
+  [1, -1].forEach(s => {
+    const Lf = s > 0, Hj = tp(Hp, s * G.hip[0], G.hip[1], G.hip[2]);
+    const tg = Lf ? [c.hLx, c.hLy, c.hLz] : [c.hRx, c.hRy, c.hRz];
+    const q = ik(Hj, tg, G.h1, G.h2, -1);
+    const U = trs(Hj[0], Hj[1], Hj[2], q[0], 0, q[2]);
+    put(G2.sphere, mul(U, T(0, -G.h1 * .4, .025)), .102, .158, .128, A.thigh);
+    const Lo = mul(U, trs(0, -G.h1, 0, q[1], 0, 0));
+    put(G2.sphere, mul(Lo, T(0, -G.h2 * .5, 0)), .043, G.h2 * .5 + .025, .047, A.legH2);
+    const hk = tp(Lo, 0, -G.h2, 0);
+    const F = trs(hk[0], hk[1], hk[2], c.hfp, 0, 0);
+    put(G2.sphere, mul(F, T(0, 0, G.foot * .45)), .047, .037, G.foot * .5 + .03, A.foot);
+    paws.push(tp(F, 0, -.03, G.foot * .8));
+  });
+  // tail (tube in world space): FK chain blended toward a ground wrap curve
+  const N = TUBE_N, tr = S.tailR || 1, pts = [], rad = [];
+  const tb0 = tp(Hp, G.tail[0], G.tail[1], G.tail[2]);
+  let Tm = trs(tb0[0], tb0[1], tb0[2], c.tb, c.ty + c.hyaw, 0);
+  pts.push(tb0);
+  for (let i = 1; i < N; i++){
+    const f = i / (N - 1), wave = c.ts * Math.sin(K.tailPh - i * .5) * (0.25 + f);
+    Tm = mul(Tm, trs(0, 0, -G.tseg, c.tc + (i > N - 5 ? c.tq : 0) + K.tailFlick * Math.sin(K.t * 22 - i) * f * .4, c.tw + wave, 0));
+    pts.push(tp(Tm, 0, 0, 0));
+  }
+  if (c.twr > .01){
+    const sg = c.tws, cz = c.hz + .07 + c.twz, gy0 = -c.ly + .045;
+    for (let i = 1; i < N; i++){
+      const f = i / (N - 1), ph = PI - sg * f * 2.75, rr = lerp(.17, .29, f) * (c.twR || 1);
+      const lift = c.tq * .5 * f * f * f + c.ts * .35 * Math.max(0, Math.sin(K.tailPh * .7)) * f * f * f * f;
+      const w = [Math.sin(ph) * rr * 1.05 + Math.sin(ph + PI / 2) * .0, lerp(tb0[1], gy0, C3.sstep(f * 2.4)) + lift, cz + Math.cos(ph) * rr * 1.1];
+      const t2 = c.twr; pts[i] = [lerp(pts[i][0], w[0], t2), lerp(pts[i][1], w[1], t2), lerp(pts[i][2], w[2], t2)];
+    }
+  }
+  const gy = -c.ly;
+  for (let i = 0; i < N; i++){ const f = i / (N - 1); rad.push(lerp(.054, .03, f * f) * tr * (S.tailR ? (1 + .25 * Math.sin(f * PI)) : 1));
+    if (pts[i][1] < gy + rad[i] * .95) pts[i][1] = gy + rad[i] * .95; }
+  const wp = pts.map(p => tp(W, p[0], p[1], p[2]));
+  tube(wp, rad.map(r => r * k), tubeData);
+  if (!K.tubeMesh || K.tubeR !== R){ K.tubeMesh = R.newTube(); K.tubeR = R; }
+  R.updateTube(K.tubeMesh, tubeData);
+  L.push({mesh:K.tubeMesh, m:IDENT, s:[1,1,1], look:A.tail});
+  const tipW = wp[N - 1];
+  L.push({mesh:G2.sphere, m:trs(tipW[0], tipW[1], tipW[2], 0,0,0, rad[N - 1] * k), s:[1,1,1], look:A.tail});
+  // collar
+  if (K.collar){
+    const hc = tp(Hd, 0, -.06, -.02), a0 = [hc[0] - nk[0], hc[1] - nk[1], hc[2] - nk[2]], al = Math.hypot(a0[0], a0[1], a0[2]);
+    const pch = Math.atan2(a0[2] / al, a0[1] / al), mid = [lerp(nk[0], hc[0], .25), lerp(nk[1], hc[1], .25), lerp(nk[2], hc[2], .25)];
+    const Cm = trs(mid[0], mid[1] + .01, mid[2] + .01, pch, c.hdy * .4, 0), cr = S.ruff ? .2 : .163;
+    if (!K.collarLook || K.collarLook.key !== K.collar.color){ K.collarLook = Object.assign({}, A.collar, {base:hex(K.collar.color), key:K.collar.color}); }
+    put(G2.collar, Cm, cr, cr * .9, cr, K.collarLook);
+    if (K.collar.star) put(G2.sphere, mul(Cm, trs(0, -.03, cr + .012, 0, 0, PI / 4)), .032, .032, .014, A.bell);
+    else put(G2.sphere, mul(Cm, T(0, -.03, cr + .01)), .027, .027, .027, A.bell);
+  }
+  // lines
+  const lc = K.whiskCol, Hw = mul(W, Hd);
+  out.lines.push({pts:WHISK_F, m:Hw, col:lc});
+  if (mo < .25) out.lines.push({pts:MOUTH_F, m:Hw, col:K.mouthCol});
+  // shadows
+  const g0 = K.root.y + .003, lift = clamp(1 - c.ly * 3, .2, 1);
+  const hc0 = tp(W, 0, c.hy, c.hz), cc0 = tp(W, 0, c.hy + .03, c.hz + .25);
+  const cx = (hc0[0] + cc0[0]) / 2, cz = (hc0[2] + cc0[2]) / 2;
+  out.flats.push({m:trs(cx, g0, cz, 0, K.root.yaw + c.hyaw * .5, 0, .34 * k, 1, .44 * k), col:[.16, .1, .2, .3 * lift * (K.shadow || 1)]});
+  paws.forEach(p => { const w = tp(W, p[0], p[1], p[2]), h = w[1] - g0; if (h < .12) out.flats.push({m:trs(w[0], g0 + .001, w[2], 0,0,0, .085 * k, 1, .085 * k), col:[.14, .08, .16, .32 * (1 - h / .12) * (K.shadow || 1)]}); });
+  K.pts = {w:W};
+  K.pts.head = tp(mul(W, Hd), 0, 0, 0); K.pts.chest = tp(mul(W, Ch), 0, 0, 0); K.pts.hips = tp(mul(W, Hp), 0, 0, 0); K.pts.tail = wp[Math.floor(N * .6)]; K.pts.nose = tp(mul(W, Hd), 0, -.04, .24);
+}
+const IDENT = new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]);
+function tube(pts, rad, out){
+  const n = pts.length; let nx = 0, ny = 1, nz = 0, first = true, s = 0, o = 0;
+  for (let i = 0; i < n; i++){
+    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(n - 1, i + 1)];
+    let tx = b[0] - a[0], ty = b[1] - a[1], tz = b[2] - a[2]; const tl = Math.hypot(tx, ty, tz) || 1; tx /= tl; ty /= tl; tz /= tl;
+    if (first){ nx = 0; ny = 1; nz = 0; if (Math.abs(ty) > .9){ nx = 1; ny = 0; } first = false; }
+    const d = nx * tx + ny * ty + nz * tz; nx -= tx * d; ny -= ty * d; nz -= tz * d; const nl = Math.hypot(nx, ny, nz) || 1; nx /= nl; ny /= nl; nz /= nl;
+    const bx = ty * nz - tz * ny, by = tz * nx - tx * nz, bz = tx * ny - ty * nx;
+    if (i) s += Math.hypot(pts[i][0] - pts[i-1][0], pts[i][1] - pts[i-1][1], pts[i][2] - pts[i-1][2]);
+    for (let j = 0; j <= TUBE_S; j++){ const th = j / TUBE_S * TAU, co = Math.cos(th), si = Math.sin(th);
+      const dx = nx * co + bx * si, dy = ny * co + by * si, dz = nz * co + bz * si, r = rad[i];
+      out[o++] = pts[i][0] + dx * r; out[o++] = pts[i][1] + dy * r; out[o++] = pts[i][2] + dz * r;
+      out[o++] = dx; out[o++] = dy; out[o++] = dz; out[o++] = co * r; out[o++] = si * r; out[o++] = s; }
+  }
+}
+function buildBed(R, out, x, z, A){
+  const G2 = R.G;
+  out.list.push({mesh:G2.rim, m:trs(x, .11, z, 0,0,0, .9, .92, .9), s:[1,1,1], look:A.bed});
+  out.list.push({mesh:G2.base, m:trs(x, .05, z, 0,0,0, .43, .055, .43), s:[.43,.055,.43], look:A.bedIn});
+  out.flats.push({m:trs(x, .002, z, 0,0,0, .72, 1, .68), col:[.16,.1,.22,.32]});
+}
+
+return {SPEC, looks, irisOf, POSE, G, build, buildBed};
+})();
+
+/* ===== MeowMotion 3D cat: behaviour, camera, input ===== */
+const Cat3D = (() => {
+'use strict';
+const {PI, TAU, clamp, lerp, sstep, hex} = C3;
+const POSE = C3R.POSE;
+const RM = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } })();
+const FACE = ['eU','eL','pu','mo','tg','eaL','eaR','eaF'];
+const body = (p, x) => { const o = {}; for (const k in p) if (!FACE.includes(k) && k !== 'ly' && k !== 'ox' && k !== 'oz') o[k] = p[k]; return Object.assign(o, x || {}); };
+const RATE = {};
+const rate = (ks, r) => ks.split(' ').forEach(k => RATE[k] = r);
+rate('hy hz hp hyaw hr sp syaw sr', 6); rate('fLx fLy fLz fRx fRy fRz fpL fpR hLx hLy hLz hRx hRy hRz hfp', 9);
+rate('hdy hdp hdr', 6.5); rate('tb ty tc tw ts tq twr tws twz twR', 4); rate('eU eL pu mo tg eaL eaR eaF', 13); rate('br tf', 2); rate('ly ox oz', 30);
+const angDiff = (a, b) => { let d = (a - b) % TAU; if (d > PI) d -= TAU; if (d < -PI) d += TAU; return d; };
+const BOUND = {x:.78, z0:-.42, z1:1.05};
+
+// ---------- moods: base pose + face + what it likes to do ----------
+const MOODS = {
+  content:  {base:'sit', mods:{}, pool:{slowBlink:3, groom:2, lookAround:2.5, yawn:1.2, headTilt:1.4, stretch:1, knead:1, loafBreak:1.3, earScratch:.7, lickLips:.6}},
+  playful:  {base:'sit', mods:{tb:1.35, twr:0, tq:.4, tc:.07, ts:.13, pu:.75, eU:0, eaF:.6}, pool:{wiggle:2, pounceAir:2, hop:2, chaseTail:1, zoomies:1.3, headTilt:2}},
+  hungry:   {base:'sit', mods:{eaF:.5, pu:.55, eU:.04}, pool:{meow:4, lickLips:2.5, lookBowl:3, headTilt:1}},
+  waiting:  {base:'loaf', mods:{eU:.26}, pool:{sigh:2, lookAround:2, meow:1.2, slowBlink:2}},
+  sulking:  {base:'sit', yaw:2.5, lw:.12, mods:{eaL:.55, eaR:.55, eU:.42, eL:.15, ts:0}, pool:{tailFlick:3, peek:2}},
+  sleeping: {base:'sleep', lw:0, mods:{}, pool:{dream:3, earFlick:2, sleepStretch:1}},
+  happy:    {base:'sit', mods:{eU:.55, eL:.58, twr:0, tb:1.3, tq:.3}, pool:{knead:2, slowBlink:2, hop:1}},
+  cheering: {base:'sit', mods:{eU:.45, eL:.5, twr:0, tb:1.4, tq:.38, eaF:.4}, pool:{hop:3}},
+  eating:   {base:'sit', mods:{eU:.45, eL:.3}, pool:{lickLips:1}}
+};
+const GAITS = {
+  walk:  {dur:1.0, duty:.62, stride:.16, lift:.055, ph:[.25,.75,0,.5], bob:.012, speed:.32},
+  trot:  {dur:.6, duty:.5, stride:.21, lift:.075, ph:[0,.5,.5,0], bob:.02, speed:.62},
+  gallop:{dur:.42, duty:.38, stride:.3, lift:.09, ph:[.5,.6,0,.1], bob:.035, flex:.14, speed:1.3}
+};
+
+// ---------- actions ----------
+const G1 = {fRx:-.025, fRy:.47, fRz:.27, fpR:-1.35, hdp:.5, hdy:-.22, hdr:.06, eU:.62, eL:.2};
+const G2 = {fRx:-.1, fRy:.62, fRz:.2, fpR:-1.5, hdp:.25, hdy:-.5, hdr:-.4, eU:.86, eL:.3};
+const ES = {hLx:.2, hLy:.4, hLz:.13, hfp:-1.1, hdy:.35, hdr:.4, hdp:.12, eU:.75, eL:.3, eaL:.3};
+const EAT = body(POSE.stand, {hy:.31, hp:.2, sp:.24, hdp:.95, hdy:0, fLz:.25, fRz:.25, tb:.45, eU:.55, eL:.3});
+const ACTS = {
+  slowBlink:{dur:2.6, keys:[[0,{}],[.25,{eU:.93, eL:.35}],[.62,{eU:.93, eL:.35}],[1,{}]]},
+  yawn:{dur:2.8, look:.15, keys:[[0,{}],[.18,{hdp:-.2, eU:.55, eaL:.3, eaR:.3}],[.32,{hdp:-.34, mo:1, tg:.35, eU:1, eL:.45, eaL:.55, eaR:.55}],[.68,{hdp:-.3, mo:1, tg:.45, eU:1, eL:.45, eaL:.55, eaR:.55}],[.84,{hdp:-.05, mo:0, tg:0, eU:.65}],[1,{}]]},
+  headTilt:{dur:2.1, keys:[[0,{}],[.22,{hdr:.38, eaF:.9, pu:.78, eU:0}],[.78,{hdr:.38, eaF:.9, pu:.78, eU:0}],[1,{}]]},
+  lookAround:{dur:4.2, look:0, keys:[[0,{}],[.18,{hdy:.9, hdp:-.08}],[.42,{hdy:.9, hdp:-.08}],[.58,{hdy:-.85, hdp:.02}],[.82,{hdy:-.85}],[1,{}]]},
+  meow:{dur:1.1, ev:[.1,'meow'], keys:[[0,{}],[.14,{hdp:-.16, mo:.75, eU:0, eaF:.5}],[.5,{hdp:-.14, mo:.55, eU:.1}],[.72,{mo:0}],[1,{}]]},
+  lickLips:{dur:1.5, keys:[[0,{}],[.18,{tg:1, mo:.06}],[.4,{tg:.3}],[.58,{tg:1, mo:.06}],[.8,{tg:0, mo:0}],[1,{}]]},
+  groom:{dur:6.2, look:0, keys:[[0,{}],[.12,G1],[.55,G1],[.64,G2],[.9,G2],[1,{}]],
+    proc(u, tg, add, t){ if (u > .14 && u < .55){ const w = Math.sin(t * 13); add.tg = .75 + .25 * w; add.mo = .08; add.hdp = .05 * w; }
+      if (u > .66 && u < .9){ const w = Math.sin(t * 8); add.fRy = .045 * w; add.fRz = .02 * w; add.hdr = .07 * w; } }},
+  stretch:{dur:6.4, look:.1, keys:[[0,{}],[.12,body(POSE.stand)],[.3,body(POSE.bow, {mo:1, tg:.3, eU:1, eL:.4})],[.5,body(POSE.bow, {mo:.1, eU:.65})],[.62,body(POSE.stand)],[.8,body(POSE.reach, {eU:.6})],[.92,body(POSE.stand)],[1,{}]]},
+  knead:{dur:4.2, look:.4, purr:1, keys:[[0,{}],[.1,{eU:.78, eL:.45, eaL:.15, eaR:.15}],[.9,{eU:.78, eL:.45}],[1,{}]],
+    proc(u, tg, add, t){ if (u > .08 && u < .92){ const w = Math.sin(t * 7.5); add.fLy = Math.max(0, w) * .06; add.fRy = Math.max(0, -w) * .06; add.fLz = Math.max(0, w) * .025; add.fRz = Math.max(0, -w) * .025; } }},
+  hop:{dur:1.2, keys:[[0,{}],[.2,{eU:.6, eL:.4}],[.8,{eU:.6, eL:.4}],[1,{}]],
+    proc(u, tg, add){ if (u < .22) add.hy = -.05 * sstep(u / .22);
+      else if (u < .72){ const s = (u - .22) / .5; add.ly = .3 * Math.sin(PI * s); add.fLy = add.fRy = .07 * Math.sin(PI * s); add.hy = -.05 * (1 - sstep(s * 3)); }
+      else add.hy = -.04 * Math.sin(PI * (u - .72) / .28); }},
+  earScratch:{dur:3.4, look:0, keys:[[0,{}],[.15,ES],[.85,ES],[1,{}]], proc(u, tg, add, t){ if (u > .17 && u < .83){ add.hLy = .03 * Math.sin(t * 30); add.hdp = .02 * Math.sin(t * 30); } }},
+  sigh:{dur:2.6, keys:[[0,{}],[.3,{eU:.62, br:2.6}],[.7,{eU:.5}],[1,{}]]},
+  tailFlick:{dur:1.8, look:.1, flick:1, keys:[[0,{}],[.3,{eaL:.45, eaR:.45, eU:.5}],[.8,{eaL:.45, eaR:.45}],[1,{}]]},
+  peek:{dur:2.8, look:1, keys:[[0,{}],[.3,{eU:.5}],[.75,{eU:.5}],[1,{}]]},
+  dream:{dur:2.2, look:0, keys:[[0,{}],[.25,{fRz:.32, fRy:.06}],[.4,{}],[.6,{fRz:.31, fRy:.05, eaL:.4}],[1,{}]]},
+  earFlick:{dur:.7, look:-1, keys:[[0,{}],[.3,{eaL:.8, eaR:.6}],[1,{}]]},
+  sleepStretch:{dur:3.4, look:0, keys:[[0,{}],[.3,{fLz:.42, fRz:.42, fLy:.05, fRy:.05, hdp:.4, mo:.6}],[.6,{fLz:.42, fRz:.4, mo:0}],[1,{}]]},
+  wiggle:{dur:1.9, keys:[[0,{}],[.15,body(POSE.crouch, {pu:.95, eU:0, eaF:1})],[.85,body(POSE.crouch, {pu:.95, eU:0, eaF:1})],[1,{}]],
+    proc(u, tg, add, t){ if (u > .2 && u < .85){ add.hr = .1 * Math.sin(t * 22); add.hz = .015 * Math.sin(t * 22); add.hyaw = .06 * Math.sin(t * 22); } }},
+  pounceAir:{dur:2.6, keys:[[0,{}],[.12,body(POSE.crouch, {pu:.95, eU:0, eaF:1})],[.42,body(POSE.crouch, {pu:.95, eU:0})],[.52,body(POSE.stand, {hp:-.28, fLy:.22, fRy:.22, fLz:.36, fRz:.36})],[.66,body(POSE.crouch, {pu:.8})],[.85,body(POSE.stand)],[1,{}]],
+    proc(u, tg, add, t, dt){ if (u > .15 && u < .42) add.hr = .1 * Math.sin(t * 22);
+      if (u > .42 && u < .66){ const s = (u - .42) / .24; add.ly = .2 * Math.sin(PI * s); push(1.4 * Math.sin(PI * s) * dt); } }},
+  chaseTail:{dur:3.4, look:0, keys:[[0,{}],[.1,body(POSE.stand, {pu:.9, eU:0, hdy:-.95, tb:.9})],[.9,body(POSE.stand, {pu:.9, hdy:-.95, tb:.9})],[1,{}]],
+    proc(u, tg, add, t, dt){ if (u > .1 && u < .9){ K.root.yaw -= dt * 5.4; S.yawT = K.root.yaw; gaitAdd(add, 'trot', dt, 1.2); } }},
+  boop:{dur:1.0, look:.5, keys:[[0,{}],[.18,{hdp:-.2, eU:.95, eL:.5, eaL:.35, eaR:.35}],[.55,{hdp:-.12, eU:.4}],[1,{}]]},
+  lookUp:{dur:1.4, ev:[.15,'meow'], keys:[[0,{}],[.2,{eaF:.9, pu:.75, eU:0, mo:.5}],[.45,{mo:0}],[1,{}]]},
+  wakePeek:{dur:3.2, look:1, keys:[[0,{}],[.2,{eU:.42, hdp:.25, hdy:.4}],[.8,{eU:.42, hdp:.25, hdy:.4}],[1,{}]]},
+  pawLift:{dur:2.2, keys:[[0,{}],[.3,{fRy:.3, fRz:.34, fRx:-.06, fpR:-.7, hdp:-.08, eU:.4, eL:.3}],[.55,{fRy:.3, fRz:.34, fRx:-.06, fpR:-.7}],[.75,{}],[1,{}]]},
+  pawLiftL:{dur:2.2, keys:[[0,{}],[.3,{fLy:.3, fLz:.34, fLx:.06, fpL:-.7, hdp:-.08, eU:.4, eL:.3}],[.55,{fLy:.3, fLz:.34, fLx:.06, fpL:-.7}],[.75,{}],[1,{}]]},
+  yogaBow:{dur:4.5, look:.4, keys:[[0,{}],[.2,body(POSE.bow, {eU:.7, eL:.3})],[.8,body(POSE.bow, {eU:.7, eL:.3})],[1,{}]]},
+  yogaReach:{dur:4.5, look:.4, keys:[[0,{}],[.2,body(POSE.reach, {eU:.6})],[.8,body(POSE.reach, {eU:.6})],[1,{}]]},
+  yogaLoaf:{dur:4.5, look:.6, keys:[[0,{}],[.2,body(POSE.loaf, {eU:.85, eL:.4, br:2.4})],[.8,body(POSE.loaf, {eU:.85, eL:.4, br:2.4})],[1,{}]]},
+  eat:{dur:3.8, look:0, keys:[[0,{}],[.14,EAT],[.88,EAT],[1,{}]], proc(u, tg, add, t){ if (u > .16 && u < .86){ const w = Math.sin(t * 11); add.mo = .1 + .08 * w; add.hdp = .04 * w; } }}
+};
+for (const k in ACTS){ const d = ACTS[k], s = new Set(); (d.keys || []).forEach(kk => Object.keys(kk[1]).forEach(c => s.add(c))); d.chans = [...s]; }
+
+// ---------- runtime ----------
+let R = null, cv = null, host = null, mode = 'room', raf = 0, lastT = 0, ok = null, vis = true, inView = true, ro = null, io = null, losses = 0;
+let cssW = 1, cssH = 1, dpr = 1, cam = null, envEff = null, tod = 'day', frameSkip = 0;
+const cb = {};
+const emit = (e, d) => { try { if (cb[e]) cb[e](d); } catch (er) {} };
+function newK(breed){ const spec = C3R.SPEC[breed] || C3R.SPEC.orange;
+  return {breed, spec, look:C3R.looks(spec), iris:C3R.irisOf(spec), r:Object.assign({}, POSE.sit), c:Object.assign({}, POSE.sit), root:{x:0, y:.1, z:0, yaw:0},
+    t:0, breath:0, tailPh:0, tailFlick:0, purr:0, gaze:[[0,0],[0,0]], whiskCol:breed === 'khaomanee' ? [.6,.58,.66,.9] : [.97,.95,.92,.85], mouthCol:[.33,.18,.18,.7], collar:null, glow:0}; }
+const K = newK('orange');
+const S = {mood:'content', base:'sit', baseUntil:0, yawT:0, act:null, idleT:3, blinkT:2, blinkU:-1, b2:false, earT:6, earU:-1, earSide:1,
+  pet:null, petW:0, look:{finger:null, pt:null, until:0}, hunt:null, move:null, wk:null, wkRate:1, gaitPh:0, bed:true, inBed:true, hop:null, busy:null, homeT:0, wkT:0, wkI:0, bowl:null, flickT:0};
+const ADD = {};
+
+function setBreed(b){ if (!C3R.SPEC[b]) b = 'orange'; if (K.breed === b) return; const n = newK(b); K.breed = b; K.spec = n.spec; K.look = n.look; K.iris = n.iris; K.whiskCol = n.whiskCol; K.collarLook = null; envEff = envFor(tod); }
+function setCollar(c){ K.collar = c && c.color ? {color:c.color, star:!!c.star} : null; }
+
+// ---------- play actions ----------
+function play(name){ const d = ACTS[name]; if (!d) return Promise.resolve(false);
+  return new Promise(res => { if (S.act) S.act.res(false); S.act = {name, d, t:0, u:0, res, ev:false}; }); }
+function stopAct(){ if (S.act){ const r = S.act.res; S.act = null; r(false); } }
+function evalKeys(d, u, tg){ const ks = d.keys; if (!ks || ks.length < 2) return;
+  let i = 0; while (i < ks.length - 2 && u > ks[i + 1][0]) i++;
+  const a = ks[i], b = ks[i + 1], s = sstep((u - a[0]) / Math.max(1e-4, b[0] - a[0]));
+  for (const k of d.chans){ const va = a[1][k] != null ? a[1][k] : tg[k], vb = b[1][k] != null ? b[1][k] : tg[k]; if (va == null || vb == null) continue; tg[k] = lerp(va, vb, s); } }
+function push(dist){ const nx = clamp(K.root.x + Math.sin(K.root.yaw) * dist, -BOUND.x, BOUND.x), nz = clamp(K.root.z + Math.cos(K.root.yaw) * dist, BOUND.z0, BOUND.z1);
+  if (mode === 'room'){ K.root.x = nx; K.root.z = nz; } }
+function gaitAdd(add, g, dt, r){ const G = GAITS[g]; S.gaitPh = (S.gaitPh + dt * (r || 1) / G.dur) % 1; const p = S.gaitPh;
+  [['fLy','fLz'],['fRy','fRz'],['hLy','hLz'],['hRy','hRz']].forEach((l, i) => { const q = (p + G.ph[i]) % 1; let dz, dy = 0;
+    if (q < G.duty) dz = lerp(G.stride / 2, -G.stride / 2, q / G.duty);
+    else { const s = (q - G.duty) / (1 - G.duty); dz = lerp(-G.stride / 2, G.stride / 2, sstep(s)); dy = G.lift * Math.sin(PI * s); }
+    add[l[0]] = (add[l[0]] || 0) + dy; add[l[1]] = (add[l[1]] || 0) + dz; });
+  add.hy = (add.hy || 0) + G.bob * Math.cos(p * TAU * 2); add.hdp = (add.hdp || 0) + .03 * Math.sin(p * TAU * 2); add.hr = (add.hr || 0) + .04 * Math.sin(p * TAU);
+  if (G.flex){ add.sp = (add.sp || 0) + G.flex * Math.sin(p * TAU); add.hp = (add.hp || 0) + G.flex * .5 * Math.sin(p * TAU + PI / 2); } }
+
+// ---------- locomotion ----------
+function moveTo(x, z, o){ o = o || {}; x = clamp(x, -BOUND.x, BOUND.x); z = clamp(z, BOUND.z0, BOUND.z1);
+  return new Promise(res => { if (S.move) S.move.res(false); S.move = {x, z, g:o.gait || 'walk', face:o.face, res}; }); }
+function locomote(dt, tg){ const m = S.move, dx = m.x - K.root.x, dz = m.z - K.root.z, dist = Math.hypot(dx, dz);
+  if (dist < .025){ S.move = null; if (m.face != null) S.yawT = m.face; m.res(true); return; }
+  Object.assign(tg, body(POSE.stand, {}), {tb:m.g === 'walk' ? .95 : .5, twr:0, tq:.3, ts:.08});
+  const want = Math.atan2(dx, dz), dy = angDiff(want, K.root.yaw), tr = m.g === 'gallop' ? 7 : 4.5;
+  K.root.yaw += clamp(dy, -tr * dt, tr * dt); S.yawT = K.root.yaw;
+  const G = GAITS[m.g], sp = G.speed * (Math.abs(dy) > .8 ? .2 : 1), st = Math.min(dist, sp * dt);
+  K.root.x += Math.sin(K.root.yaw) * st; K.root.z += Math.cos(K.root.yaw) * st;
+  gaitAdd(ADD, m.g, dt, 1); }
+function goHome(){ if (mode !== 'room') return Promise.resolve(); if (Math.hypot(K.root.x, K.root.z) < .05){ S.yawT = MOODS[S.mood].yaw || 0; return Promise.resolve(); }
+  return moveTo(0, 0, {gait:'walk', face:MOODS[S.mood].yaw || 0}); }
+function bedHeight(dt){ if (mode !== 'room' || !S.bed){ K.root.y = 0; return; }
+  const inside = Math.hypot(K.root.x, K.root.z) < .44;
+  if (inside !== S.inBed){ S.inBed = inside; S.hop = {t:0, a:K.root.y, b:inside ? .1 : 0}; }
+  if (S.hop){ S.hop.t += dt / .42; const u = Math.min(1, S.hop.t); K.root.y = lerp(S.hop.a, S.hop.b, u) + .17 * Math.sin(PI * u); if (u >= 1) S.hop = null; }
+  else K.root.y = S.inBed ? .1 : 0; }
+
+// ---------- look ----------
+function lookTarget(){ if (S.look.finger) return S.look.finger; if (S.look.pt && K.t < S.look.until) return S.look.pt; return cam ? cam.eye : null; }
+function lookAt(tg){ const md = MOODS[S.mood] || MOODS.content; let w = md.lw != null ? md.lw : 1;
+  if (S.act){ const l = S.act.d.look; if (l === -1) {} else w = l != null ? (S.act.d.look === 1 ? 1 : l) : w; }
+  if (S.look.finger || (S.look.pt && K.t < S.look.until)) w = Math.max(w, S.base === 'sleep' ? 0 : .9);
+  if (S.move) w *= .25;
+  const T0 = lookTarget(); if (!T0 || !K.pts || w <= 0) return;
+  const h = K.pts.head, dx = T0[0] - h[0], dy = T0[1] - h[1], dz = T0[2] - h[2], a = -K.root.yaw;
+  const lx = dx * Math.cos(a) + dz * Math.sin(a), lz = -dx * Math.sin(a) + dz * Math.cos(a);
+  const yawT = Math.atan2(lx, lz), pitchT = Math.atan2(-dy, Math.hypot(lx, lz));
+  tg.hdy = lerp(tg.hdy, clamp(yawT * .72, -1.05, 1.05), w); tg.hdp = lerp(tg.hdp, clamp(tg.hdp * .4 + pitchT * .65, -.55, .6), w); }
+function gaze(dt){ const T0 = lookTarget(), HW = K.HW; const k = 1 - Math.exp(-22 * dt);
+  [1, -1].forEach((s, i) => { let gp = 0, gy = 0;
+    if (T0 && HW && S.base !== 'sleep' && !(S.act && S.act.d.look === 0 && !S.look.finger)){
+      const ex = HW[0]*s*.104 + HW[4]*.02 + HW[8]*.152 + HW[12], ey = HW[1]*s*.104 + HW[5]*.02 + HW[9]*.152 + HW[13], ez = HW[2]*s*.104 + HW[6]*.02 + HW[10]*.152 + HW[14];
+      const wx = T0[0] - ex, wy = T0[1] - ey, wz = T0[2] - ez;
+      const lx = HW[0]*wx + HW[1]*wy + HW[2]*wz, ly = HW[4]*wx + HW[5]*wy + HW[6]*wz, lz = HW[8]*wx + HW[9]*wy + HW[10]*wz;
+      gy = clamp(Math.atan2(lx, lz) - s * .17, -.6, .6); gp = clamp(Math.atan2(-ly, Math.hypot(lx, lz)), -.45, .45); }
+    K.gaze[i][0] += (gp - K.gaze[i][0]) * k; K.gaze[i][1] += (gy - K.gaze[i][1]) * k; }); }
+
+// ---------- petting / hunting overlays ----------
+function petOverlay(dt, tg){ S.petW += ((S.pet ? 1 : 0) - S.petW) * (1 - Math.exp(-6 * dt)); const w = S.petW;
+  if (w < .01){ K.purr = 0; return; }
+  const part = S.pet ? S.pet.part : (S.lastPart || 'head');
+  const O = part === 'tail' ? {eU:.38, eL:.1, eaL:.7, eaR:.7} : part === 'back' ? {eU:.66, eL:.36, twr:0, tb:1.3, tq:.35} : {eU:.86, eL:.62, eaL:.3, eaR:.3, pu:.45};
+  if (S.base === 'sleep'){ O.eU = 1; delete O.tb; delete O.twr; }
+  for (const k in O) tg[k] = lerp(tg[k], O[k], w);
+  if (part === 'head'){ tg.hdp -= .12 * w; tg.hdr += (S.pet ? S.pet.dir : 0) * .25 * w; }
+  if (part === 'back' && (S.base === 'sit' || S.base === 'stand')) tg.hy += .02 * w;
+  K.purr = part === 'tail' ? 0 : w; if (part === 'tail') S.flickT = Math.max(S.flickT, .3); }
+function canHunt(){ return mode === 'room' && !RM && S.base !== 'sleep' && !S.busy && !S.move && ['content','playful','happy','hungry'].includes(S.mood); }
+function hunt(dt, tg){ const H = S.hunt; H.t += dt;
+  if (H.phase === 'stalk'){
+    Object.assign(tg, body(POSE.crouch), {pu:.97, eU:0, eaF:1, eaL:0, eaR:0});
+    const gp = H.gp; if (gp){ S.yawT = Math.atan2(gp[0] - K.root.x, gp[2] - K.root.z); }
+    if (H.t > .5){ ADD.hr = .11 * Math.sin(K.t * 22); ADD.hyaw = .06 * Math.sin(K.t * 22); }
+    if ((H.released || K.t - H.lastMove > .35) && H.t > .8 || H.t > 3){ H.phase = 'leap'; H.t = 0; H.from = [K.root.x, K.root.z];
+      const g = H.gp || [K.root.x + Math.sin(K.root.yaw) * .4, 0, K.root.z + Math.cos(K.root.yaw) * .4];
+      H.to = [clamp(g[0], -BOUND.x, BOUND.x), clamp(g[2] - .12, BOUND.z0, BOUND.z1)]; }
+  } else if (H.phase === 'leap'){
+    const u = Math.min(1, H.t / .55), s = sstep(u);
+    Object.assign(tg, body(POSE.stand, {hp:-.25, fLy:.2, fRy:.2, fLz:.34, fRz:.34, hLz:-.34, hRz:-.34}), {pu:.95, eU:0});
+    K.root.x = lerp(H.from[0], H.to[0], s); K.root.z = lerp(H.from[1], H.to[1], s); ADD.ly = .3 * Math.sin(PI * u);
+    if (u >= 1){ H.phase = 'land'; H.t = 0; emit('play'); }
+  } else if (H.phase === 'land'){
+    Object.assign(tg, body(POSE.crouch, {fLz:.3, fRz:.3, fLy:.035, fRy:.035}), {pu:.7, eU:.1});
+    if (H.t > .9){ S.hunt = null; S.base = 'sit'; S.homeT = K.t + 3.5; S.yawT = Math.atan2(-K.root.x, 3 - K.root.z); }
+  } }
+
+const WAITS = [];
+function waitSim(sec){ return new Promise(r => WAITS.push([K.t + sec, r])); }
+// ---------- main update ----------
+function update(dt){
+  K.t += dt; const md = MOODS[S.mood] || MOODS.content;
+  for (let i = WAITS.length - 1; i >= 0; i--) if (K.t >= WAITS[i][0]){ const r = WAITS[i][1]; WAITS.splice(i, 1); r(); }
+  for (const k in ADD) delete ADD[k];
+  if (S.baseUntil && K.t > S.baseUntil){ S.baseUntil = 0; S.base = md.base; }
+  let base = S.base;
+  if (mode === 'workout'){ base = S.wk && GAITS[S.wk] ? 'stand' : S.wk === 'yoga' || S.wk === 'strength' ? 'sit' : 'sit'; }
+  const tg = Object.assign({}, POSE[base] || POSE.sit);
+  if (md.mods && base !== 'sleep') Object.assign(tg, md.mods);
+  if (S.night && base !== 'sleep') tg.pu = Math.max(tg.pu, .72);
+  if (mode === 'workout') workout(dt, tg);
+  if (S.move) locomote(dt, tg);
+  if (S.hunt) hunt(dt, tg);
+  if (S.act){ const a = S.act; a.t += dt; a.u = a.t / a.d.dur;
+    if (a.u >= 1){ S.act = null; a.res(true); }
+    else { evalKeys(a.d, a.u, tg); if (a.d.proc) a.d.proc(a.u, tg, ADD, K.t, dt); if (a.d.ev && !a.ev && a.u >= a.d.ev[0]){ a.ev = true; emit(a.d.ev[1]); } if (a.d.flick) S.flickT = Math.max(S.flickT, .2); if (a.d.purr) K.purr = Math.max(K.purr, .6); } }
+  petOverlay(dt, tg);
+  lookAt(tg);
+  // smoothing
+  for (const k in tg){ const cur = K.c[k]; K.c[k] = cur == null ? tg[k] : cur + (tg[k] - cur) * (1 - Math.exp(-(RATE[k] || 8) * dt)); }
+  const r = K.r; for (const k in K.c) r[k] = K.c[k];
+  for (const k in ADD) r[k] = (r[k] || 0) + ADD[k];
+  // blink / ear twitch / tail
+  if (S.base !== 'sleep' || mode === 'workout'){ S.blinkT -= dt;
+    if (S.blinkT <= 0){ S.blinkU = 0; S.blinkT = (S.mood === 'playful' ? 3 : 1.8) + Math.random() * 4.5; if (Math.random() < .16) S.b2 = true; } }
+  if (S.blinkU >= 0){ S.blinkU += dt / .18; const b = clamp(S.blinkU < .4 ? S.blinkU / .4 : 1 - (S.blinkU - .4) / .6, 0, 1); r.eU = lerp(r.eU, 1, b); r.eL = lerp(r.eL, .25, b);
+    if (S.blinkU >= 1){ S.blinkU = -1; if (S.b2){ S.b2 = false; S.blinkT = .1; } } }
+  S.earT -= dt; if (S.earT <= 0){ S.earU = 0; S.earSide = Math.random() < .5 ? 1 : -1; S.earT = 4 + Math.random() * 9; }
+  if (S.earU >= 0){ S.earU += dt / .3; const e = Math.sin(clamp(S.earU, 0, 1) * PI) * .6; if (S.earSide > 0) r.eaL += e; else r.eaR += e; if (S.earU >= 1) S.earU = -1; }
+  S.flickT = Math.max(0, S.flickT - dt * .5); K.tailFlick += (Math.min(1, S.flickT * 3) - K.tailFlick) * (1 - Math.exp(-5 * dt));
+  K.breath += dt * (S.base === 'sleep' ? 1.35 : S.mood === 'playful' || S.wk && GAITS[S.wk] ? 3.6 : 2.4);
+  K.tailPh += dt * (S.mood === 'playful' ? 3.2 : S.base === 'sleep' ? .7 : 1.6) * (S.wk && GAITS[S.wk] ? 1.6 : 1);
+  if (!S.pet && !(S.act && S.act.d.purr)) K.purr *= .9;
+  // root yaw toward target (turn in place)
+  if (!S.move && !(S.act && S.act.name === 'chaseTail')){ const d = angDiff(S.yawT, K.root.yaw); K.root.yaw += d * (1 - Math.exp(-3 * dt)); if (Math.abs(d) > .25 && !S.hunt) gaitAdd(r, 'walk', dt * .7, 1); }
+  bedHeight(dt);
+  gaze(dt);
+  // idle brain
+  if (mode === 'room' && !S.act && !S.move && !S.pet && !S.hunt && !S.busy){
+    if (Math.hypot(K.root.x, K.root.z) < .06) S.yawT = md.yaw || 0; else if (!S.homeT) S.homeT = K.t + 4;
+    if (S.homeT && K.t > S.homeT){ S.homeT = 0; goHome(); }
+    else { S.idleT -= dt; if (S.idleT <= 0){ S.idleT = 3.5 + Math.random() * 6; idle(md); } } }
+}
+function idle(md){ const pool = md.pool, keys = Object.keys(pool).filter(k => !RM || ['slowBlink','headTilt','lickLips','meow','earFlick','peek'].includes(k));
+  if (!keys.length) return; let sum = 0; keys.forEach(k => sum += pool[k]); let x = Math.random() * sum, pick = keys[0];
+  for (const k of keys){ x -= pool[k]; if (x <= 0){ pick = k; break; } }
+  if (pick === 'loafBreak'){ if (S.base === 'sit'){ S.base = 'loaf'; S.baseUntil = K.t + 18 + Math.random() * 20; } return; }
+  if (pick === 'lookBowl'){ if (S.bowl){ S.look.pt = S.bowl; S.look.until = K.t + 2.2; waitSim(.9).then(() => { if (!S.act) play('meow'); }); } else play('meow'); return; }
+  if (pick === 'zoomies'){ zoomies(); return; }
+  if ((pick === 'stretch' || pick === 'earScratch' || pick === 'groom') && S.base === 'loaf') S.base = 'sit';
+  play(pick); }
+async function zoomies(){ if (mode !== 'room' || S.busy) return; S.busy = 'zoom';
+  const path = [[.8, .35], [.25, .8], [-.75, .5], [-.7, -.25], [0, -.3]];
+  for (const p of path){ if (S.busy !== 'zoom') return; const okm = await moveTo(p[0], p[1], {gait:'gallop'}); if (!okm) break; }
+  if (S.busy === 'zoom'){ S.busy = null; await goHome(); play('hop'); } }
+
+// ---------- workout ----------
+function workout(dt, tg){ S.bed = false; const w = S.wk;
+  if (GAITS[w]){ gaitAdd(ADD, w, dt, S.wkRate); Object.assign(tg, {tb:w === 'walk' ? 1.0 : .55, twr:0, tq:.3, ts:.09}); S.yawT = .32 + .08 * Math.sin(K.t * .4); return; }
+  S.yawT = w === 'yoga' ? .5 : 0;
+  if ((w === 'yoga' || w === 'strength') && !S.act){ S.wkT -= dt; if (S.wkT <= 0){ S.wkT = 1.2; const seq = w === 'yoga' ? ['yogaBow','yogaReach','yogaLoaf','slowBlink'] : ['pawLift','pawLiftL','hop','pawLift','pawLiftL','knead']; play(seq[S.wkI++ % seq.length]); } }
+  if (w === 'idle' && !S.act){ S.wkT -= dt; if (S.wkT <= 0){ S.wkT = 4 + Math.random() * 4; play(['slowBlink','headTilt','lickLips','lookAround'][Math.floor(Math.random() * 4)]); } } }
+
+// ---------- camera + light ----------
+const FRAME = {room:{fov:28, pitch:.2, fill:.55, feet:.8, h:1.1, minW:2.2}, workout:{fov:30, pitch:.13, fill:.36, feet:.86, h:1.1, minW:1.6}, portrait:{fov:24, pitch:.14, fill:.84, feet:.94, h:1.12}};
+function proj(VP, x, y, z){ const cx = VP[0]*x + VP[4]*y + VP[8]*z + VP[12], cy = VP[1]*x + VP[5]*y + VP[9]*z + VP[13], cw = VP[3]*x + VP[7]*y + VP[11]*z + VP[15]; return [cx / cw, cy / cw, cw]; }
+function makeCam(w, h, fr){ const fov = fr.fov * PI / 180, asp = w / h, tn = Math.tan(fov / 2);
+  let d = (fr.h / fr.fill) / (2 * tn); if (fr.minW) d = Math.max(d, fr.minW / (2 * tn * asp));
+  const tgt = [0, fr.h * .45, 0], eye = [0, tgt[1] + Math.sin(fr.pitch) * d, Math.cos(fr.pitch) * d];
+  const V = C3.lookAt(eye, tgt, [0, 1, 0]), P = C3.persp(fov, asp, .1, 40);
+  const o = proj(C3.mulN(P, V), 0, 0, 0); P[9] -= (1 - 2 * fr.feet) - o[1];
+  const VP = C3.mulN(P, V); return {VP, IVP:C3.inv4(VP), eye, VR:new Float32Array([V[0],V[1],V[2],V[4],V[5],V[6],V[8],V[9],V[10]])}; }
+const ENV = {
+  day:   {key:[-.55,.75,.62], keyC:[.66,.62,.56], sky:[.6,.58,.68], gnd:[.44,.38,.4], rim:[.55,.5,.46]},
+  dawn:  {key:[-.7,.45,.55], keyC:[.8,.62,.48], sky:[.54,.54,.68], gnd:[.46,.38,.38], rim:[.75,.56,.42]},
+  golden:{key:[-.75,.42,.5], keyC:[.88,.6,.36], sky:[.52,.48,.62], gnd:[.48,.36,.32], rim:[.9,.62,.34]},
+  night: {key:[.6,.6,.52], keyC:[.66,.47,.3], sky:[.3,.31,.5], gnd:[.2,.17,.24], rim:[.5,.48,.86]}
+};
+function norm(v){ const l = Math.hypot(v[0], v[1], v[2]); return [v[0] / l, v[1] / l, v[2] / l]; }
+function envFor(t, spec){ const e = ENV[t] || ENV.day, br = hex((spec || K.spec).rim || '#FFFFFF');
+  return {key:norm(e.key), keyC:e.keyC, sky:e.sky, gnd:e.gnd, rim:[e.rim[0] * br[0] * 1.1, e.rim[1] * br[1] * 1.1, e.rim[2] * br[2] * 1.1], floor:0}; }
+function setEnv(t){ tod = ENV[t] ? t : 'day'; S.night = tod === 'night'; K.glow = S.night ? .22 : 0; envEff = envFor(tod); }
+
+// ---------- canvas, loop, input ----------
+function supported(){ if (ok !== null) return ok; try { const c = document.createElement('canvas'); ok = !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl'))); } catch (e) { ok = false; } return ok; }
+function init(){ if (R) return true; if (!supported() || losses > 1) return false;
+  try { cv = document.createElement('canvas'); cv.className = 'c3d'; cv.setAttribute('aria-hidden', 'true'); R = C3.Renderer(cv); }
+  catch (e) { R = null; cv = null; ok = false; return false; }
+  cv.addEventListener('webglcontextlost', e => { e.preventDefault(); losses++; stop(); R = null; const h = host; host = null; if (cv && cv.parentNode) cv.parentNode.removeChild(cv); cv = null; emit('lost'); });
+  bindInput(); setEnv(tod); return true; }
+function resize(){ if (!host || !cv) return; const r = host.getBoundingClientRect(); cssW = Math.max(1, r.width); cssH = Math.max(1, r.height);
+  dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(cssW * dpr); cv.height = Math.round(cssH * dpr);
+  cam = makeCam(cv.width, cv.height, FRAME[mode] || FRAME.room); }
+function attach(el, o){ o = o || {}; if (!init()) return false;
+  detach(); host = el; mode = o.mode || 'room'; host.appendChild(cv);
+  if (o.breed) setBreed(o.breed); setCollar(o.collar); if (o.tod) setEnv(o.tod);
+  S.bed = mode === 'room'; stopAct(); if (S.move){ S.move.res(false); S.move = null; } S.hunt = null; S.busy = null; S.pet = null;
+  if (mode !== 'room'){ K.root.x = 0; K.root.z = 0; K.root.y = 0; S.inBed = false; S.wk = o.gait || 'walk'; S.yawT = .3; K.root.yaw = .3; }
+  else { S.wk = null; S.inBed = Math.hypot(K.root.x, K.root.z) < .44; if (!S.inBed){ S.homeT = K.t + 1; } }
+  setMood(o.mood || S.mood, true);
+  resize();
+  if (window.ResizeObserver){ ro = new ResizeObserver(() => resize()); ro.observe(host); }
+  if (window.IntersectionObserver){ io = new IntersectionObserver(en => { inView = en[0] ? en[0].isIntersecting : true; kick(); }); io.observe(host); }
+  lastT = 0; kick(); return true; }
+function detach(){ stop(); if (ro){ ro.disconnect(); ro = null; } if (io){ io.disconnect(); io = null; } if (cv && cv.parentNode) cv.parentNode.removeChild(cv); host = null; P0 = null; S.pet = null; S.look.finger = null; }
+function kick(){ if (!raf && host && R && vis && inView) raf = requestAnimationFrame(loop); }
+function stop(){ if (raf) cancelAnimationFrame(raf); raf = 0; lastT = 0; }
+function loop(ts){ raf = 0; if (!host || !R || !vis || !inView) return; raf = requestAnimationFrame(loop);
+  const dt = lastT ? clamp((ts - lastT) / 1000, 0, .05) : .016; lastT = ts;
+  update(RM ? dt * .85 : dt);
+  const calm = mode === 'room' && !P0 && !S.pet && !S.move && !S.hunt && !S.act && !S.hop;
+  if (calm && (frameSkip = (frameSkip + 1) % 2)) return;
+  draw(); }
+function draw(){ C3.resetPool(); const out = {list:[], lines:[], flats:[]};
+  if (S.bed && mode === 'room') C3R.buildBed(R, out, 0, 0, K.look);
+  C3R.build(K, R, out);
+  R.draw(out.list, out.lines, out.flats, cam, envEff, cv.width, cv.height); }
+document.addEventListener('visibilitychange', () => { vis = document.visibilityState !== 'hidden'; if (vis) kick(); else stop(); });
+
+function ray(px, py){ if (!cam) return null; const nx = px / cssW * 2 - 1, ny = 1 - py / cssH * 2, M = cam.IVP;
+  const un = z => { const x = M[0]*nx + M[4]*ny + M[8]*z + M[12], y = M[1]*nx + M[5]*ny + M[9]*z + M[13], zz = M[2]*nx + M[6]*ny + M[10]*z + M[14], w = M[3]*nx + M[7]*ny + M[11]*z + M[15]; return [x / w, y / w, zz / w]; };
+  const a = un(-1), b = un(1); const d = norm([b[0] - a[0], b[1] - a[1], b[2] - a[2]]); return {o:a, d}; }
+function groundAt(px, py, y0){ const r = ray(px, py); if (!r || Math.abs(r.d[1]) < 1e-4) return null; const t = ((y0 || 0) - r.o[1]) / r.d[1]; if (t < 0) return null; return [r.o[0] + r.d[0] * t, y0 || 0, r.o[2] + r.d[2] * t]; }
+function planeAt(px, py){ const r = ray(px, py); if (!r) return null; const z0 = K.root.z + .9, t = (z0 - r.o[2]) / r.d[2]; if (!(t > 0)) return null; return [r.o[0] + r.d[0] * t, r.o[1] + r.d[1] * t, z0]; }
+function screenOf(p){ const q = proj(cam.VP, p[0], p[1], p[2]); return [(q[0] * .5 + .5) * cssW, (1 - (q[1] * .5 + .5)) * cssH]; }
+function hit(x, y, grow){ if (!K.pts || !cam) return null; grow = grow || 1; const k = (K.spec.size || 1);
+  const parts = [['nose', K.pts.nose, .07], ['head', K.pts.head, .29], ['tail', K.pts.tail, .1], ['back', K.pts.chest, .24], ['back', K.pts.hips, .24]];
+  let best = null, bd = 1e9;
+  for (const [n, p, rad] of parts){ if (!p) continue; const s = screenOf(p), e = screenOf([p[0] + rad * k, p[1], p[2]]), rr = Math.max(10, Math.abs(e[0] - s[0])) * grow, d = Math.hypot(x - s[0], y - s[1]);
+    if (d < rr && d / rr < bd){ bd = d / rr; best = n; if (n === 'nose') break; } }
+  return best; }
+let P0 = null;
+function bindInput(){ cv.style.touchAction = 'none';
+  cv.addEventListener('pointerdown', e => { if (P0) return; const r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    P0 = {id:e.pointerId, x, y, x0:x, y0:y, dist:0, part:hit(x, y), pet:false, lh:0, t0:K.t};
+    try { cv.setPointerCapture(e.pointerId); } catch (er) {}
+    if (!P0.part) finger(x, y); emit('down', {part:P0.part}); });
+  cv.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    if (!P0){ if (e.pointerType === 'mouse') finger(x, y, true); return; } if (e.pointerId !== P0.id) return;
+    const dx = x - P0.x, d = Math.hypot(dx, y - P0.y); P0.dist += d; P0.x = x; P0.y = y;
+    if (P0.part){ if (!P0.pet && P0.dist > 12){ P0.pet = true; if (S.hunt) S.hunt = null; S.pet = {part:P0.part === 'nose' ? 'head' : P0.part, dir:0}; emit('petstart', {part:S.pet.part}); }
+      if (P0.pet){ const p = hit(x, y, 1.5); if (p) S.pet.part = p === 'nose' ? 'head' : p; S.lastPart = S.pet.part; S.pet.dir = clamp(S.pet.dir * .8 + dx * .05, -1, 1);
+        if (P0.dist - P0.lh > 46){ P0.lh = P0.dist; emit('petmove', {x:e.clientX, y:e.clientY, part:S.pet.part}); } } }
+    else { finger(x, y); huntTrack(x, y, d); } });
+  const up = e => { if (!P0 || e.pointerId !== P0.id) return; const p = P0; P0 = null;
+    if (p.pet){ S.pet = null; emit('petend', {dist:p.dist, part:S.lastPart}); }
+    else if (p.part && p.dist < 12){ tap(p.part); emit('tap', {part:p.part}); }
+    else if (S.hunt) S.hunt.released = true;
+    if (S.look.finger){ S.look.pt = S.look.finger; S.look.until = K.t + 1.2; } S.look.finger = null; };
+  cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+  cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && !P0) S.look.finger = null; }); }
+function finger(x, y, hover){ const p = planeAt(x, y); if (p) S.look.finger = p; }
+function huntTrack(x, y, d){ if (S.hunt){ if (d > 1.5){ S.hunt.lastMove = K.t; S.hunt.gp = groundAt(x, y) || S.hunt.gp; } return; }
+  if (!canHunt() || S.act && ['eat','stretch','groom'].includes(S.act.name) && S.act.u < .85) return;
+  S.hacc = (S.hacc || 0) * Math.exp(-(K.t - (S.hT || K.t)) * 1.0) + d; S.hT = K.t;
+  if (S.hacc > 170){ S.hacc = 0; stopAct(); S.hunt = {phase:'stalk', t:0, lastMove:K.t, gp:groundAt(x, y), released:false}; } }
+function tap(part){ if (S.busy === 'eat') return;
+  if (S.base === 'sleep'){ play('wakePeek'); return; }
+  if (S.hunt) return;
+  play(part === 'nose' ? 'boop' : part === 'head' ? (Math.random() < .5 ? 'earFlick' : 'lookUp') : part === 'tail' ? 'tailFlick' : 'lookUp'); }
+
+// ---------- app-facing ----------
+function setMood(m, force){ if (!MOODS[m]) m = 'content'; const prev = S.mood; if (m === prev && !force) return; S.mood = m; const md = MOODS[m];
+  if (mode === 'workout') return;
+  if (prev === 'sleeping' && m !== 'sleeping' && !force){ S.base = md.base; play('yawn').then(() => { if (S.mood !== 'sleeping') play('stretch'); }); }
+  else if (!S.busy){ S.base = md.base; S.baseUntil = 0; }
+  if (!S.busy && !S.move){ if (Math.hypot(K.root.x, K.root.z) > .05 && m !== 'playful') S.homeT = K.t + 1.5; else S.yawT = md.yaw || 0; } }
+async function eat(clientX, clientY){ if (mode !== 'room' || !cv) return false;
+  const r = cv.getBoundingClientRect(), gp = groundAt(clientX - r.left, clientY - r.top); if (!gp) return false;
+  S.bowl = [gp[0], .12, gp[2]]; stopAct(); S.hunt = null; S.busy = 'eat';
+  const bx = clamp(gp[0], -BOUND.x + .1, BOUND.x - .1), bz = clamp(gp[2], BOUND.z0, BOUND.z1);
+  let dx = K.root.x - bx, dz = K.root.z - bz; const dl = Math.hypot(dx, dz) || 1; dx /= dl; dz /= dl; if (dz > -.2){ dz = -.6; dx = Math.sign(dx || -1) * .8; }
+  const sx = bx + dx * .4, sz = bz + dz * .4;
+  await moveTo(sx, sz, {gait:'walk'}); if (S.busy !== 'eat') return false;
+  S.yawT = Math.atan2(bx - K.root.x, bz - K.root.z); await waitSim(.4);
+  await play('eat'); await play('lickLips');
+  if (S.busy === 'eat'){ S.busy = null; await goHome(); }
+  return true; }
+function gait(g, r){ S.wk = g; S.wkRate = r || 1; if (!GAITS[g]) S.wkT = Math.min(S.wkT, .3); }
+function act(name){ if (name === 'celebrate') return play('hop').then(() => play('hop'));
+  if (name === 'play'){ if (mode === 'room' && !RM){ stopAct(); return play('wiggle').then(() => play('pounceAir')).then(() => { S.homeT = K.t + 2; }); } return play('hop'); }
+  return play(name); }
+function bowlAt(clientX, clientY){ if (!cv) return; const r = cv.getBoundingClientRect(), gp = groundAt(clientX - r.left, clientY - r.top); if (gp) S.bowl = [gp[0], .12, gp[2]]; }
+
+// ---------- thumbnails ----------
+const thumbs = {};
+let TK = null;
+function thumb(breed, o){ o = o || {}; const key = breed + '|' + (o.mood || '') + '|' + (o.collar || '') + '|' + (o.size || 160);
+  if (thumbs[key]) return thumbs[key]; if (!init()) return null;
+  try {
+    const n = newK(breed); if (!TK) TK = n; else Object.assign(TK, {breed, spec:n.spec, look:n.look, iris:n.iris, whiskCol:n.whiskCol, collarLook:null});
+    TK.collar = o.collar ? {color:o.collar, star:o.star} : null; TK.root = {x:0, y:0, z:0, yaw:.42};
+    const pose = o.mood === 'sleeping' ? 'sleep' : 'sit'; TK.r = Object.assign({}, POSE[pose], {hdy:-.32, hdp:-.04});
+    if (o.mood === 'happy'){ Object.assign(TK.r, {eU:.62, eL:.42, twr:0, tb:1.3, tq:.3}); } else if (o.mood !== 'sleeping') Object.assign(TK.r, {eU:.1, pu:.5});
+    TK.gaze = [[-.03, -.16], [-.03, -.16]]; TK.t = 1; TK.breath = 0; TK.tailPh = 1;
+    const sz = (o.size || 160) * 2;
+    const px = R.snapshot((w, h) => { C3.resetPool(); const out = {list:[], lines:[], flats:[]}; C3R.build(TK, R, out);
+      R.draw(out.list, out.lines, out.flats, makeCam(w, h, FRAME.portrait), envFor('day', TK.spec), w, h); }, sz, sz);
+    const c2 = document.createElement('canvas'); c2.width = sz; c2.height = sz; const x = c2.getContext('2d'), im = x.createImageData(sz, sz);
+    for (let y = 0; y < sz; y++){ const src = (sz - 1 - y) * sz * 4, dst = y * sz * 4;
+      for (let i = 0; i < sz * 4; i += 4){ const a = px[src + i + 3]; if (a){ const f = 255 / a; im.data[dst + i] = Math.min(255, px[src + i] * f); im.data[dst + i + 1] = Math.min(255, px[src + i + 1] * f); im.data[dst + i + 2] = Math.min(255, px[src + i + 2] * f); im.data[dst + i + 3] = a; } } }
+    x.putImageData(im, 0, 0);
+    const c3 = document.createElement('canvas'), half = sz / 2; c3.width = half; c3.height = half; const x3 = c3.getContext('2d'); x3.imageSmoothingQuality = 'high'; x3.drawImage(c2, 0, 0, half, half);
+    return (thumbs[key] = c3.toDataURL('image/png'));
+  } catch (e) { return null; } }
+
+return {supported, attach, detach, setBreed, setCollar, setMood, setEnv, gait, act, eat, bowlAt, thumb,
+  headAt(){ if (!cv || !K.pts || !cam) return null; const r = cv.getBoundingClientRect(), s = screenOf(K.pts.head); return [r.left + s[0], r.top + s[1]]; },
+  on(e, f){ cb[e] = f; }, active(){ return !!(host && R); }, busy(){ return !!S.busy || !!S.move; }, _S:S, _K:K,
+  _freeze(){ stop(); vis = false; }, _step(sec, nodraw){ const n = Math.round(sec * 30); for (let i = 0; i < n; i++) update(1 / 30); if (!nodraw && R && host) draw(); },
+  async _run(sec){ for (let i = 0; i < sec * 10; i++){ for (let j = 0; j < 3; j++) update(1 / 30); await new Promise(r => setTimeout(r, 0)); } if (R && host) draw(); }};
+})();
+
+
 /* =========================================================
    MeowMotion — exercise to feed your cat
    ========================================================= */
@@ -301,9 +1192,12 @@ const BREEDS = {
   fold:      {name:'สก็อตติชโฟลด์', lv:5, body:'#C9C3C9', stripe:'#A79FA8', belly:'#F2EEF1', ear:'#E9C4C4', tail:'#B8B1B9', eyes:['#C98A0B','#C98A0B'], folded:true},
   korat:     {name:'โคราช (สีสวาด)', lv:8, body:'#A9B4C2', stripe:null, belly:'#C3CCD7', ear:'#D9B8BE', tail:'#9AA6B5', eyes:['#3F9A5E','#3F9A5E']},
   mainecoon: {name:'เมนคูน', lv:12, body:'#B88A5E', stripe:'#7E5A3A', belly:'#F2E3D0', ear:'#E9B9A6', tail:'#A57A50', eyes:['#7AA33E','#7AA33E'], tufts:true},
-  khaomanee: {name:'ขาวมณี', lv:15, body:'#FFFFFF', stripe:null, belly:'#F6F4F9', ear:'#FFC6BE', tail:'#FFFFFF', eyes:['#3E7CC9','#D9A520'], outline:'#DCD6E6'}
+  khaomanee: {name:'ขาวมณี', lv:15, body:'#FFFFFF', stripe:null, belly:'#F6F4F9', ear:'#FFC6BE', tail:'#FFFFFF', eyes:['#3E7CC9','#D9A520'], outline:'#DCD6E6'},
+  tuxedo:    {name:'แมววัว', lv:10, body:'#3A363E', stripe:null, belly:'#FFFFFF', ear:'#E9B4B4', tail:'#3A363E', eyes:['#9FB83A','#9FB83A']},
+  calico:    {name:'สามสี', lv:18, body:'#FFF8F0', stripe:null, belly:'#FFFFFF', ear:'#FFC6BE', tail:'#E48536', eyes:['#D99E2C','#D99E2C'], outline:'#E8DED2'},
+  black:     {name:'แมวดำ', lv:20, body:'#2E2B33', stripe:null, belly:'#2E2B33', ear:'#6A5560', tail:'#2E2B33', eyes:['#EAB92A','#EAB92A']}
 };
-const BREED_ORDER = ['orange','siamese','fold','korat','mainecoon','khaomanee'];
+const BREED_ORDER = ['orange','siamese','fold','korat','tuxedo','mainecoon','khaomanee','calico','black'];
 const FOOD = {
   kibble:{name:'Kibble', full:20, happy:2},
   tuna:{name:'Tuna', full:35, happy:10},
@@ -361,7 +1255,7 @@ function newState(name){
     owned:{}, toyCd:{}, xpBoostUntil:0,
     pet:{day:today(), gained:0},
     days:{}, log:[{t:now, text:'ของขวัญต้อนรับ', coins:50}],
-    settings:{moveGoal:400, exGoal:30, standGoal:12, age:30, gentle:false, sound:true}
+    settings:{moveGoal:400, exGoal:30, standGoal:12, age:30, gentle:false, sound:true, cat3d:true}
   };
 }
 function cat(){ return S.cats.find(c => c.id === S.activeCat) || S.cats[0]; }
@@ -551,7 +1445,7 @@ const waitMs = ms => new Promise(r => setTimeout(r, ms));
 const Pet = {
   timer:null, token:0, busy:false,
   svg(){ return document.querySelector('#catwrap svg'); },
-  start(){ this.stop(); this.schedule(1200); },
+  start(){ this.stop(); if (Cat3D.active()) return; this.schedule(1200); },
   stop(){ clearTimeout(this.timer); this.timer = null; this.token++; this.busy = false; },
   schedule(ms){ clearTimeout(this.timer); this.timer = setTimeout(() => this.tick(), ms || (1500 + Math.random() * 2600)); },
   async tick(){
@@ -616,7 +1510,9 @@ const Pet = {
     else if (a === 'sulk'){ await catAnim(s, 'c-earL', [{transform:'rotate(0)'},{transform:'rotate(-18deg)'},{transform:'rotate(-18deg)', offset:.8},{transform:'rotate(0)'}], {duration:2400}); }
   },
   async eat(){
-    const w = document.getElementById('catwrap'), s = this.svg(), room = document.getElementById('room'); if (!s && Live.ready()){ Live.play('blink'); return; } if (!w || !s || RMOTION) return;
+    const w = document.getElementById('catwrap'), s = this.svg(), room = document.getElementById('room');
+    if (Cat3D.active()){ const b = room && room.querySelector('.bowlpos'); if (b){ const r = b.getBoundingClientRect(); await Cat3D.eat(r.left + r.width / 2, r.bottom - r.height * .3); refreshCat(); } return; }
+    if (!w || !s || RMOTION) return;
     const bowl = room && room.querySelector('.bowlpos'); if (!bowl) return;
     this.stop(); this.busy = true; const t = this.token;
     const dx = (bowl.getBoundingClientRect().left + bowl.getBoundingClientRect().width / 2) - (w.getBoundingClientRect().left + w.getBoundingClientRect().width / 2) - 30;
@@ -633,61 +1529,40 @@ const Pet = {
     this.busy = false; refreshCat(); this.schedule();
   }
 };
-// ---------- live (video) cat ----------
-const CLIP = {base:(() => { try { return localStorage.getItem('mm_clipbase') === 'root' ? '' : 'clips/'; } catch (e) { return 'clips/'; } })()};
-const clipSrc = (k, ext) => CLIP.base + k + (ext || '.mp4');
-function clipMiss(x){ // try clips/ first, then repo root; returns true if handled
-  const src = x.getAttribute('src') || ''; if (!src) return true;
-  if (src.startsWith('clips/')){ if (CLIP.base === 'clips/'){ CLIP.base = ''; try { localStorage.setItem('mm_clipbase', 'root'); } catch (e) {} return 'switch'; } return true; }
-  if (CLIP.base === 'clips/') return true;
-  try { localStorage.removeItem('mm_clipbase'); } catch (e) {} return false;
-}
-const LIVE_CLIPS = {idle:'clips/idle.mp4', blink:'clips/blink.mp4', groom:'clips/groom.mp4', loaf:'clips/loaf.mp4', stretch:'clips/stretch.mp4', walk:'clips/walk.mp4', walk2:'clips/walk2.mp4'};
-const LIVE_POOL = {content:['idle','idle','blink','groom','loaf','stretch'], playful:['stretch','groom','idle','blink'], hungry:['idle','idle','blink'], waiting:['idle','loaf','stretch'], sulking:['loaf','idle'], sleeping:['loaf'], happy:['blink','idle'], eating:['blink'], cheering:['blink','idle']};
-const Live = {
-  front:0, cur:null, fading:false, queued:null, failed:false, warned:false,
-  on(){ return !this.failed && !!S && S.settings.live !== false && cat().breed === 'orange'; },
-  ready(){ return !!document.getElementById('lvA'); },
-  vids(){ return [document.getElementById('lvA'), document.getElementById('lvB')]; },
-  html(){ return `<video class="lv on" id="lvA" muted playsinline preload="auto" poster="${clipSrc('idle', '.jpg')}" aria-hidden="true"></video><video class="lv" id="lvB" muted playsinline preload="auto" aria-hidden="true"></video><div class="lv-shade"></div>`; },
-  pool(){ return LIVE_POOL[UI.petting ? 'happy' : getMood()] || LIVE_POOL.content; },
-  pick(){ const p = this.pool(); return p[Math.floor(Math.random() * p.length)]; },
-  start(){
-    const v = this.vids(); if (!v[0]) return;
-    this.front = 0; this.fading = false; this.queued = null;
-    v.forEach(x => { x.addEventListener('error', () => this.fail(x)); x.addEventListener('timeupdate', () => this.near(x)); });
-    const k = this.pick(); this.cur = k; v[0].poster = clipSrc(k, '.jpg'); v[0].src = clipSrc(k);
-    if (!RMOTION && !UI.walking) v[0].play().catch(() => {});
-  },
-  stop(){ this.vids().forEach(x => { if (x){ try { x.pause(); x.removeAttribute('src'); x.load(); } catch (e) {} } }); this.fading = false; this.queued = null; },
-  pause(){ this.vids().forEach(x => { if (x) x.pause(); }); },
-  resume(){ const v = this.vids()[this.front]; if (v && v.paused && !RMOTION && !UI.walking && UI.tab === 'cat') v.play().catch(() => {}); },
-  fail(x){
-    if (this.failed) return; const m = clipMiss(x); if (m === 'switch'){ if (UI.tab === 'cat') render(); return; } if (m) return; this.failed = true;
-    if (!this.warned){ this.warned = true; toast('ยังไม่พบไฟล์คลิปแมว (โฟลเดอร์ clips) ใช้แมวการ์ตูนไปก่อนนะ', 3200); }
-    if (UI.tab === 'cat') render();
-  },
-  near(x){
-    const v = this.vids(); if (x !== v[this.front] || this.fading || !x.duration) return;
-    if (UI.walking){ x.pause(); return; }
-    if (x.currentTime > x.duration - 0.9) this.play(this.pick());
-  },
-  mood(){ this.resume(); if (!this.pool().includes(this.cur)) this.play(this.pick()); },
-  play(k){
-    const v = this.vids(); if (!v[0] || !LIVE_CLIPS[k]) return;
-    if (this.fading){ this.queued = k; return; }
-    const fr = v[this.front], back = v[1 - this.front];
-    this.fading = true; this.cur = k;
-    back.poster = clipSrc(k, '.jpg'); back.src = clipSrc(k);
-    const go = () => {
-      if (!RMOTION) back.play().catch(() => {});
-      back.classList.add('on'); fr.classList.remove('on');
-      setTimeout(() => { fr.pause(); this.front = 1 - this.front; this.fading = false;
-        if (this.queued){ const q = this.queued; this.queued = null; this.play(q); } }, 720);
-    };
-    if (back.readyState >= 2) go(); else { back.addEventListener('loadeddata', go, {once:true}); setTimeout(() => { if (this.fading && back.readyState < 2){ this.fading = false; } }, 6000); }
-  }
+// ---------- 3D cat glue ----------
+const C3D = {
+  zzTimer:null,
+  on(){ return !UI.c3dLost && (!S || S.settings.cat3d !== false) && Cat3D.supported(); },
+  collar(c){ const it = c && c.collar && SHOP_BY[c.collar]; return it ? {color:it.color, star:!!it.star} : null; },
+  attachRoom(mood, breed){ const st = document.getElementById('stage'); if (!st) return false;
+    const c = S ? cat() : null;
+    const ok = Cat3D.attach(st, {mode:'room', breed:breed || (c ? c.breed : 'orange'), collar:c ? this.collar(c) : null, mood:mood || (UI.petting ? 'happy' : getMood()), tod:skyNow()});
+    if (!ok){ UI.c3dLost = true; return false; }
+    const b = document.querySelector('#room .bowlpos'); if (b){ const r = b.getBoundingClientRect(); Cat3D.bowlAt(r.left + r.width / 2, r.bottom - r.height * .3); }
+    clearInterval(this.zzTimer); this.zzTimer = setInterval(() => this.zz(), 2600);
+    return true; },
+  attachWorkout(w){ const st = document.getElementById('wkStage'); if (!st) return false; const c = cat();
+    return Cat3D.attach(st, {mode:'workout', breed:c.breed, collar:this.collar(c), mood:'cheering', tod:w.sky, gait:'walk'}); },
+  sync(){ if (!Cat3D.active() || !S) return; const c = cat(); Cat3D.setBreed(c.breed); Cat3D.setCollar(this.collar(c)); Cat3D.setMood(UI.petting ? 'happy' : getMood()); Cat3D.setEnv(skyNow()); },
+  zz(){ const room = document.getElementById('room'); if (!room || !Cat3D.active() || !S || UI.walking || getMood() !== 'sleeping' || document.hidden || RMOTION) return;
+    const h = Cat3D.headAt(); if (!h) return; const rr = room.getBoundingClientRect(), z = document.createElement('div');
+    z.className = 'zzz'; z.textContent = Math.random() > .5 ? 'z' : 'Z'; z.style.fontSize = (15 + Math.random() * 9) + 'px';
+    z.style.left = (h[0] - rr.left + 16) + 'px'; z.style.top = (h[1] - rr.top - 46) + 'px'; room.appendChild(z); setTimeout(() => z.remove(), 2500); },
+  detach(){ clearInterval(this.zzTimer); this.zzTimer = null; Cat3D.detach(); }
 };
+Cat3D.on('petstart', () => { UI.petting = true; Pet.busy = false; audioReady(); purrStart(); const tg = document.getElementById('moodtag'); if (tg) tg.textContent = 'ครางเบาๆ'; hideHint(); });
+Cat3D.on('petmove', d => { spawnHeart(document.getElementById('room'), d.x, d.y); haptic(); });
+Cat3D.on('petend', d => { UI.petting = false; UI.happyUntil = Date.now() + 1800; purrStop(); if (S) petReward(d.dist); refreshCat(); });
+Cat3D.on('tap', () => { audioReady(); meow(); haptic(); hideHint(); });
+Cat3D.on('meow', () => meow());
+Cat3D.on('play', () => { if (!S) return; haptic(); hideHint(); const room = document.getElementById('room'), h = Cat3D.headAt(); if (room && h) spawnHeart(room, h[0], h[1] - 10);
+  if (S.pet.day !== today()) S.pet = {day:today(), gained:0};
+  if (S.pet.gained < 10){ const c = cat(); c.happiness = clamp(c.happiness + 1, 0, 100); S.pet.gained += 1; refreshBars(); save(); toast(`${ICON.yarn('#fff',16)} จับได้แล้ว +1 ความสุข`, 1400); } });
+Cat3D.on('lost', () => { UI.c3dLost = true; if (S && UI.tab === 'cat' && !UI.walking) render(); });
+function catArt(breed, mood, label, px){ if (C3D.on()){ const u = Cat3D.thumb(breed, {mood, size:px || 128}); if (u) return `<img class="cat3d-img" src="${u}" alt="${esc(label || '')}">`; } return catSVG({breed, mood, label}); }
+function hintOnce(three){ let seen = false; try { seen = localStorage.getItem('mm_hint') === '1'; } catch (e) {}
+  return seen ? '' : `<div class="hint" id="hint">${three ? 'ลูบตัวน้อง แตะเพื่อทัก ลากนิ้วบนพื้นให้น้องไล่จับ' : 'ลากนิ้วบนตัวน้องเพื่อลูบ แตะเพื่อทัก'}</div>`; }
+function hideHint(){ const h = document.getElementById('hint'); if (h) h.remove(); try { localStorage.setItem('mm_hint', '1'); } catch (e) {} }
 // ---------- bot friends (local league) ----------
 const BOTS = [
   {id:'ton',  name:'โค้ชต้น', cat:'บิ๊กบอส', breed:'mainecoon', mult:1.30, hour:6,    rest:.10,
@@ -784,13 +1659,13 @@ function renderFriendsTab(){
   const gapUp = meI > 0 ? rows[meI - 1].min - me.min + 1 : 0;
   const board = rows.map((r, i) => `<div class="lrow fr${r.me ? ' meRow' : ''}">
       <span class="rank">${i < 2 ? '⬆' : i >= 4 ? '⬇' : ''}${i + 1}</span>
-      <div class="art" style="background:#F6F1FF;width:46px;height:46px">${catSVG({breed:BREEDS[r.breed] ? r.breed : 'orange', mood:r.today > 0 ? 'happy' : 'content', label:r.cat})}</div>
+      <div class="art" style="background:#F6F1FF;width:46px;height:46px">${catArt(BREEDS[r.breed] ? r.breed : 'orange', r.today > 0 ? 'happy' : 'content', r.cat, 96)}</div>
       <div class="col grow" style="min-width:0"><b style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.name)}</b>
         <span class="tiny muted">แมว${esc(r.cat)} · วันนี้ ${fmt(r.today)} นาที</span>
         <div class="track" style="margin-top:4px"><div class="fill" style="width:${Math.min(100, r.min / 150 * 100)}%;background:${r.min >= 150 ? '#46B98A' : '#9C8CF0'}"></div></div></div>
       <div class="col" style="align-items:flex-end;gap:4px"><b style="font-size:16px">${fmt(r.min)}<span class="tiny muted"> นาที</span></b>
         ${r.me ? '' : `<button class="cheer" data-act="botCheer" data-id="${r.id}" ${st.sent[r.id] === today() ? 'disabled style="opacity:.4"' : ''} aria-label="ส่งปลาให้ ${esc(r.name)}">🐟</button>`}</div></div>`).join('');
-  const chat = League.chat(rows).map(m => `<div class="row g8" style="align-items:flex-start"><div style="width:34px;height:34px;flex:none">${catSVG({breed:m.b.breed, mood:'content', label:m.b.cat})}</div>
+  const chat = League.chat(rows).map(m => `<div class="row g8" style="align-items:flex-start"><div style="width:36px;height:36px;flex:none">${catArt(m.b.breed, 'content', m.b.cat, 80)}</div>
       <div class="chatb"><b class="tiny">${esc(m.b.name)}</b><br>${esc(m.t)}</div></div>`).join('');
   return `<header class="top"><div class="col g4"><h1 class="title">ลีก${TIERS[st.tier]} ${TIER_ICON[st.tier]}</h1><span class="sub">${daysLeft ? 'จบลีกในอีก ' + daysLeft + ' วัน' : 'วันสุดท้ายของลีก!'} · ⬆ เลื่อน ⬇ ตกชั้น</span></div>${walletPills()}</header>
   <section class="card col g8" style="background:linear-gradient(135deg,#F4F0FF,#EAF8F1)">
@@ -809,39 +1684,6 @@ function renderFriendsTab(){
   ${st.hist.length ? `<section class="card col g6"><b style="font-size:15px">ประวัติลีก</b>${st.hist.slice(0, 5).map(h => `<div class="row between small"><span>${TIER_ICON[h.tier]} ${TIERS[h.tier]} · สัปดาห์ ${esc(h.week.slice(5))}</span><b>อันดับ ${h.rank} · ${fmt(h.min)} นาที</b></div>`).join('')}</section>` : ''}`;
 }
 
-// ---------- workout video (real cat walking with you) ----------
-const WkVid = {
-  front:0, fading:false, list:[], idx:0, paused:false, rate:1, failed:false,
-  vids(){ return [document.getElementById('wvA'), document.getElementById('wvB')]; },
-  html(){ return Live.on() ? `<div class="wkv" id="wkV"><video id="wvA" class="on" muted playsinline preload="auto" aria-hidden="true"></video><video id="wvB" muted playsinline preload="auto" aria-hidden="true"></video></div>` : ''; },
-  start(w){
-    const v = this.vids(), sc = document.getElementById('wkScene'); if (!v[0]) return;
-    this.list = (w.act === 'yoga' || w.act === 'strength') ? ['stretch'] : ['walk', 'walk2'];
-    this.idx = 0; this.front = 0; this.fading = false; this.paused = false; this.rate = 1; this.failed = false;
-    v.forEach(x => { x.addEventListener('error', () => this.fail(x)); x.addEventListener('timeupdate', () => this.near(x)); });
-    v[0].addEventListener('loadeddata', () => { if (sc && !this.failed) sc.classList.add('has-video'); }, {once:true});
-    v[0].poster = clipSrc(this.list[0], '.jpg'); v[0].src = clipSrc(this.list[0]);
-    if (!RMOTION) v[0].play().catch(() => {});
-  },
-  fail(x){ if (this.failed) return; const m = clipMiss(x); if (m === 'switch'){ const v = this.vids()[this.front]; if (v){ v.src = clipSrc(this.list[this.idx]); if (!RMOTION) v.play().catch(() => {}); } return; } if (m) return; this.failed = true; const sc = document.getElementById('wkScene'); if (sc) sc.classList.remove('has-video'); const b = document.getElementById('wkV'); if (b) b.remove(); },
-  near(x){ const v = this.vids(); if (x !== v[this.front] || this.fading || !x.duration || this.paused) return;
-    if (x.currentTime > x.duration - 0.9 / Math.max(this.rate, .5)){ this.idx = (this.idx + 1) % this.list.length; this.swap(this.list[this.idx]); } },
-  swap(k){
-    const v = this.vids(); if (!v[0]) return; const fr = v[this.front], back = v[1 - this.front];
-    this.fading = true; back.src = clipSrc(k);
-    const go = () => { back.playbackRate = this.rate; if (!RMOTION && !this.paused) back.play().catch(() => {});
-      back.classList.add('on'); fr.classList.remove('on');
-      setTimeout(() => { fr.pause(); this.front = 1 - this.front; this.fading = false; }, 720); };
-    if (back.readyState >= 2) go(); else { back.addEventListener('loadeddata', go, {once:true}); setTimeout(() => { if (this.fading && back.readyState < 2) this.fading = false; }, 6000); }
-  },
-  update(w, g, rate){
-    const v = this.vids()[this.front]; if (!v || this.failed) return;
-    const paused = !!w.pausedAt || g === 'idle', r = g === 'gallop' ? 1.5 : g === 'trot' ? 1.25 : (g === 'walk' ? clamp(rate, .75, 1.2) : 1);
-    if (Math.abs(r - this.rate) > .04){ this.rate = r; try { v.playbackRate = r; } catch (e) {} }
-    if (paused !== this.paused){ this.paused = paused; if (paused) v.pause(); else if (!RMOTION) v.play().catch(() => {}); }
-  },
-  stop(){ this.vids().forEach(x => { if (x){ try { x.pause(); x.removeAttribute('src'); x.load(); } catch (e) {} } }); }
-};
 function attachLook(){
   const room = document.getElementById('room'); if (!room) return;
   room.addEventListener('pointermove', e => {
@@ -993,18 +1835,17 @@ function walletPills(){
 function barRow(id, icon, label, val, color){
   return `<div class="barrow">${icon}<span class="lbl">${label}</span><div class="track"><div class="fill" id="${id}F" style="width:${Math.round(val)}%;background:${color}"></div></div><span class="val" id="${id}V">${Math.round(val)}%</span></div>`;
 }
-function roomDecor(){
-  const o = S.owned, night = (h => h >= 19 || h < 6)(new Date().getHours());
-  let s = `<div class="window${night ? ' night' : ''}"><div class="sun"></div></div><div class="floor"></div>`;
-  if (o.rug) s += `<div class="decor" style="left:50%;bottom:14px;margin-left:-60px">${itemArt('rug',120)}</div>`;
-  if (o.frame) s += `<div class="decor" style="left:114px;top:22px">${itemArt('frame',46)}</div>`;
-  if (o.fishbowl) s += `<div class="decor" style="right:16px;top:${o.frame ? 60 : 62}px">${itemArt('fishbowl',44)}</div>`;
-  if (o.condo) s += `<div class="decor" style="left:8px;bottom:40px">${itemArt('condo',104)}</div>`;
-  if (o.plant) s += `<div class="decor" style="right:12px;bottom:48px">${itemArt('plant',52)}</div>`;
-  s += `<div class="cushion"></div>`;
-  s += `<div class="decor bowlpos" style="right:${o.plant ? 62 : 22}px;bottom:18px">${itemArt('kibble',56)}</div>`;
+function roomDecor(three, bare){
+  const o = bare || !S ? {} : S.owned;
+  let s = `<div class="wall"></div><div class="window"><div class="sun"></div></div><div class="floor"></div><div class="sunpatch"></div><div class="lampglow"></div>`;
+  if (o.rug) s += `<div class="decor" style="left:50%;bottom:5%;margin-left:-84px">${itemArt('rug',168)}</div>`;
+  if (o.frame) s += `<div class="decor" style="left:40%;top:10%">${itemArt('frame',50)}</div>`;
+  if (o.fishbowl) s += `<div class="decor" style="right:7%;top:15%">${itemArt('fishbowl',48)}</div>`;
+  if (o.condo) s += `<div class="decor" style="left:3%;bottom:15%">${itemArt('condo',110)}</div>`;
+  if (o.plant) s += `<div class="decor" style="right:4%;bottom:36%">${itemArt('plant',56)}</div>`;
+  if (!bare) s += `<div class="decor front bowlpos" style="right:8%;bottom:7%">${itemArt('kibble',58)}</div>`;
   const toy = o.yarn ? 'yarn' : o.mouse ? 'mouse' : o.wand ? 'wand' : null;
-  if (toy) s += `<div class="decor" style="left:${o.condo ? 92 : 24}px;bottom:16px">${itemArt(toy,44)}</div>`;
+  if (toy) s += `<div class="decor" style="left:${o.condo ? 31 : 9}%;bottom:7%">${itemArt(toy,44)}</div>`;
   return s;
 }
 function banner(mood){
@@ -1021,55 +1862,57 @@ function banner(mood){
   return `<div class="banner"><div class="ico" style="background:var(--lav)">${ICON.paw('#5B4BB8',16)}</div><p>${text}</p>` +
     (btn === 'walk' ? `<button class="btn primary" style="min-height:40px;padding:0 12px" data-act="walk">${ICON.walk('#fff',16)}เดิน</button>` : `<button class="btn ghost" style="min-height:40px;padding:0 12px" data-act="play">เล่นด้วย</button>`) + `</div>`;
 }
+function meter(id, icon, label, val, color){
+  return `<div class="meter"><span class="mh">${icon}${label}<b id="${id}V">${Math.round(val)}%</b></span><div class="track"><div class="fill" id="${id}F" style="width:${Math.round(val)}%;background:${color}"></div></div></div>`;
+}
 function renderCatTab(){
-  const c = cat(), mood = getMood(), lv = levelInfo(), d = peek(today()) || emptyDay(), st = S.settings;
+  const c = cat(), mood = getMood(), lv = levelInfo(), d = peek(today()) || emptyDay(), st = S.settings, three = C3D.on();
   const together = daysBetween(c.adopted || today(), today()) + 1;
   const ex = effEx(d), q = qualityMin(d);
   const synced = d.syncedAt ? 'อัปเดต ' + timeTH(d.syncedAt) : 'ยังไม่ได้อัปเดตวันนี้';
   return `
   <header class="top">
-    <div class="col g4 grow"><div class="row g8"><h1 class="title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.name)}</h1><span class="chip lav">Lv ${lv.level}</span></div>
-    <span class="sub">${BREEDS[c.breed].name} · อยู่ด้วยกัน ${together} วัน</span></div>
+    <div class="col g4 grow"><div class="row g8"><h1 class="title catname">${esc(c.name)}</h1><span class="chip lav">Lv ${lv.level}</span></div>
+    <span class="sub">${BREEDS[c.breed].name}, อยู่ด้วยกัน ${together} วัน</span></div>
     ${walletPills()}
   </header>
   ${banner(mood)}
-  <section class="card bars" aria-label="สถานะของ ${esc(c.name)}">
-    ${barRow('full', ICON.bowl('#A44A24',20), 'ความอิ่ม', c.fullness, '#F4A27C')}
-    ${barRow('happy', ICON.heart('#5B4BB8',20), 'ความสุข', c.happiness, '#9C8CF0')}
-    ${barRow('energy', ICON.bolt('#1B6E4E',20), 'พลังงาน', energyNow(), '#5CC99B')}
-  </section>
-  ${Live.on() ? `<section class="room live" id="room" aria-label="ห้องของ ${esc(c.name)}">
-    ${Live.html()}<span class="lvtag" id="lvtag">${moodTH(mood)}</span>
-    <div class="catwrap" id="catwrap" role="img" aria-label="${esc(c.name)} กำลัง${moodTH(mood)}"></div>` : `<section class="room" id="room" aria-label="ห้องของ ${esc(c.name)}">
-    ${roomDecor()}
-    <div class="catwrap" id="catwrap">${catSVG({breed:c.breed, mood, collar:c.collar, label:c.name + ' กำลัง' + moodTH(mood)})}</div>`}
+  <section class="room" id="room" data-tod="${skyNow()}" aria-label="ห้องของ ${esc(c.name)}">
+    ${roomDecor(three)}
+    ${three ? `<div class="stage" id="stage" role="img" aria-label="${esc(c.name)} กำลัง${moodTH(mood)}"></div>`
+      : `<div class="cushion"></div><div class="catwrap" id="catwrap">${catSVG({breed:c.breed, mood, collar:c.collar, label:c.name + ' กำลัง' + moodTH(mood)})}</div>`}
+    <span class="moodtag" id="moodtag">${moodTH(mood)}</span>
     <div class="bubble" id="bubble">${BUBBLE[mood]}</div>
-    <div class="hint">ลากนิ้วบนตัว ${esc(c.name)} เพื่อลูบ · แตะเพื่อทัก</div>
+    ${hintOnce(three)}
   </section>
+  <section class="card meters" aria-label="สถานะของ ${esc(c.name)}">
+    ${meter('full', ICON.bowl('#A3401F',16), 'อิ่ม', c.fullness, '#F4845F')}
+    ${meter('happy', ICON.heart('#5A49C2',16), 'สุข', c.happiness, '#9C8CF0')}
+    ${meter('energy', ICON.bolt('#1B6E4E',16), 'พลัง', energyNow(), '#4CC48F')}
+  </section>
+  <nav class="quick" aria-label="ดูแล ${esc(c.name)}">
+    <button class="btn soft" data-act="feed"><span class="ico" style="background:var(--peach)">${ICON.bowl('#A3401F')}</span>ให้อาหาร</button>
+    <button class="btn soft" data-act="play"><span class="ico" style="background:var(--lav)">${ICON.yarn('#5A49C2')}</span>เล่น</button>
+    <button class="btn primary" data-act="walk">${ICON.walk('#fff', 20)}เดินกับน้อง</button>
+  </nav>
   <section class="card col g10" aria-label="กิจกรรมวันนี้">
-    <div class="row between"><span style="font-size:15px;font-weight:800">กิจกรรมวันนี้</span>
-      <button class="btn ghost" style="min-height:34px;padding:0 10px;font-size:12.5px;border-radius:12px" data-act="sync">${ICON.sync('#5B4BB8',15)}อัปเดตจาก Apple Health</button></div>
+    <div class="row between"><h2 style="font-family:var(--display);font-size:18px">วันนี้</h2>
+      <button class="btn ghost" style="min-height:34px;padding:0 10px;font-size:12.5px;border-radius:12px" data-act="sync">${ICON.sync('#5A49C2',15)}อัปเดตจาก Apple Health</button></div>
     <div class="ringsrow">
       ${ringsSVG(84, [d.kcal / st.moveGoal, ex / st.exGoal, (d.stand || 0) / st.standGoal], 'Move ' + d.kcal + ' จาก ' + st.moveGoal + ' kcal, Exercise ' + ex + ' จาก ' + st.exGoal + ' นาที, Stand ' + (d.stand||0) + ' จาก ' + st.standGoal + ' ชั่วโมง')}
       <div class="col g4 grow">
-        <div class="metric"><span style="font-size:12px;font-weight:800;color:#C63C3C">Move</span><span><b>${fmt(d.kcal)}</b><span class="u">/${st.moveGoal} kcal</span></span></div>
-        <div class="metric"><span style="font-size:12px;font-weight:800;color:#1B6E4E">Exercise</span><span><b>${fmt(ex)}</b><span class="u">/${st.exGoal} นาที</span></span></div>
-        <div class="metric"><span style="font-size:12px;font-weight:800;color:#1F6FA3">Stand</span><span><b>${fmt(d.stand || 0)}</b><span class="u">/${st.standGoal} ชม.</span></span></div>
-        <span class="tiny muted">${fmt(effSteps(d))} ก้าว · ${synced}</span>
+        <div class="metric"><span style="font-size:12px;font-weight:700;color:#C63C3C">Move</span><span><b>${fmt(d.kcal)}</b><span class="u">/${st.moveGoal} kcal</span></span></div>
+        <div class="metric"><span style="font-size:12px;font-weight:700;color:#1B6E4E">Exercise</span><span><b>${fmt(ex)}</b><span class="u">/${st.exGoal} นาที</span></span></div>
+        <div class="metric"><span style="font-size:12px;font-weight:700;color:#1F6FA3">Stand</span><span><b>${fmt(d.stand || 0)}</b><span class="u">/${st.standGoal} ชม.</span></span></div>
+        <span class="tiny muted">${fmt(effSteps(d))} ก้าว, ${synced}</span>
       </div>
     </div>
     <div class="divider"></div>
-    <div class="row between g8">
-      <div class="col g4"><span style="font-size:16px;font-weight:800;color:var(--honeyD)">+${fmt(d.awarded.coins)} Coins วันนี้</span>
-        <span class="chip mint" style="align-self:flex-start">Zone 2 / เดินเร็ว · ${fmt(q)} นาที</span></div>
-      <button class="btn primary" data-act="walk">${ICON.walk('#fff')}พาเดินเล่น</button>
+    <div class="row between g8" style="flex-wrap:wrap">
+      <span style="font-size:16px;font-weight:700;color:var(--honeyD)">+${fmt(d.awarded.coins)} Coins วันนี้</span>
+      <span class="chip mint">Zone 2 / เดินเร็ว ${fmt(q)} นาที</span>
     </div>
-  </section>
-  <nav class="quick" aria-label="ทางลัด">
-    <button class="btn soft" data-act="feed"><span class="ico" style="background:var(--peach)">${ICON.bowl('#A44A24')}</span>ให้อาหาร</button>
-    <button class="btn soft" data-act="play"><span class="ico" style="background:var(--lav)">${ICON.yarn('#5B4BB8')}</span>เล่น</button>
-    <a class="btn soft" href="#stats"><span class="ico" style="background:var(--mint)">${ICON.chart('#1B6E4E')}</span>สถิติ</a>
-  </nav>`;
+  </section>`;
 }
 function moodTH(m){ return {content:'ชิลๆ', playful:'อยากเล่น', hungry:'หิว', waiting:'รอคุณ', sulking:'งอน', sleeping:'หลับ', cheering:'เชียร์', happy:'มีความสุข', eating:'กินข้าว'}[m] || ''; }
 
@@ -1181,7 +2024,7 @@ function renderMeTab(){
   const breeds = BREED_ORDER.map(k => { const b = BREEDS[k], locked = lv.level < b.lv, mine = S.cats.find(x => x.breed === k), on = mine && mine.id === S.activeCat;
     const act = locked ? '' : mine ? `data-act="setcat" data-id="${mine.id}"` : `data-act="adopt" data-v="${k}"`;
     return `<button class="breed${on ? ' on' : ''}" ${act} ${locked ? 'disabled' : ''} aria-label="${b.name}${locked ? ' ปลดล็อกที่เลเวล ' + b.lv : mine ? ' ' + mine.name : ' รับเลี้ยงได้'}">
-      <span style="${locked ? 'opacity:.35;filter:grayscale(1)' : ''}">${catSVG({breed:k, mood:'content', label:b.name})}</span>
+      <span class="art" style="${locked ? 'opacity:.35;filter:grayscale(1)' : ''}">${catArt(k, 'content', b.name, 152)}</span>
       <span style="font-size:12.5px;font-weight:800;text-align:center;line-height:1.2">${mine ? esc(mine.name) : b.name}</span>
       <span class="tiny" style="color:${locked ? 'var(--ink2)' : on ? 'var(--lavD)' : mine ? 'var(--ink2)' : 'var(--mintD)'};font-weight:700">${locked ? 'Lv ' + b.lv : on ? 'อยู่บ้าน' : mine ? b.name : 'รับเลี้ยงได้'}</span></button>`; }).join('');
   const collars = SHOP.filter(i => i.cat === 'collar' && S.owned[i.id]);
@@ -1191,7 +2034,7 @@ function renderMeTab(){
   <section class="card col g10"><div class="field"><label for="catName">ชื่อแมวตัวนี้</label><input class="input" id="catName" maxlength="20" value="${esc(c.name)}" data-set="catName" autocomplete="off"></div>
     ${collars.length ? `<div class="field"><label>ปลอกคอ</label><div class="row g8" style="flex-wrap:wrap"><button class="btn ${c.collar ? 'ghost' : 'lavb'}" style="min-height:38px" data-act="equip" data-id="">ไม่ใส่</button>${collars.map(i => `<button class="btn ${c.collar === i.id ? 'lavb' : 'ghost'}" style="min-height:38px" data-act="equip" data-id="${i.id}"><span style="width:12px;height:12px;border-radius:50%;background:${i.color}"></span>${i.name.replace('ปลอกคอ','')}</button>`).join('')}</div></div>` : ''}
   </section>
-  <section class="col g8"><h2 style="font-size:17px;font-weight:800">Cat Café · ${S.cats.length} ตัว</h2><span class="small muted">ขึ้นเลเวลจากการออกกำลังกาย แล้วรับเลี้ยงสายพันธุ์ใหม่ได้ แตะตัวที่มีอยู่เพื่อให้มาอยู่บ้าน</span><div class="breeds">${breeds}</div></section>
+  <section class="col g8"><h2 style="font-family:var(--display);font-size:19px">Cat Café, ${S.cats.length} ตัว</h2><span class="small muted">ขึ้นเลเวลจากการออกกำลังกาย แล้วรับเลี้ยงสายพันธุ์ใหม่ได้ แตะตัวที่มีอยู่เพื่อให้มาอยู่บ้าน</span><div class="breeds">${breeds}</div></section>
   <section class="card col g10"><h2 style="font-size:17px;font-weight:800">เป้าหมายรายวัน</h2>
     <div class="fields">
       <div class="field"><label for="gMove">Move (kcal)</label><input class="input" id="gMove" type="number" inputmode="numeric" min="50" max="3000" value="${st.moveGoal}" data-set="moveGoal"></div>
@@ -1202,7 +2045,7 @@ function renderMeTab(){
     <span class="small muted">Zone 2 ของคุณ ≈ <b style="color:var(--mintD)">${z2a}–${z2b} bpm</b> (60–70% ของ HRmax ${hrMax} ตามสูตร 208 − 0.7 × อายุ) ดูชีพจรระหว่างเดินได้จาก Apple Watch</span>
   </section>
   <section class="card col g12">
-    <label class="row between g12"><span class="col"><b style="font-size:15px">แมวสมจริง (วิดีโอ)</b><span class="small muted">ใช้คลิปแมวจริงในห้องสำหรับแมวส้ม ปิดเพื่อประหยัดแบตและเน็ต</span></span><span class="switch"><input type="checkbox" data-set="live" ${st.live !== false ? 'checked' : ''}><span></span></span></label>
+    <label class="row between g12"><span class="col"><b style="font-size:15px">แมว 3 มิติ</b><span class="small muted">ขยับได้ทุกท่าและมองตามนิ้ว ปิดเพื่อประหยัดแบต แอปจะใช้แมวการ์ตูน 2D แทน</span></span><span class="switch"><input type="checkbox" data-set="cat3d" ${st.cat3d !== false ? 'checked' : ''}><span></span></span></label>
     <div class="divider"></div>
     <label class="row between g12"><span class="col"><b style="font-size:15px">เสียงครางตอนลูบ</b><span class="small muted">เสียงเบาๆ ตอนลูบและทักแมว</span></span><span class="switch"><input type="checkbox" data-set="sound" ${st.sound ? 'checked' : ''}><span></span></span></label>
     <div class="divider"></div>
@@ -1221,8 +2064,7 @@ function renderMeTab(){
 
 function renderOnboarding(){
   return `<div class="onb">
-    <div style="height:210px;border-radius:28px;background:#EDE8FB;position:relative;overflow:hidden"><div class="floor" style="height:64px"></div><div class="cushion" style="bottom:28px"></div>
-      <div class="catwrap" style="bottom:38px">${catSVG({breed:'orange', mood:'playful', label:'ลูกแมวส้มรอให้คุณรับเลี้ยง'})}</div></div>
+    <section class="room" id="room" data-tod="${skyNow()}" aria-label="ลูกแมวส้มรอให้คุณรับเลี้ยง">${roomDecor(C3D.on(), true)}${C3D.on() ? '<div class="stage" id="stage"></div>' : `<div class="cushion"></div><div class="catwrap">${catSVG({breed:'orange', mood:'playful', label:'ลูกแมวส้มรอให้คุณรับเลี้ยง'})}</div>`}</section>
     <div class="col g6"><h1 class="title">ยินดีต้อนรับสู่ MeowMotion</h1><span class="sub" style="font-size:14.5px">ออกกำลังกายเพื่อเลี้ยงแมว</span></div>
     <ul><li>เดิน วิ่ง หรือเล่นเวท แล้วนำข้อมูลจาก Apple Health เข้ามา ได้ Meow Coins</li><li>อยู่ใน Zone 2 ครบ 20 นาที ได้ Premium Salmon</li><li>ใช้ Coins ซื้ออาหาร ของเล่น และของแต่งห้อง ให้แมวอิ่มและมีความสุข</li></ul>
     <div class="field"><label for="onbName">ตั้งชื่อลูกแมวของคุณ</label><input class="input" id="onbName" maxlength="20" value="Mochi" autocomplete="off"></div>
@@ -1235,20 +2077,24 @@ function render(){
   if (!S){
     nav.hidden = true;
     app.innerHTML = UI.booted ? renderOnboarding() : `<div class="splash"><div style="width:140px;height:140px">${catSVG({breed:'orange', mood:'sleeping', label:'กำลังโหลด'})}</div><span class="sub">กำลังปลุกน้องแมว…</span></div>`;
+    if (UI.booted && C3D.on() && document.getElementById('stage')) C3D.attachRoom('playful', 'orange'); else C3D.detach();
     return;
   }
   nav.hidden = false;
   nav.innerHTML = `<div class="in">${[['cat','แมว'],['stats','สถิติ'],['friends','ลีก'],['shop','ร้านค้า'],['me','ฉัน']].map(([k, t]) => `<a href="#${k}" class="${UI.tab === k ? 'on' : ''}" ${UI.tab === k ? 'aria-current="page"' : ''}>${TAB_ICON[k](UI.tab === k)}${t}</a>`).join('')}</div>`;
-  Live.stop();
   app.innerHTML = UI.tab === 'stats' ? renderStatsTab() : UI.tab === 'friends' ? renderFriendsTab() : UI.tab === 'shop' ? renderShopTab() : UI.tab === 'me' ? renderMeTab() : renderCatTab();
-  if (UI.tab === 'cat'){ attachPet(); attachLook(); Pet.start(); Live.start(); } else Pet.stop();
+  if (UI.tab === 'cat'){
+    if (document.getElementById('stage')){ Pet.stop(); if (!UI.walking && !C3D.attachRoom()){ render(); return; } }
+    else { if (!UI.walking) C3D.detach(); attachPet(); attachLook(); Pet.start(); }
+  } else { Pet.stop(); if (!UI.walking) C3D.detach(); }
   if (UI.tab === 'friends') setTimeout(() => League.check(), 0);
 }
 function refreshCat(){
-  const wrap = document.getElementById('catwrap'); if (!wrap) return;
-  const c = cat(), mood = getMood();
-  if (document.getElementById('lvA')){ Live.mood(); const tg = document.getElementById('lvtag'); if (tg) tg.textContent = UI.petting ? 'ครางเบาๆ' : moodTH(mood); }
-  else wrap.innerHTML = catSVG({breed:c.breed, mood, collar:c.collar, label:c.name + ' กำลัง' + moodTH(mood)});
+  if (!S) return;
+  const c = cat(), mood = getMood(), tg = document.getElementById('moodtag'), room = document.getElementById('room');
+  if (room && room.dataset.tod && room.dataset.tod !== skyNow()) room.dataset.tod = skyNow();
+  if (Cat3D.active() && !UI.walking){ C3D.sync(); if (tg) tg.textContent = UI.petting ? 'ครางเบาๆ' : moodTH(mood); const st = document.getElementById('stage'); if (st) st.setAttribute('aria-label', c.name + ' กำลัง' + moodTH(mood)); }
+  else { const wrap = document.getElementById('catwrap'); if (!wrap) return; wrap.innerHTML = catSVG({breed:c.breed, mood, collar:c.collar, label:c.name + ' กำลัง' + moodTH(mood)}); if (tg) tg.textContent = moodTH(mood); }
   const b = document.getElementById('bubble'); if (b && b.textContent !== BUBBLE[mood]){ b.textContent = BUBBLE[mood]; b.style.animation = 'none'; void b.offsetWidth; b.style.animation = ''; }
 }
 function refreshBars(){
@@ -1272,7 +2118,7 @@ function attachPet(){
   const end = () => {
     if (!down) return; down = false; try { el.releasePointerCapture(pid); } catch (er) {}
     if (moved){ UI.petting = false; UI.happyUntil = Date.now() + 1800; purrStop(); petReward(dist); refreshCat(); }
-    else { const svg = el.querySelector('svg'); if (svg){ svg.classList.remove('hop'); void svg.getBoundingClientRect(); svg.classList.add('hop'); } else if (Live.ready()) Live.play('blink'); meow(); haptic(); }
+    else { const svg = el.querySelector('svg'); if (svg){ svg.classList.remove('hop'); void svg.getBoundingClientRect(); svg.classList.add('hop'); } meow(); haptic(); }
     setTimeout(() => { if (!UI.petting && !UI.walking && UI.tab === 'cat') refreshCat(); }, 2000);
   };
   el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end); el.addEventListener('lostpointercapture', end);
@@ -1303,7 +2149,7 @@ function openSheet(html, label){
 function closeSheet(instant){ const b = document.getElementById('sheetBack'); if (b) b.remove(); }
 function confirmSheet(title, body, okLabel, okAct, extra){
   openSheet(`<h2>${title}</h2><p class="muted" style="margin:4px 0 16px;font-size:14.5px">${body}</p>
-    <div class="row g10"><button class="btn ghost grow" data-act="close">ยกเลิก</button><button class="btn primary grow" data-act="${okAct}" ${extra || ''}>${okLabel}</button></div>`, title);
+    <div class="row g10"><button class="btn ghost grow" data-act="close">ยกเลิก</button><button class="btn ${okAct === 'resetOk' ? 'danger' : 'primary'} grow" data-act="${okAct}" ${extra || ''}>${okLabel}</button></div>`, title);
 }
 
 function feedSheet(){
@@ -1337,7 +2183,7 @@ function playNow(id){
   if ((S.toyCd[id] || 0) + TOY_CD > Date.now()) return;
   S.toyCd[id] = Date.now(); c.happiness = clamp(c.happiness + t.play, 0, 100); UI.happyUntil = Date.now() + 2600;
   save(); closeSheet(); haptic(); meow();
-  if (UI.tab === 'cat'){ refreshCat(); refreshBars(); const svg = document.querySelector('#catwrap svg'); if (svg) svg.classList.add('wiggle'); setTimeout(() => { if (UI.tab === 'cat') refreshCat(); }, 2800); }
+  if (UI.tab === 'cat'){ refreshCat(); refreshBars(); if (Cat3D.active()) Cat3D.act('play'); else { const svg = document.querySelector('#catwrap svg'); if (svg) svg.classList.add('wiggle'); } setTimeout(() => { if (UI.tab === 'cat') refreshCat(); }, 2800); }
   toast(`${ICON.yarn('#fff',16)} เล่น${t.name} +${t.play} ความสุข`);
 }
 function buySheet(id){
@@ -1501,13 +2347,12 @@ function wkBuild(w){
   el.innerHTML = `<div class="wk-scene" id="wkScene" data-act="${w.act}">
       <div class="sky"></div><div class="stars"></div><div class="sunmoon"></div>
       <div class="layer out"><div class="hills"></div><div class="ground"></div><div class="path" id="wkPath"></div>${trees}<div class="rain"></div></div>
-      <div class="layer in"><div class="wall"></div><div class="iwin"><div class="isky"></div><div class="irain"></div></div>
+      <div class="layer in"><div class="wall2"></div><div class="iwin"><div class="isky"></div><div class="irain"></div></div>
         <svg class="lamp" viewBox="0 0 70 120" aria-hidden="true"><path d="M35 0v40" stroke="#9C8CF0" stroke-width="2"/><path d="M14 64q21-34 42 0z" fill="#FFE7A3"/><ellipse cx="35" cy="96" rx="34" ry="22" fill="#FFE7A3" opacity=".35"/></svg>
         <div class="ifloor"></div>
         ${w.act === 'yoga' ? '<div class="mat"></div>' : w.act === 'strength' ? `<svg class="post" viewBox="0 0 60 90" aria-hidden="true"><rect x="6" y="80" width="48" height="8" rx="3" fill="#C9A27E"/><rect x="22" y="14" width="16" height="68" fill="#E8D3BC"/><path d="M22 24h16M22 34h16M22 44h16M22 54h16M22 64h16M22 74h16" stroke="#D3B596" stroke-width="2"/><rect x="10" y="6" width="40" height="10" rx="4" fill="#9C8CF0"/></svg><div class="mat" style="width:min(60%,280px)"></div>` : '<div class="belt" id="wkBelt"></div>'}
       </div>
-      ${WkVid.html()}
-      <div class="wk-cat" id="wkCat">${catSVG({breed:c.breed, mood:'cheering', collar:c.collar, label:c.name + ' ออกกำลังกายด้วยกัน'})}</div>
+      ${C3D.on() ? `<div class="wk-stage" id="wkStage" role="img" aria-label="${esc(c.name)} ออกกำลังกายด้วยกัน"></div>` : `<div class="wk-cat" id="wkCat">${catSVG({breed:c.breed, mood:'cheering', collar:c.collar, label:c.name + ' ออกกำลังกายด้วยกัน'})}</div>`}
       <div class="wk-top" id="wkTop"></div>
       <div class="wk-pop" id="wkPop" role="status" aria-live="polite"></div>
     </div>
@@ -1523,18 +2368,18 @@ function wkBuild(w){
   el.querySelector('#wkTalkBox').addEventListener('change', e => { w.talk = e.target.checked; haptic(); });
   // scenery animations (speed follows pace)
   if (!RMOTION){
-    const path = el.querySelector('#wkPath'); if (path) w.scene.push(path.animate([{backgroundPosition:'0 0'},{backgroundPosition:'0 90px'}], {duration:700, iterations:Infinity}));
+    const path = el.querySelector('#wkPath'); if (path) w.scene.push(path.animate([{backgroundPosition:'0 90px'},{backgroundPosition:'0 0'}], {duration:700, iterations:Infinity}));
     el.querySelectorAll('.tree').forEach((t, i) => { const side = i % 2 ? 1 : -1, far = 150 + (i % 4) * 30;
-      const an = t.animate([{transform:`translate(${side * 12}px,0) scale(.12)`, opacity:0},{opacity:1, offset:.18},{transform:`translate(${side * far}px,${180 + (i % 3) * 30}px) scale(1.9)`, opacity:1}], {duration:4200, iterations:Infinity, easing:'cubic-bezier(.55,0,1,.6)'});
+      const an = t.animate([{transform:`translate(${side * far}px,${180 + (i % 3) * 30}px) scale(1.9)`, opacity:1},{opacity:1, offset:.82},{transform:`translate(${side * 12}px,0) scale(.12)`, opacity:0}], {duration:4200, iterations:Infinity, easing:'cubic-bezier(0,.4,.45,1)'});
       an.currentTime = i * 525; w.scene.push(an); });
     const belt = el.querySelector('#wkBelt'); if (belt) w.scene.push(belt.animate([{backgroundPosition:'0 0'},{backgroundPosition:'-44px 0'}], {duration:500, iterations:Infinity}));
   }
-  wkScene(w); wkChips(w); WkVid.start(w);
+  wkScene(w); wkChips(w); if (C3D.on()) C3D.attachWorkout(w);
 }
 function wkScene(w){
   const sc = document.getElementById('wkScene'), root = document.getElementById('wk'); if (!sc) return;
   w.sky = skyNow(); sc.dataset.sky = w.sky; sc.dataset.place = w.place; sc.dataset.wx = w.wx ? wxOf(w.wx.code) : 'clear';
-  root.classList.toggle('night', w.sky === 'night');
+  root.classList.toggle('night', w.sky === 'night'); if (Cat3D.active()) Cat3D.setEnv(w.sky);
 }
 function wkChips(w){
   const t = document.getElementById('wkTop'); if (!t) return;
@@ -1580,18 +2425,21 @@ function wkRate(w, cad){
     else if (cad < 160){ g = 'trot'; rate = clamp(cad / 145, .8, 1.3); scene = clamp(cad / 110, .9, 1.7); }
     else { g = 'gallop'; rate = clamp(cad / 170, .85, 1.3); scene = 2; }
   } else { g = w.act === 'run' ? 'trot' : 'walk'; scene = w.act === 'run' ? 1.4 : w.act === 'cycle' ? 1.7 : 1; }
-  wkGait(w, g); WkVid.update(w, g, rate); w.anims.forEach(x => { try { x.playbackRate = rate; } catch (e) {} }); w.scene.forEach(x => { try { x.playbackRate = Math.max(scene, 0.0001); if (scene === 0) x.pause(); else if (x.playState === 'paused') x.play(); } catch (e) {} });
+  wkGait(w, g); if (Cat3D.active()) Cat3D.gait(g, rate); w.anims.forEach(x => { try { x.playbackRate = rate; } catch (e) {} }); w.scene.forEach(x => { try { x.playbackRate = Math.max(scene, 0.0001); if (scene === 0) x.pause(); else if (x.playState === 'paused') x.play(); } catch (e) {} });
 }
 function wkFx(w, kind){
-  const sc = document.getElementById('wkScene'), c = document.getElementById('wkCat'); if (!sc || !c || RMOTION) return;
-  const r = sc.getBoundingClientRect(), b = c.getBoundingClientRect(), f = document.createElement('div'); f.className = 'fx';
-  f.style.left = (b.left - r.left + b.width * (.3 + Math.random() * .4)) + 'px'; f.style.top = (b.top - r.top + 10) + 'px'; f.style.setProperty('--dx', (Math.random() * 40 - 20) + 'px');
+  const sc = document.getElementById('wkScene'), c = document.getElementById('wkCat'), hd = Cat3D.active() ? Cat3D.headAt() : null; if (!sc || (!c && !hd) || RMOTION) return;
+  const r = sc.getBoundingClientRect(), f = document.createElement('div'); f.className = 'fx';
+  if (hd){ f.style.left = (hd[0] - r.left - 30 + 60 * Math.random()) + 'px'; f.style.top = (hd[1] - r.top - 40) + 'px'; }
+  else { const b = c.getBoundingClientRect(); f.style.left = (b.left - r.left + b.width * (.3 + Math.random() * .4)) + 'px'; f.style.top = (b.top - r.top + 10) + 'px'; }
+  f.style.setProperty('--dx', (Math.random() * 40 - 20) + 'px');
   f.innerHTML = kind === 'note' ? `<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 18V5l11-2v13" stroke="#5B4BB8" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="6.5" cy="18" r="3" fill="#5B4BB8"/><circle cx="17.5" cy="16" r="3" fill="#5B4BB8"/></svg>` : heartPath(Math.random() > .5 ? '#F28BA8' : '#EE5D5D');
   sc.appendChild(f); setTimeout(() => f.remove(), 2300);
 }
 async function wkInterval(w, title, sub){
   const pop = document.getElementById('wkPop'), box = document.getElementById('wkCat'); if (!pop) return;
   pop.innerHTML = `${esc(title)}<small>${esc(sub)}</small>`; pop.classList.add('show'); haptic(); chime(); setTimeout(meow, 350);
+  if (Cat3D.active()) Cat3D.act('celebrate');
   if (box && !RMOTION){ w.anims.forEach(a => a.pause()); const s = box.querySelector('svg'); if (s){ s.dataset.eyes = 'happy'; s.dataset.mouth = 'open'; }
     await box.animate([{transform:'translateY(0) scale(1)'},{transform:'translateY(8px) scale(1.32)', offset:.35},{transform:'translateY(-30px) scale(1.36)', offset:.55},{transform:'translateY(8px) scale(1.32)', offset:.72},{transform:'translateY(8px) scale(1.32)', offset:.85},{transform:'translateY(0) scale(1)'}], {duration:2400, easing:'ease-in-out'}).finished.catch(() => {});
     w.anims.forEach(a => a.play()); }
@@ -1655,7 +2503,7 @@ function endWorkout(keep){
   const w = UI.walking; if (!w) return;
   clearInterval(w.timer); try { window.removeEventListener('devicemotion', w.handler); } catch (e) {}
   try { if (w.geo != null) navigator.geolocation.clearWatch(w.geo); } catch (e) {} try { if (w.wake) w.wake.release(); } catch (e) {}
-  const n = wkNumbers(w); UI.walking = null; WkVid.stop(); const el = document.getElementById('wk'); if (el) el.remove();
+  const n = wkNumbers(w); UI.walking = null; C3D.detach(); const el = document.getElementById('wk'); if (el) el.remove();
   if (ACTS[w.act].out && w.auto && w.fix) wPrefs().lastPlace[w.act] = w.place;
   if (!keep){ toast('ยกเลิกแล้ว'); save(); goTab('cat'); Pet.start(); return; }
   if (n.min < 1){ toast('ยังไม่ถึง 1 นาที เลยยังไม่บันทึกนะ'); goTab('cat'); Pet.start(); return; }
@@ -1663,7 +2511,7 @@ function endWorkout(keep){
   d.workouts.push({id:'w' + Date.now(), type:w.act, min:n.min, z2:Math.min(n.brisk, n.min), src:w.motion ? 'motion' : 'timer', steps:w.steps, dist:Math.round(w.dist), place:w.place, at:Date.now()});
   if (w.steps) d.appSteps = (d.appSteps || 0) + w.steps;
   const r = award(k); save(); UI.happyUntil = Date.now() + 3000; goTab('cat');
-  openSheet(`<div class="col g10" style="align-items:center;text-align:center"><div style="width:140px;height:140px">${catSVG({breed:cat().breed, mood:'happy', collar:cat().collar, label:'แมวดีใจ'})}</div>
+  openSheet(`<div class="col g10" style="align-items:center;text-align:center"><div style="width:140px;height:140px">${catArt(cat().breed, 'happy', 'แมวดีใจ', 280)}</div>
     <h2>${esc(ACTS[w.act].name)} ${n.min} นาที!</h2>
     <span class="muted" style="font-size:14px">${w.dist > 50 ? (w.dist / 1000).toFixed(2) + ' กม. · ' : ''}${w.motion && w.steps ? fmt(w.steps) + ' ก้าว · ' : ''}ระดับปานกลางขึ้นไป ${Math.min(n.brisk, n.min)} นาที</span>
     <div class="row g8" style="justify-content:center;flex-wrap:wrap"><span class="pill coin">${coinSVG()}+${fmt(r.gotC)} Coins</span>${r.gotS ? `<span class="pill salmon">${fishSVG()}+${r.gotS} Salmon</span>` : ''}</div>
@@ -1708,7 +2556,7 @@ const ACT = {
   equip(el){ const c = cat(); c.collar = el.dataset.id || null; save(); render(); haptic(); },
   setcat(el){ S.activeCat = el.dataset.id; save(); render(); haptic(); toast(`${esc(cat().name)} มาอยู่บ้านแล้ว`); },
   adopt(el){ const k = el.dataset.v, b = BREEDS[k]; if (!b || levelInfo().level < b.lv) return;
-    openSheet(`<div class="col g10" style="align-items:center;text-align:center"><div style="width:130px;height:130px">${catSVG({breed:k, mood:'playful', label:b.name})}</div><h2>รับเลี้ยง${b.name}</h2>
+    openSheet(`<div class="col g10" style="align-items:center;text-align:center"><div style="width:130px;height:130px">${catArt(k, 'happy', b.name, 260)}</div><h2>รับเลี้ยง${b.name}</h2>
       <div class="field" style="width:100%;text-align:left"><label for="adoptName">ตั้งชื่อ</label><input class="input" id="adoptName" maxlength="20" placeholder="เช่น Tofu" autocomplete="off"></div>
       <div class="row g10" style="width:100%"><button class="btn ghost grow" data-act="close">ยกเลิก</button><button class="btn primary grow" data-act="adoptOk" data-v="${k}">รับเลี้ยง</button></div></div>`, 'รับเลี้ยงแมว'); },
   adoptOk(el){ const k = el.dataset.v, name = ($('#adoptName').value.trim() || BREEDS[k].name).slice(0, 20), id = 'c' + Date.now();
@@ -1734,7 +2582,7 @@ document.addEventListener('change', e => {
   const el = e.target.closest('[data-set]'); if (!el || !S) return;
   const k = el.dataset.set, st = S.settings;
   if (k === 'catName'){ const v = el.value.trim().slice(0, 20); if (v){ cat().name = v; save(); toast('เปลี่ยนชื่อแล้ว'); } else el.value = cat().name; return; }
-  if (k === 'sound' || k === 'gentle' || k === 'live'){ st[k] = el.checked; if (k === 'live') Live.failed = false; save(); haptic(); return; }
+  if (k === 'sound' || k === 'gentle' || k === 'cat3d'){ st[k] = el.checked; if (k === 'cat3d') UI.c3dLost = false; save(); haptic(); return; }
   const lim = {moveGoal:[50,3000], exGoal:[5,300], standGoal:[1,24], age:[10,100]}[k];
   const v = num(el.value); if (v == null || !lim){ el.value = st[k]; return; }
   st[k] = Math.round(clamp(v, lim[0], lim[1])); el.value = st[k];
@@ -1784,7 +2632,7 @@ async function boot(){
   if (UI.tab === 'me' && S) render();
   setInterval(tick, 30000);
   if (S) setTimeout(() => League.check(), 1500);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible'){ tick(); Live.resume(); } else { Live.pause(); if (S){ Store.saveLocal(); Store.flush(); } } });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') tick(); else if (S){ Store.saveLocal(); Store.flush(); } });
 }
 boot();
 </script>
